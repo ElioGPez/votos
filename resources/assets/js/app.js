@@ -1,7 +1,7 @@
 new Vue({
     el: '#main',
     created() {
-    this.obtenerCategorias(); 
+    this.obtenerCategorias();   
     },
     data() {
         return {

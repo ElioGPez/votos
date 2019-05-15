@@ -15,6 +15,9 @@ class CreateComprasTable extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->increments('id');
+            $table->double('total');
+            $table->date('fecha');
+            $table->enum('estado', ['pagada', 'impaga']);	
             $table->timestamps();
         });
     }
