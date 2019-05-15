@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('categoria','CategoriaController');
+Route::resource('producto','ProductoController');
+Route::resource('venta','VentaController');
+Route::resource('compra','CompraController');
+Route::resource('cliente','ClienteController');
