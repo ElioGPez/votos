@@ -17,4 +17,17 @@ class Producto extends Model
         'stock',
         'categoria_id'
     ];
+
+    public function categoria()
+    {
+        return $this->belongsTo('App\Categoria');
+    }
+    public function linea_compra()
+    {
+        return $this->hasMany('App\Linea_Compra');
+    }
+    public function linea_venta()
+    {
+        return $this->hasMany('App\Linea_Venta');
+    }
 }

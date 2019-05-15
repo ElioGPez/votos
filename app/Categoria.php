@@ -10,4 +10,9 @@ class Categoria extends Model
     protected $primaryKey ="id";
 
 	protected $filable = ['nombre','descripcion'];
+
+	public function producto()
+    {
+        return $this->hasMany('App\Producto');
+    }
 }
