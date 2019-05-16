@@ -1,16 +1,11 @@
-const Home = {template : '<h2> Home </h2>'}
-const About = {template : '<h2> Acerca de </h2>'}
 
-const routes = [
-    {path: '/', component: Home},
-    {path: '/about', component: About},
-]
+window.Vue = require('vue');
 
-const router = new VueRouter({
-    routes    
-})
+Vue.component('app',require('../components/Home.vue'));
+import router from './rutas';
+const axios = require('axios');
 
-new Vue({
+const app = new Vue({
     router,
     el: '#main',
     created() {
