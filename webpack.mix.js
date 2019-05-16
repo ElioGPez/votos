@@ -13,6 +13,7 @@ let mix = require('laravel-mix');
 
 mix.scripts([
    'resources/assets/js/vue.js',
+   'resources/assets/js/router.js',
    'resources/assets/js/axios.js',
    'resources/assets/js/app.js',
 ], 'public/js/app.js');

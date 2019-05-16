@@ -7,12 +7,48 @@
 
         <title>Laravel y Vue</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+        <style>
+        #ac {
+            color: white;
+        }
+        </style>
       
     </head>
     <body>
+
+    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e60000;">
+        <!-- Logo -->
+        <a id="ac" class="navbar-brand" href="#"><b>Sistema Sandwicheria</b></a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#ca-navbar" aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <!-- Menu Area -->
+            <div class="navbar-collapse collapse" id="ca-navbar" style="">
+                <ul class="navbar-nav ml-auto" id="nav">
+                    <li class="nav-item">
+                        <a id="ac" class="nav-link">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            Salir
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:white;">
+                            bla
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
         <div id="main" class="container">
-        @yield('contenido')
+        <router-link to="/">Home</router-link>|
+        <router-link to="/about">About</router-link>
+        
+        <router-view/>
+
+
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

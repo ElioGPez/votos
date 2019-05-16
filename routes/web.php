@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('cuerpo');
+    return view('app');
 });
 
 Route::resource('categoria','CategoriaController');
