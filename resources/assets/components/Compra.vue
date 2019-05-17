@@ -1,15 +1,11 @@
 <template>
   <div>
-      <br>
+    <br>
     <div id="row2">
-      <h3 class="text-center">Registro de Ventas</h3>
+      <h3 class="text-center">Registro de Compras</h3>
     </div>
-    <div id="row1" class="row">
-      <div id="card" class="card col-8">
+      <div id="card" class="card">
         <form class="card-body">
-          <div>
-            <h4 class="text-center">Alimentos y Bebidas</h4>
-          </div>
           <div class="form-group">
             <!-- Listas Tipo y Categoria -->
             <div class="row">
@@ -109,14 +105,7 @@
           </div>
         </form>
       </div>
-      <div id="card" class="col-4">
-        <form class="card-body">
-          <div>
-            <h4 class="text-center">Mesas y Pool</h4>
-          </div>
-        </form>
-      </div>
-    </div>
+
   </div>
 </template>
 
@@ -148,11 +137,10 @@ label {
 
 #card {
   background-color: rgb(235, 235, 235);
-}
-#row1 {
-  margin-left: 45px;
+    margin-left: 45px;
   margin-right: 45px;
 }
+
 #row2 {
   margin-left: 40px;
   margin-right: 40px;

@@ -15,7 +15,7 @@
       
     </head>
     <body>
-
+    <div id="main"> 
     <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e60000;">
         <!-- Logo -->
         <a id="ac" class="navbar-brand" href="#"><h2><b>Sistema Sandwicheria</b></h2></a>
@@ -25,17 +25,17 @@
                 <ul class="navbar-nav ml-auto" id="nav">
                     <li class="nav-item">
                         <a id="ac" class="nav-link">
-                            Home
+                        <router-link style="color:white;" to="/"><b>Venta</b></router-link>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">
-                            Salir
+                        <a id="ac" class="nav-link">
+                        <router-link style="color:white;" to="/compra"><b>Compra</b></router-link>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color:white;">
-                            bla
+                        <a id="ac" class="nav-link">
+                        <router-link style="color:white;" to="/ventas"><b>Listado Ventas</b></router-link>
                         </a>
                     </li>
                 </ul>
@@ -43,9 +43,7 @@
         </nav>
 
 
-        <div id="main">
-        <router-link to="/">Venta</router-link>|
-        <router-link to="/about">About</router-link>
+        
         
         <router-view/>
         <!--app></app-->

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Venta from '../components/Venta.vue'
-import About from '../components/About.vue'
+import Compra from '../components/Compra.vue'
+import ListadoVentas from '../components/ListadoVentas.vue'
 
 
 Vue.use(Router)
@@ -15,9 +16,15 @@ export default new Router({
 
         },
         {
-            path : '/about',
-            name : 'about',
-            component: About
+            path : '/compra',
+            name : 'compra',
+            component: Compra
+
+        },
+        {
+            path : '/ventas',
+            name : 'listado_ventas',
+            component: ListadoVentas
 
         },
     ],
