@@ -18,7 +18,7 @@
 
     <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e60000;">
         <!-- Logo -->
-        <a id="ac" class="navbar-brand" href="#"><b>Sistema Sandwicheria</b></a>
+        <a id="ac" class="navbar-brand" href="#"><h2><b>Sistema Sandwicheria</b></h2></a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#ca-navbar" aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <!-- Menu Area -->
             <div class="navbar-collapse collapse" id="ca-navbar" style="">
@@ -43,12 +43,12 @@
         </nav>
 
 
-        <div id="main" class="container">
-        <router-link to="/">Home</router-link>|
+        <div id="main">
+        <router-link to="/">Venta</router-link>|
         <router-link to="/about">About</router-link>
         
         <router-view/>
-        <app></app>
+        <!--app></app-->
 
 
         </div>
