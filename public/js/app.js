@@ -377,6 +377,12 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
+module.exports = "/images/hamburguesa.jpg?bec1dc17e9bcca67e8de1d14ebcb4d59";
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -481,12 +487,6 @@ module.exports = function normalizeComponent (
   }
 }
 
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/hamburguesa.jpg?bec1dc17e9bcca67e8de1d14ebcb4d59";
 
 /***/ }),
 /* 3 */
@@ -13653,7 +13653,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(20)
 /* template */
@@ -16468,7 +16468,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(25)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = null
 /* template */
@@ -16545,7 +16545,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n    padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\n}\n#row1 {\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\n}\n#row1 {\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\ninput[type=\"checkbox\"] {\r\n  transform: scale(1.5);\n}\r\n", ""]);
 
 // exports
 
@@ -16606,62 +16606,23 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row", attrs: { id: "row1" } }, [
-        _c("div", { staticClass: "card col-8", attrs: { id: "card" } }, [
-          _c("form", { staticClass: "card-body" }, [
-            _c("div", [
-              _c("h4", { staticClass: "text-center" }, [
-                _vm._v("Alimentos y Bebidas")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "custom-select",
-                      attrs: { id: "exampleFormControlSelect1" }
-                    },
-                    [
-                      _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Seleccione el Tipo de Producto...")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Alimentos")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Bebidas")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "custom-select",
-                      attrs: { id: "exampleFormControlSelect1" }
-                    },
-                    [
-                      _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Seleccione la Categoria...")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Sandwich")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Pizzas")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Al Plato")])
-                    ]
-                  )
+        _c(
+          "div",
+          {
+            staticClass: "col-lg-8 col-md-8 col-sm-12 col-xs-12",
+            attrs: { id: "card" }
+          },
+          [
+            _c("form", { staticClass: "card-body" }, [
+              _c("div", [
+                _c("h4", { staticClass: "text-center" }, [
+                  _vm._v("Alimentos y Bebidas")
                 ])
               ]),
               _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-10" }, [
+                  _c("div", { staticClass: "col" }, [
                     _c(
                       "select",
                       {
@@ -16670,149 +16631,652 @@ var staticRenderFns = [
                       },
                       [
                         _c("option", { attrs: { selected: "" } }, [
-                          _vm._v("Seleccione el Producto...")
+                          _vm._v("Seleccione el Tipo de Producto...")
                         ]),
                         _vm._v(" "),
-                        _c("option", [_vm._v("Pizza Comun")]),
+                        _c("option", [_vm._v("Alimentos")]),
                         _vm._v(" "),
-                        _c(
-                          "option",
-                          {
-                            staticStyle: {
-                              background:
-                                "url(resources/assets/imagenes/hamburguesa.jpg) no-repeat center left",
-                              "padding-left": "20px"
-                            }
-                          },
-                          [_vm._v("Tu texto")]
-                        )
+                        _c("option", [_vm._v("Bebidas")])
                       ]
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-2" }, [
+                  _c("div", { staticClass: "col" }, [
                     _c(
-                      "button",
+                      "select",
                       {
-                        staticClass: "btn btn-danger",
-                        attrs: { type: "button" }
+                        staticClass: "custom-select",
+                        attrs: { id: "exampleFormControlSelect1" }
                       },
-                      [_vm._v("AGREGAR")]
+                      [
+                        _c("option", { attrs: { selected: "" } }, [
+                          _vm._v("Seleccione la Categoria...")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Sandwich")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Pizzas")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Al Plato")])
+                      ]
                     )
                   ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("fieldset", [
-                  _c("div", {}, [
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-10" }, [
+                      _c(
+                        "select",
+                        {
+                          staticClass: "custom-select",
+                          attrs: { id: "exampleFormControlSelect1" }
+                        },
+                        [
+                          _c("option", { attrs: { selected: "" } }, [
+                            _vm._v("Seleccione el Producto...")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("Pizza Comun")]),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              staticStyle: {
+                                background:
+                                  "url(resources/assets/imagenes/hamburguesa.jpg) no-repeat center left",
+                                "padding-left": "20px"
+                              }
+                            },
+                            [_vm._v("Tu texto")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: { type: "button" }
+                        },
+                        [_vm._v("AGREGAR")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("fieldset", [
+                    _c("div", {}, [
+                      _c(
+                        "table",
+                        {
+                          staticClass:
+                            "table table-striped table-bordered table-condensed table-hover",
+                          staticStyle: { "background-color": "white" }
+                        },
+                        [
+                          _c(
+                            "thead",
+                            {
+                              staticStyle: {
+                                "background-color": "rgb(177, 18, 18)"
+                              }
+                            },
+                            [
+                              _c("tr", [
+                                _c("th", [_vm._v("Acciones")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Imagen")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Producto")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Cantidad")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Precio")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("SubTotal")])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("tbody", [
+                            _c("tr", [
+                              _c("td", { attrs: { "data-label": "Votos" } }, [
+                                _c("a", { attrs: { href: "" } }, [
+                                  _c(
+                                    "button",
+                                    { staticClass: "btn btn-warning" },
+                                    [_vm._v("X")]
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { attrs: { "data-label": "imagen" } }, [
+                                _c("img", {
+                                  attrs: {
+                                    src: __webpack_require__(1),
+                                    width: "50",
+                                    height: "50"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("Pizza")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("1")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("$50")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("$50")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("td", { attrs: { "data-label": "Votos" } }, [
+                                _c("a", { attrs: { href: "" } }, [
+                                  _c(
+                                    "button",
+                                    { staticClass: "btn btn-warning" },
+                                    [_vm._v("X")]
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { attrs: { "data-label": "imagen" } }, [
+                                _c("img", {
+                                  attrs: {
+                                    src: __webpack_require__(1),
+                                    width: "50",
+                                    height: "50"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("Pizza")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("1")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("$50")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("$50")]
+                              )
+                            ])
+                          ])
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("h4", { attrs: { align: "right" } }, [
+                      _vm._v("TOTAL $500")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-6", attrs: { id: "btn" } }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: {
+                            type: "button",
+                            "data-toggle": "modal",
+                            "data-target": "#exampleModalCenter"
+                          }
+                        },
+                        [_vm._v("PENDIENTE")]
+                      )
+                    ]),
+                    _vm._v(" "),
                     _c(
-                      "table",
+                      "div",
                       {
-                        staticClass:
-                          "table table-striped table-bordered table-condensed table-hover",
-                        staticStyle: { "background-color": "white" }
+                        staticClass: "col-6",
+                        attrs: { align: "right", id: "btn" }
                       },
                       [
                         _c(
-                          "thead",
+                          "button",
                           {
-                            staticStyle: {
-                              "background-color": "rgb(177, 18, 18)"
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" }
+                          },
+                          [_vm._v("REGISTRAR")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "col-lg-4 col-md-4 col-sm-12 col-xs-12",
+            attrs: { id: "card" }
+          },
+          [
+            _c("form", { staticClass: "card-body" }, [
+              _c("div", [
+                _c("h4", { staticClass: "text-center" }, [
+                  _vm._v("Ventas Pendientes")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: {
+                              "data-toggle": "modal",
+                              "data-target": ".bd-example-modal-lg",
+                              type: "button"
                             }
                           },
-                          [
-                            _c("tr", [
-                              _c("th", [_vm._v("Acciones")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Imagen")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Producto")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Cantidad")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Precio")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("SubTotal")])
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("tbody", [
-                          _c("tr", [
-                            _c("td", { attrs: { "data-label": "Votos" } }, [
-                              _c("a", { attrs: { href: "" } }, [
-                                _c(
-                                  "button",
-                                  { staticClass: "btn btn-danger" },
-                                  [_vm._v("Eliminar")]
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "imagen" } }, [
-                              _c("img", {
-                                attrs: {
-                                  src: __webpack_require__(2),
-                                  width: "50",
-                                  height: "50"
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("Pizza")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("1")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("$50")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("$50")
-                            ])
+                          [_vm._v("Mesa 1")]
+                        )
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" }
+                          },
+                          [_vm._v("Mesa 2")]
+                        )
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning",
+                            attrs: { type: "button" }
+                          },
+                          [_vm._v("Mesa Pool 1")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "exampleModalCenter",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalCenterTitle",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-header",
+                    staticStyle: { "background-color": "rgb(177, 18, 18)" },
+                    attrs: { align: "center" }
+                  },
+                  [_c("h3", [_vm._v("VENTAS PENDIENTES")])]
+                ),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", { attrs: { for: "" } }, [
+                    _vm._v(
+                      "Asociar venta pendiente a alguna de las siguientes mesas"
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticStyle: { "background-color": "rgb(173, 166, 166)" },
+                      attrs: { align: "center" }
+                    },
+                    [_c("label", { attrs: { for: "" } }, [_vm._v("Mesas")])]
+                  ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Mesa 1")]
+                            )
                           ]),
                           _vm._v(" "),
-                          _c("tr", [
-                            _c("td", { attrs: { "data-label": "Votos" } }, [
-                              _c("a", { attrs: { href: "" } }, [
-                                _c(
-                                  "button",
-                                  { staticClass: "btn btn-danger" },
-                                  [_vm._v("Eliminar")]
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "imagen" } }, [
-                              _c("img", {
-                                attrs: {
-                                  src: __webpack_require__(2),
-                                  width: "50",
-                                  height: "50"
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("Pizza")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("1")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("$50")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("$50")
-                            ])
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "inlineCheckbox1",
+                                value: "option1"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Mesa 1")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "inlineCheckbox1",
+                                value: "option1"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Mesa 1")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "inlineCheckbox1",
+                                value: "option1"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Mesa 1")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "inlineCheckbox1",
+                                value: "option1"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticStyle: { "background-color": "rgb(173, 166, 166)" },
+                      attrs: { align: "center" }
+                    },
+                    [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Mesas de Pool")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Mesa 1")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "inlineCheckbox1",
+                                value: "option1"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Mesa 1")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "inlineCheckbox1",
+                                value: "option1"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Mesa 1")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "inlineCheckbox1",
+                                value: "option1"
+                              }
+                            })
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Mesa 1")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-4" }, [
+                            _c("input", {
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "checkbox",
+                                id: "inlineCheckbox1",
+                                value: "option1"
+                              }
+                            })
                           ])
                         ])
                       ]
@@ -16820,35 +17284,225 @@ var staticRenderFns = [
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", [
-                  _c("h4", { attrs: { align: "right" } }, [
-                    _vm._v("TOTAL $500")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { attrs: { id: "btn" } }, [
+                _c("div", { staticClass: "modal-footer" }, [
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-danger btn-lg btn-block",
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
                       attrs: { type: "button" }
                     },
-                    [_vm._v("REGISTRAR")]
+                    [_vm._v("GUARDAR")]
                   )
                 ])
               ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade bd-example-modal-lg",
+          attrs: {
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myLargeModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog modal-lg" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-header",
+                  staticStyle: { "background-color": "rgb(177, 18, 18)" },
+                  attrs: { align: "center" }
+                },
+                [_c("h3", [_vm._v("VENTAS PENDIENTES")])]
+              ),
+              _vm._v(" "),
+              _c("div", [
+                _c("label", { attrs: { for: "" } }, [
+                  _vm._v(
+                    "Asociar venta pendiente a alguna de las siguientes mesas"
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("fieldset", [
+                    _c("div", {}, [
+                      _c(
+                        "table",
+                        {
+                          staticClass:
+                            "table table-striped table-bordered table-condensed table-hover",
+                          staticStyle: { "background-color": "white" }
+                        },
+                        [
+                          _c(
+                            "thead",
+                            {
+                              staticStyle: {
+                                "background-color": "rgb(177, 18, 18)"
+                              }
+                            },
+                            [
+                              _c("tr", [
+                                _c("th", [_vm._v("Acciones")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Imagen")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Producto")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Cantidad")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Precio")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("SubTotal")])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("tbody", [
+                            _c("tr", [
+                              _c("td", { attrs: { "data-label": "Votos" } }, [
+                                _c("a", { attrs: { href: "" } }, [
+                                  _c(
+                                    "button",
+                                    { staticClass: "btn btn-warning" },
+                                    [_vm._v("X")]
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { attrs: { "data-label": "imagen" } }, [
+                                _c("img", {
+                                  attrs: {
+                                    src: __webpack_require__(1),
+                                    width: "50",
+                                    height: "50"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("Pizza")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("1")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("$50")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("$50")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("td", { attrs: { "data-label": "Votos" } }, [
+                                _c("a", { attrs: { href: "" } }, [
+                                  _c(
+                                    "button",
+                                    { staticClass: "btn btn-warning" },
+                                    [_vm._v("X")]
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { attrs: { "data-label": "imagen" } }, [
+                                _c("img", {
+                                  attrs: {
+                                    src: __webpack_require__(1),
+                                    width: "50",
+                                    height: "50"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("Pizza")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("1")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("$50")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { attrs: { "data-label": "Producto" } },
+                                [_vm._v("$50")]
+                              )
+                            ])
+                          ])
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("h4", { attrs: { align: "right" } }, [
+                      _vm._v("TOTAL $500")
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "btn btn-danger", attrs: { type: "button" } },
+                  [_vm._v("REGISTRAR")]
+                )
+              ])
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4", attrs: { id: "card" } }, [
-          _c("form", { staticClass: "card-body" }, [
-            _c("div", [
-              _c("h4", { staticClass: "text-center" }, [_vm._v("Mesas y Pool")])
-            ])
-          ])
-        ])
-      ])
+        ]
+      )
     ])
   }
 ]
@@ -16870,7 +17524,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(30)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = null
 /* template */
@@ -17115,7 +17769,7 @@ var staticRenderFns = [
                           _c("td", { attrs: { "data-label": "imagen" } }, [
                             _c("img", {
                               attrs: {
-                                src: __webpack_require__(2),
+                                src: __webpack_require__(1),
                                 width: "50",
                                 height: "50"
                               }
@@ -17151,7 +17805,7 @@ var staticRenderFns = [
                           _c("td", { attrs: { "data-label": "imagen" } }, [
                             _c("img", {
                               attrs: {
-                                src: __webpack_require__(2),
+                                src: __webpack_require__(1),
                                 width: "50",
                                 height: "50"
                               }
@@ -17219,7 +17873,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(34)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = null
 /* template */
@@ -17296,7 +17950,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n    padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\r\n    margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -17314,22 +17968,27 @@ var render = function() {
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card", attrs: { id: "card" } },
-      [
-        _c(
-          "router-link",
-          { staticStyle: { color: "white" }, attrs: { to: "/" } },
-          [
-            _c("button", { staticClass: "btn btn-danger" }, [
-              _vm._v("Registro de Ventas")
-            ])
-          ]
-        )
-      ],
-      1
-    )
+    _c("div", { staticClass: "card", attrs: { id: "card" } }, [
+      _c(
+        "div",
+        [
+          _c(
+            "router-link",
+            { staticStyle: { color: "white" }, attrs: { to: "/" } },
+            [
+              _c(
+                "button",
+                { staticClass: "btn btn-danger", attrs: { align: "right" } },
+                [_vm._v("Nueva Venta")]
+              )
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._m(1)
+    ])
   ])
 }
 var staticRenderFns = [
@@ -17339,6 +17998,126 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "row2" } }, [
       _c("h3", { staticClass: "text-center" }, [_vm._v("Listado de Ventas")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("fieldset", [
+            _c("div", {}, [
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table table-striped table-bordered table-condensed table-hover",
+                  staticStyle: { "background-color": "white" }
+                },
+                [
+                  _c(
+                    "thead",
+                    { staticStyle: { "background-color": "rgb(177, 18, 18)" } },
+                    [
+                      _c("tr", [
+                        _c("th", [_vm._v("Acciones")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Imagen")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Producto")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Cantidad")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Precio")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("SubTotal")])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", { attrs: { "data-label": "Votos" } }, [
+                        _c("a", { attrs: { href: "" } }, [
+                          _c("button", { staticClass: "btn btn-danger" }, [
+                            _vm._v("Eliminar")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "imagen" } }, [
+                        _c("img", {
+                          attrs: {
+                            src: __webpack_require__(1),
+                            width: "50",
+                            height: "50"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "Producto" } }, [
+                        _vm._v("Pizza")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "Producto" } }, [
+                        _vm._v("1")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "Producto" } }, [
+                        _vm._v("$50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "Producto" } }, [
+                        _vm._v("$50")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", { attrs: { "data-label": "Votos" } }, [
+                        _c("a", { attrs: { href: "" } }, [
+                          _c("button", { staticClass: "btn btn-danger" }, [
+                            _vm._v("Eliminar")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "imagen" } }, [
+                        _c("img", {
+                          attrs: {
+                            src: __webpack_require__(1),
+                            width: "50",
+                            height: "50"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "Producto" } }, [
+                        _vm._v("Pizza")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "Producto" } }, [
+                        _vm._v("1")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "Producto" } }, [
+                        _vm._v("$50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { attrs: { "data-label": "Producto" } }, [
+                        _vm._v("$50")
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("br")
+        ])
+      ])
     ])
   }
 ]

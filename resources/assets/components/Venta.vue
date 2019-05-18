@@ -1,11 +1,11 @@
 <template>
   <div>
-      <br>
+    <br>
     <div id="row2">
       <h3 class="text-center">Registro de Ventas</h3>
     </div>
     <div id="row1" class="row">
-      <div id="card" class="card col-8">
+      <div id="card" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
         <form class="card-body">
           <div>
             <h4 class="text-center">Alimentos y Bebidas</h4>
@@ -69,7 +69,7 @@
                       <tr>
                         <td data-label="Votos">
                           <a href>
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button class="btn btn-warning">X</button>
                           </a>
                         </td>
                         <td data-label="imagen">
@@ -84,7 +84,7 @@
                       <tr>
                         <td data-label="Votos">
                           <a href>
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button class="btn btn-warning">X</button>
                           </a>
                         </td>
                         <td data-label="imagen">
@@ -102,19 +102,298 @@
               <div>
                 <h4 align="right">TOTAL $500</h4>
               </div>
-              <div id="btn">
-                <button type="button" class="btn btn-danger btn-lg btn-block">REGISTRAR</button>
+              <div class="row">
+                <div class="col-6" id="btn">
+                  <button
+                    type="button"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter"
+                    class="btn btn-secondary"
+                  >PENDIENTE</button>
+                </div>
+                <div align="right" class="col-6" id="btn">
+                  <button type="button" class="btn btn-danger">REGISTRAR</button>
+                </div>
               </div>
             </div>
           </div>
         </form>
       </div>
-      <div id="card" class="col-4">
+      <div id="card" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
         <form class="card-body">
           <div>
-            <h4 class="text-center">Mesas y Pool</h4>
+            <h4 class="text-center">Ventas Pendientes</h4>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+              <div class="row">
+                <div class="col">
+                  <button
+                    data-toggle="modal"
+                    data-target=".bd-example-modal-lg"
+                    type="button"
+                    class="btn btn-danger"
+                  >Mesa 1</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+              <div class="row">
+                <div class="col">
+                  <button type="button" class="btn btn-danger">Mesa 2</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+              <div class="row">
+                <div class="col">
+                  <button type="button" class="btn btn-warning">Mesa Pool 1</button>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
+      </div>
+    </div>
+    <br>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div align="center" style="background-color: rgb(177, 18, 18);" class="modal-header">
+            <h3>VENTAS PENDIENTES</h3>
+          </div>
+          <div>
+            <label for>Asociar venta pendiente a alguna de las siguientes mesas</label>
+          </div>
+          <div class="modal-body">
+            <div align="center" style="background-color: rgb(173, 166, 166);">
+              <label for>Mesas</label>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-danger">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-danger">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-danger">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-danger">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <!-- -->
+            <div align="center" style="background-color: rgb(173, 166, 166);">
+              <label for>Mesas de Pool</label>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-warning">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-warning">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-warning">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-warning">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Fin -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">GUARDAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div align="center" style="background-color: rgb(177, 18, 18);" class="modal-header">
+            <h3>VENTAS PENDIENTES</h3>
+          </div>
+          <div>
+            <label for>Venta Pendiente de Mesa 1</label>
+          </div>
+          <div class="modal-body">
+            <!-- Tabla -->
+            <div class="form-group">
+              <fieldset>
+                <div class>
+                  <table
+                    class="table table-striped table-bordered table-condensed table-hover"
+                    style="background-color:white"
+                  >
+                    <thead style="background-color: rgb(177, 18, 18);">
+                      <tr>
+                        <th>Acciones</th>
+                        <th>Imagen</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>SubTotal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-label="Votos">
+                          <a href>
+                            <button class="btn btn-warning">X</button>
+                          </a>
+                        </td>
+                        <td data-label="imagen">
+                          <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
+                        </td>
+                        <td data-label="Producto">Pizza</td>
+                        <td data-label="Producto">1</td>
+                        <td data-label="Producto">$50</td>
+                        <td data-label="Producto">$50</td>
+                      </tr>
+
+                      <tr>
+                        <td data-label="Votos">
+                          <a href>
+                            <button class="btn btn-warning">X</button>
+                          </a>
+                        </td>
+                        <td data-label="imagen">
+                          <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
+                        </td>
+                        <td data-label="Producto">Pizza</td>
+                        <td data-label="Producto">1</td>
+                        <td data-label="Producto">$50</td>
+                        <td data-label="Producto">$50</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </fieldset>
+              <div>
+                <h4 align="right">TOTAL $500</h4>
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-danger">REGISTRAR</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -138,7 +417,7 @@ h3 {
 }
 h4 {
   background-color: rgb(173, 166, 166);
-    padding: 5px;
+  padding: 5px;
 }
 
 label {
@@ -156,5 +435,8 @@ label {
 #row2 {
   margin-left: 40px;
   margin-right: 40px;
+}
+input[type="checkbox"] {
+  transform: scale(1.5);
 }
 </style>
