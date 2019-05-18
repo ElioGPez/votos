@@ -17335,13 +17335,99 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("div", [
                 _c("label", { attrs: { for: "" } }, [
-                  _vm._v(
-                    "Asociar venta pendiente a alguna de las siguientes mesas"
-                  )
+                  _vm._v("Venta Pendiente de Mesa 1")
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col" }, [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "custom-select",
+                        attrs: { id: "exampleFormControlSelect1" }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "" } }, [
+                          _vm._v("Seleccione el Tipo de Producto...")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Alimentos")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Bebidas")])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }, [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "custom-select",
+                        attrs: { id: "exampleFormControlSelect1" }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "" } }, [
+                          _vm._v("Seleccione la Categoria...")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Sandwich")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Pizzas")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Al Plato")])
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-10" }, [
+                      _c(
+                        "select",
+                        {
+                          staticClass: "custom-select",
+                          attrs: { id: "exampleFormControlSelect1" }
+                        },
+                        [
+                          _c("option", { attrs: { selected: "" } }, [
+                            _vm._v("Seleccione el Producto...")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("Pizza Comun")]),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              staticStyle: {
+                                background:
+                                  "url(resources/assets/imagenes/hamburguesa.jpg) no-repeat center left",
+                                "padding-left": "20px"
+                              }
+                            },
+                            [_vm._v("Tu texto")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: { type: "button" }
+                        },
+                        [_vm._v("AGREGAR")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("fieldset", [
                     _c("div", {}, [

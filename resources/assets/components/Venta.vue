@@ -331,6 +331,42 @@
             <label for>Venta Pendiente de Mesa 1</label>
           </div>
           <div class="modal-body">
+                        <!-- Listas Tipo y Categoria -->
+            <div class="row">
+              <div class="col">
+                <select class="custom-select" id="exampleFormControlSelect1">
+                  <option selected>Seleccione el Tipo de Producto...</option>
+                  <option>Alimentos</option>
+                  <option>Bebidas</option>
+                </select>
+              </div>
+              <div class="col">
+                <select class="custom-select" id="exampleFormControlSelect1">
+                  <option selected>Seleccione la Categoria...</option>
+                  <option>Sandwich</option>
+                  <option>Pizzas</option>
+                  <option>Al Plato</option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <!-- Lista Producto y Boton -->
+            <div class="form-group">
+              <div class="row">
+                <div class="col-10">
+                  <select class="custom-select" id="exampleFormControlSelect1">
+                    <option selected>Seleccione el Producto...</option>
+                    <option>Pizza Comun</option>
+                    <option
+                      style="background:url(resources/assets/imagenes/hamburguesa.jpg) no-repeat center left; padding-left:20px;"
+                    >Tu texto</option>
+                  </select>
+                </div>
+                <div class="col-2">
+                  <button type="button" class="btn btn-danger">AGREGAR</button>
+                </div>
+              </div>
+            </div>
             <!-- Tabla -->
             <div class="form-group">
               <fieldset>
