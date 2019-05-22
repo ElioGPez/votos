@@ -8,6 +8,7 @@ import ListadoCompras from '../components/ListadoCompras.vue'
 import Producto from '../components/Producto.vue'
 import ProductoCrear from '../components/ProductoCrear.vue'
 import ProductoModificar from '../components/ProductoModificar.vue'
+import Informe from '../components/Informe.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -56,7 +57,12 @@ export default new Router({
             path : '/producto_modificar',
             name : 'producto_modificar',
             component: ProductoModificar
-        },
+        },        
+        {
+            path : '/informe',
+            name : 'informe',
+            component: Informe
+        }
     ],
     mode : 'history'  //evita que aparezca el # en las rutas
 
