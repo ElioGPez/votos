@@ -5,6 +5,9 @@ import Compra from '../components/Compra.vue'
 import ListadoVentas from '../components/ListadoVentas.vue'
 import VentaDetalle from '../components/VentaDetalle.vue'
 import ListadoCompras from '../components/ListadoCompras.vue'
+import Producto from '../components/Producto.vue'
+import ProductoCrear from '../components/ProductoCrear.vue'
+import ProductoModificar from '../components/ProductoModificar.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -38,7 +41,22 @@ export default new Router({
             path : '/compras',
             name : 'listado_compras',
             component: ListadoCompras
-        }
+        },
+        {
+            path : '/producto',
+            name : 'producto',
+            component: Producto
+        },        
+        {
+            path : '/producto_crear',
+            name : 'producto_crear',
+            component: ProductoCrear
+        },         
+        {
+            path : '/producto_modificar',
+            name : 'producto_modificar',
+            component: ProductoModificar
+        },
     ],
     mode : 'history'  //evita que aparezca el # en las rutas
 

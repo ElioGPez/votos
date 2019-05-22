@@ -50,6 +50,11 @@
                         <router-link style="color:white;" to="/compras"><b>Listado Compras</b></router-link>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a id="ac" class="nav-link">
+                        <router-link style="color:white;" to="/producto"><b>Productos</b></router-link>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
