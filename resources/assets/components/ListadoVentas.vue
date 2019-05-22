@@ -3,12 +3,29 @@
     <br>
     <div id="row2">
       <h3 class="text-center">Listado de Ventas</h3>
+    <div class="row">
+      <div class="col-2 row">
+        <div class="col"><label for="">FILTRAR POR FECHAS</label></div>
+      </div>
+      <div class="col-4 row">
+        <div class="col-6" align="right"><label for="">Desde</label></div>
+        <div class="col-6"><input class="form-control" type="date" id="example-datetime-local-input"></div>
+      </div>
+      <div class="col-4 row">
+        <div class="col-6" align="right"><label for="">Hasta</label></div>
+        <div class="col-6"><input class="form-control" type="date" id="example-datetime-local-input"></div>
+      </div>
+      <div class="col-2" align="center">
+          <button style="margin:3px;" align="right" class="btn btn-danger">FILTRAR</button>
+      </div>
     </div>
+    </div>
+
 
     <div id="card" class="card">
       <div>
         <router-link style="color:white;" to="/">
-          <button align="right" class="btn btn-danger">Nueva Venta</button>
+          <button style="margin:3px;" align="right" class="btn btn-danger"><i class="fas fa-plus-circle"></i>Nueva Venta</button>
         </router-link>
       </div>
       <form class="card-body">
@@ -23,43 +40,65 @@
                 >
                   <thead style="background-color: rgb(177, 18, 18);">
                     <tr>
+                      <th>Id</th>
+                      <th>Fecha</th>
+                      <th>Estado</th>
+                      <th>Total</th>
                       <th>Acciones</th>
-                      <th>Imagen</th>
-                      <th>Producto</th>
-                      <th>Cantidad</th>
-                      <th>Precio</th>
-                      <th>SubTotal</th>
+
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td data-label="Votos">
-                        <a href>
-                          <button class="btn btn-danger">Eliminar</button>
-                        </a>
+                        1
                       </td>
                       <td data-label="imagen">
-                        <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
-                      </td>
-                      <td data-label="Producto">Pizza</td>
-                      <td data-label="Producto">1</td>
-                      <td data-label="Producto">$50</td>
-                      <td data-label="Producto">$50</td>
-                    </tr>
+                        20-05-19                      
+                        </td>
+                      <td data-label="Producto">PAGADA</td>
+                      <td data-label="Producto">$500</td>
+                      <td data-label="Producto">
+                    <a href>
+                      <router-link to="/venta_detalle">
+                      <button class="btn btn-warning">
+                        <i class="far fa-edit"></i>
+                      </button>        
+                      </router-link>
 
+                    </a>
+                    <a href>
+                      <button class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </a>
+                      </td>
+                    </tr>
                     <tr>
                       <td data-label="Votos">
-                        <a href>
-                          <button class="btn btn-danger">Eliminar</button>
-                        </a>
+                        1
                       </td>
                       <td data-label="imagen">
-                        <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
+                        20-05-19                      
+                        </td>
+                      <td data-label="Producto">PAGADA</td>
+                      <td data-label="Producto">$500</td>
+                      <td data-label="Producto">
+
+                    <a href>
+                      <router-link to="/venta_detalle">
+                      <button class="btn btn-warning">
+                        <i class="far fa-edit"></i>
+                      </button>        
+                      </router-link>
+
+                    </a>
+                    <a href>
+                      <button class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </a>
                       </td>
-                      <td data-label="Producto">Pizza</td>
-                      <td data-label="Producto">1</td>
-                      <td data-label="Producto">$50</td>
-                      <td data-label="Producto">$50</td>
                     </tr>
                   </tbody>
                 </table>
@@ -73,6 +112,12 @@
   </div>
 </template>
 
+<script>
+
+export default {
+  
+}
+</script>
 <style>
 .table td {
   text-align: center;
