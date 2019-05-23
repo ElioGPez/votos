@@ -18,6 +18,9 @@
         #ac {
             color: white;
         }
+        #ab { 
+            color: red;
+        }
         </style>
       
     </head>
@@ -30,31 +33,65 @@
         <!-- Menu Area -->
             <div class="navbar-collapse collapse" id="ca-navbar" style="">
                 <ul class="navbar-nav ml-auto" id="nav">
-                    <li class="nav-item">
-                        <a id="ac" class="nav-link">
-                        <router-link style="color:white;" to="/"><b>Venta</b></router-link>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="ac" class="nav-link">
-                        <router-link style="color:white;" to="/ventas"><b>Listado Ventas</b></router-link>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="ac" class="nav-link">
-                        <router-link style="color:white;" to="/compra"><b>Compra</b></router-link>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="ac" class="nav-link">
-                        <router-link style="color:white;" to="/compras"><b>Listado Compras</b></router-link>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="ac" class="nav-link">
-                        <router-link style="color:white;" to="/producto"><b>Productos</b></router-link>
-                        </a>
-                    </li>
+                <li class="nav-item dropdown">
+        <a id="ac" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b>Ventas</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a id="ab" class="nav-link">
+                <router-link style="color:red;" to="/">
+                <i class="fas fa-plus-circle"></i>
+                    <b>Nueva Venta</b>
+                </router-link>
+            </a>
+            <a id="ab" class="nav-link">
+                <router-link style="color:red;" to="/ventas">
+                <i class="fas fa-list-ol"></i>    
+                    <b>Listado</b>
+                </router-link>
+            </a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a id="ac" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b>Compras</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a id="ab" class="nav-link">
+                <router-link style="color:red;" to="/compra">
+                <i class="fas fa-plus-circle"></i>
+                    <b>Nueva Compra</b>
+                </router-link>
+            </a>
+            <a id="ab" class="nav-link">
+                <router-link style="color:red;" to="/compras">
+                <i class="fas fa-list-ol"></i>    
+                    <b>Listado</b>
+                </router-link>
+            </a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="ac" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b>Productos</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a id="ab" class="nav-link">
+                <router-link style="color:red;" to="/producto_crear">
+                <i class="fas fa-plus-circle"></i>
+                    <b>Nuevo Producto</b>
+                </router-link>
+            </a>
+            <a id="ab" class="nav-link">
+                <router-link style="color:red;" to="/producto">
+                <i class="fas fa-list-ol"></i>    
+                    <b>Listado</b>
+                </router-link>
+            </a>
+        </div>
+      </li>
+
                     <li class="nav-item">
                         <a id="ac" class="nav-link">
                         <router-link style="color:white;" to="/informe"><b>Informe</b></router-link>
