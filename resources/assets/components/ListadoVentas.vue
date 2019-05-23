@@ -22,7 +22,7 @@
     </div>
 
 
-    <div id="card" class="card">
+    <div id="cardlist" class="card">
       <div>
         <router-link style="color:white;" to="/">
           <button style="margin:3px;" align="right" class="btn btn-danger"><i class="fas fa-plus-circle"></i>Nueva Venta</button>
@@ -144,7 +144,7 @@ label {
   text-align: center;
 }
 
-#card {
+#cardlist {
   background-color: rgb(235, 235, 235);
   margin-left: 45px;
   margin-right: 45px;

@@ -18,7 +18,7 @@
     </div>
     <br>
 
-    <div id="card" class="card">
+    <div id="cardlist" class="card">
       <div>
         <router-link style="color:white;" to="/producto_crear">
           <button style="margin:3px;" align="right" class="btn btn-danger">

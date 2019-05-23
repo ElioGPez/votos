@@ -460,7 +460,11 @@ label {
   font-weight: bold;
   text-align: center;
 }
-
+#cardlist {
+  background-color: rgb(235, 235, 235);
+  margin-left: 45px;
+  margin-right: 45px;
+}
 #card {
   background-color: rgb(235, 235, 235);
 }

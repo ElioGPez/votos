@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(9);
-var isBuffer = __webpack_require__(59);
+var isBuffer = __webpack_require__(60);
 
 /*global toString:true*/
 
@@ -833,7 +833,7 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(61);
+var normalizeHeaderName = __webpack_require__(62);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -1152,12 +1152,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(62);
-var buildURL = __webpack_require__(64);
-var parseHeaders = __webpack_require__(65);
-var isURLSameOrigin = __webpack_require__(66);
+var settle = __webpack_require__(63);
+var buildURL = __webpack_require__(65);
+var parseHeaders = __webpack_require__(66);
+var isURLSameOrigin = __webpack_require__(67);
 var createError = __webpack_require__(11);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(67);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(68);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1254,7 +1254,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(68);
+      var cookies = __webpack_require__(69);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -1338,7 +1338,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(63);
+var enhanceError = __webpack_require__(64);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -1413,7 +1413,7 @@ window.Vue = __webpack_require__(7);
 
 Vue.component('app', __webpack_require__(19));
 
-var axios = __webpack_require__(57);
+var axios = __webpack_require__(58);
 
 var app = new Vue({
     router: __WEBPACK_IMPORTED_MODULE_0__rutas__["a" /* default */],
@@ -16588,7 +16588,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\n}\n#row1 {\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\ninput[type=\"checkbox\"] {\r\n  transform: scale(1.5);\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#cardlist {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\n}\n#row1 {\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\ninput[type=\"checkbox\"] {\r\n  transform: scale(1.5);\n}\r\n", ""]);
 
 // exports
 
@@ -18079,7 +18079,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#cardlist {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -18221,7 +18221,7 @@ var render = function() {
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "card", attrs: { id: "card" } }, [
+    _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
       _c(
         "div",
         [
@@ -18914,7 +18914,7 @@ var render = function() {
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _c("div", { staticClass: "card", attrs: { id: "card" } }, [
+    _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
       _c(
         "div",
         [
@@ -19352,7 +19352,7 @@ var render = function() {
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _c("div", { staticClass: "card", attrs: { id: "card" } }, [
+    _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
       _c("form", { staticClass: "card-body" }, [
         _c("div", { staticClass: "form-group" }, [
           _vm._m(1),
@@ -19687,7 +19687,7 @@ var render = function() {
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _c("div", { staticClass: "card", attrs: { id: "card" } }, [
+    _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
       _c("form", { staticClass: "card-body" }, [
         _c("div", { staticClass: "form-group" }, [
           _vm._m(1),
@@ -19839,11 +19839,12 @@ if (false) {
 /* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = null
+var __vue_template__ = __webpack_require__(57)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -19862,6 +19863,22 @@ var Component = normalizeComponent(
 )
 Component.options.__file = "resources/assets/components/Informe.vue"
 
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-99591bf2", Component.options)
+  } else {
+    hotAPI.reload("data-v-99591bf2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
 module.exports = Component.exports
 
 
@@ -19869,10 +19886,430 @@ module.exports = Component.exports
 /* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(58);
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "row2" } }, [
+        _c("h3", { staticClass: "text-center" }, [_vm._v("INFORME")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-2 row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("label", { attrs: { for: "" } }, [_vm._v("FILTRAR POR...")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4 row" }, [
+            _c("div", { staticClass: "col-6", attrs: { align: "right" } }, [
+              _c("label", { attrs: { for: "" } }, [_vm._v("Desde")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-6" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "date", id: "example-datetime-local-input" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4 row" }, [
+            _c("div", { staticClass: "col-6", attrs: { align: "right" } }, [
+              _c("label", { attrs: { for: "" } }, [_vm._v("Hasta")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-6" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "date", id: "example-datetime-local-input" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-2", attrs: { align: "center" } }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: { margin: "3px" },
+                attrs: { align: "right" }
+              },
+              [_vm._v("OBTENER")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
+        _c("div", [
+          _c("h4", { staticClass: "text-center" }, [_vm._v("VENTAS")])
+        ]),
+        _vm._v(" "),
+        _c("form", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("fieldset", [
+                _c("div", {}, [
+                  _c(
+                    "table",
+                    {
+                      staticClass:
+                        "table table-striped table-bordered table-condensed table-hover",
+                      staticStyle: { "background-color": "white" }
+                    },
+                    [
+                      _c(
+                        "thead",
+                        {
+                          staticStyle: {
+                            "background-color": "rgb(177, 18, 18)"
+                          }
+                        },
+                        [
+                          _c("tr", [
+                            _c("th", [_vm._v("Id")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Fecha")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Estado")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Total")])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("tbody", [
+                        _c("tr", [
+                          _c("td", { attrs: { "data-label": "Votos" } }, [
+                            _vm._v(
+                              "\n                      1\n                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "imagen" } }, [
+                            _vm._v(
+                              "\n                      20-05-19                      \n                      "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("PAGADA")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("$500")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", { attrs: { "data-label": "Votos" } }, [
+                            _vm._v(
+                              "\n                      1\n                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "imagen" } }, [
+                            _vm._v(
+                              "\n                      20-05-19                      \n                      "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("PAGADA")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("$500")
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("h4", { attrs: { align: "right" } }, [_vm._v("TOTAL $500")])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
+        _c("div", [
+          _c("h4", { staticClass: "text-center" }, [_vm._v("COMPRAS")])
+        ]),
+        _vm._v(" "),
+        _c("form", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("fieldset", [
+                _c("div", {}, [
+                  _c(
+                    "table",
+                    {
+                      staticClass:
+                        "table table-striped table-bordered table-condensed table-hover",
+                      staticStyle: { "background-color": "white" }
+                    },
+                    [
+                      _c(
+                        "thead",
+                        {
+                          staticStyle: {
+                            "background-color": "rgb(177, 18, 18)"
+                          }
+                        },
+                        [
+                          _c("tr", [
+                            _c("th", [_vm._v("Id")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Fecha")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Estado")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Total")])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("tbody", [
+                        _c("tr", [
+                          _c("td", { attrs: { "data-label": "Votos" } }, [
+                            _vm._v(
+                              "\n                      1\n                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "imagen" } }, [
+                            _vm._v(
+                              "\n                      20-05-19                      \n                      "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("PAGADA")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("$500")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", { attrs: { "data-label": "Votos" } }, [
+                            _vm._v(
+                              "\n                      1\n                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "imagen" } }, [
+                            _vm._v(
+                              "\n                      20-05-19                      \n                      "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("PAGADA")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("$500")
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("h4", { attrs: { align: "right" } }, [_vm._v("TOTAL $500")])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
+        _c("div", [
+          _c("h4", { staticClass: "text-center" }, [_vm._v("GASTOS")])
+        ]),
+        _vm._v(" "),
+        _c("form", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("fieldset", [
+                _c("div", {}, [
+                  _c(
+                    "table",
+                    {
+                      staticClass:
+                        "table table-striped table-bordered table-condensed table-hover",
+                      staticStyle: { "background-color": "white" }
+                    },
+                    [
+                      _c(
+                        "thead",
+                        {
+                          staticStyle: {
+                            "background-color": "rgb(177, 18, 18)"
+                          }
+                        },
+                        [
+                          _c("tr", [
+                            _c("th", [_vm._v("Id")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Fecha")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Estado")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Total")])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("tbody", [
+                        _c("tr", [
+                          _c("td", { attrs: { "data-label": "Votos" } }, [
+                            _vm._v(
+                              "\n                      1\n                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "imagen" } }, [
+                            _vm._v(
+                              "\n                      20-05-19                      \n                      "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("PAGADA")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("$500")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", { attrs: { "data-label": "Votos" } }, [
+                            _vm._v(
+                              "\n                      1\n                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "imagen" } }, [
+                            _vm._v(
+                              "\n                      20-05-19                      \n                      "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("PAGADA")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v("$500")
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("h4", { attrs: { align: "right" } }, [_vm._v("TOTAL $500")])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
+        _c("div", [
+          _c("h4", { staticClass: "text-center" }, [_vm._v("TOTAL")])
+        ]),
+        _vm._v(" "),
+        _c("form", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "h1",
+              { staticClass: "text-center", staticStyle: { color: "green" } },
+              [_vm._v("TOTAL DE GANANCIAS NETAS OBTENIDAS: $40000")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6", attrs: { id: "btn" } }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-secondary",
+              attrs: {
+                type: "button",
+                "data-toggle": "modal",
+                "data-target": "#exampleModalCenter"
+              }
+            },
+            [_vm._v("GUARDAR INFORME PDF")]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-6", attrs: { align: "right", id: "btn" } },
+          [
+            _c(
+              "button",
+              { staticClass: "btn btn-danger", attrs: { type: "button" } },
+              [_vm._v("IMPRIMIR")]
+            )
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-99591bf2", module.exports)
+  }
+}
 
 /***/ }),
 /* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(59);
+
+/***/ }),
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19880,7 +20317,7 @@ module.exports = __webpack_require__(58);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(9);
-var Axios = __webpack_require__(60);
+var Axios = __webpack_require__(61);
 var defaults = __webpack_require__(6);
 
 /**
@@ -19915,14 +20352,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(13);
-axios.CancelToken = __webpack_require__(74);
+axios.CancelToken = __webpack_require__(75);
 axios.isCancel = __webpack_require__(12);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(75);
+axios.spread = __webpack_require__(76);
 
 module.exports = axios;
 
@@ -19931,7 +20368,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports) {
 
 /*!
@@ -19958,7 +20395,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19966,10 +20403,10 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(6);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(69);
-var dispatchRequest = __webpack_require__(70);
-var isAbsoluteURL = __webpack_require__(72);
-var combineURLs = __webpack_require__(73);
+var InterceptorManager = __webpack_require__(70);
+var dispatchRequest = __webpack_require__(71);
+var isAbsoluteURL = __webpack_require__(73);
+var combineURLs = __webpack_require__(74);
 
 /**
  * Create a new instance of Axios
@@ -20051,7 +20488,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20070,7 +20507,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20103,7 +20540,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20131,7 +20568,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20206,7 +20643,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20250,7 +20687,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20325,7 +20762,7 @@ module.exports = (
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20368,7 +20805,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20428,7 +20865,7 @@ module.exports = (
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20487,14 +20924,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(71);
+var transformData = __webpack_require__(72);
 var isCancel = __webpack_require__(12);
 var defaults = __webpack_require__(6);
 
@@ -20573,7 +21010,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20600,7 +21037,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20621,7 +21058,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20642,7 +21079,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20706,7 +21143,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
