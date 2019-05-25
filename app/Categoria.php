@@ -11,8 +11,8 @@ class Categoria extends Model
 
 	protected $filable = ['nombre','descripcion'];
 
-	public function producto()
+	public function sub_categoria()
     {
-        return $this->hasMany('App\Producto');
+        return $this->hasMany('App\Subcategoria');
     }
 }

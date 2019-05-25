@@ -18,9 +18,9 @@ class Producto extends Model
         'categoria_id'
     ];
 
-    public function categoria()
+    public function sub_categoria()
     {
-        return $this->belongsTo('App\Categoria');
+        return $this->belongsTo('App\SubCategoria');
     }
     public function linea_compra()
     {
