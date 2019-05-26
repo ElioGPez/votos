@@ -15,8 +15,4 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::resource('categoria','CategoriaController');
-Route::resource('producto','ProductoController');
-Route::resource('venta','VentaController');
-Route::resource('compra','CompraController');
-Route::resource('cliente','ClienteController');
+

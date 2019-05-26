@@ -14,18 +14,23 @@
             <!-- Listas Tipo y Categoria -->
             <div class="row">
               <div class="col">
-                <select class="custom-select" id="exampleFormControlSelect1">
-                  <option selected>Seleccione el Tipo de Producto...</option>
-                  <option>Alimentos</option>
-                  <option>Bebidas</option>
+                <select 
+                class="custom-select" 
+                @change="obtenerCategorias($event)" 
+                v-model="tipo">
+                  <option value="0" selected>Seleccione el Tipo de Producto...</option>
+                  <option value="1">Alimentos</option>
+                  <option value="2">Bebidas</option>
                 </select>
               </div>
               <div class="col">
-                <select class="custom-select" id="exampleFormControlSelect1">
-                  <option selected>Seleccione la Categoria...</option>
-                  <option>Sandwich</option>
-                  <option>Pizzas</option>
-                  <option>Al Plato</option>
+                <select 
+                class="custom-select" 
+                :disabled="validated == 1"
+                @change="obtenerProductos($event)"
+                v-model="categoria">
+                  <option value="0" selected>Seleccione la Categoria de Producto...</option>
+                  <option v-for="item of categorias" :key="item.id" :value=item.id>{{item.nombre}}</option>
                 </select>
               </div>
             </div>
@@ -34,16 +39,16 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-10">
-                  <select class="custom-select" id="exampleFormControlSelect1">
-                    <option selected>Seleccione el Producto...</option>
-                    <option>Pizza Comun</option>
-                    <option
-                      style="background:url(resources/assets/imagenes/hamburguesa.jpg) no-repeat center left; padding-left:20px;"
-                    >Tu texto</option>
+                  <select 
+                  class="custom-select" 
+                  :disabled="validated2 == 1"
+                  v-model="producto">
+                  <option value="0" selected>Seleccione el Producto...</option>
+                  <option v-for="item of productos" :key="item.id" :value=item.id>{{item.producto}}</option>
                   </select>
                 </div>
                 <div class="col-2">
-                  <button type="button" class="btn btn-danger">AGREGAR</button>
+                  <button @click="obtenerProducto()" type="button" class="btn btn-danger">AGREGAR</button>
                 </div>
               </div>
             </div>
@@ -66,22 +71,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr v-for="item of linea_venta" :key="item.id">
                         <td data-label="Votos">
                           <a href>
                             <button class="btn btn-warning">X</button>
                           </a>
                         </td>
                         <td data-label="imagen">
-                          <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
+                          <img :src=item.imagen width="50" height="50">
                         </td>
-                        <td data-label="Producto">Pizza</td>
-                        <td data-label="Producto">1</td>
-                        <td data-label="Producto">$50</td>
-                        <td data-label="Producto">$50</td>
+                        <td data-label="Producto">{{item.producto}}</td>
+                        <td data-label="Producto">{{item.stock}}</td>
+                        <td data-label="Producto">{{item.precio}}</td>
+                        <td data-label="Producto">{{item.precio}}</td>
                       </tr>
 
-                      <tr>
+                      <!-- tr>
                         <td data-label="Votos">
                           <a href>
                             <button class="btn btn-warning">X</button>
@@ -94,7 +99,7 @@
                         <td data-label="Producto">1</td>
                         <td data-label="Producto">$50</td>
                         <td data-label="Producto">$50</td>
-                      </tr>
+                      </tr-->
                     </tbody>
                   </table>
                 </div>
@@ -401,7 +406,7 @@
                         <td data-label="Producto">$50</td>
                       </tr>
 
-                      <tr>
+                      <!--tr>
                         <td data-label="Votos">
                           <a href>
                             <button class="btn btn-warning">X</button>
@@ -414,7 +419,7 @@
                         <td data-label="Producto">1</td>
                         <td data-label="Producto">$50</td>
                         <td data-label="Producto">$50</td>
-                      </tr>
+                      </tr-->
                     </tbody>
                   </table>
                 </div>
@@ -434,6 +439,54 @@
     </div>
   </div>
 </template>
+
+
+<script>
+const axios = require('axios');
+
+export default {
+  data() {
+    return {
+      tipo:'0',
+      categorias:[],
+      validated:1,
+      validated2:1,
+      productos:[],
+      categoria:'0',
+      producto:'0',
+      linea_venta:[]
+    }
+  },
+  methods: {
+    obtenerCategorias(event){
+      if(event.target.value!=0){
+            var urlCategorias = 'api/sub_categoria/'+event.target.value;
+            axios.get(urlCategorias).then(response => {
+               this.categorias = response.data;
+               this.validated=0;
+            });
+      }
+    },
+    obtenerProductos(event){
+      if(event.target.value!=0){
+            var urlProductos = 'api/producto/'+event.target.value;
+            axios.get(urlProductos).then(response => {
+               this.productos = response.data;
+               this.validated2=0;
+            });
+      }
+    },
+    obtenerProducto(){
+      for(var item of this.productos){
+        if(this.producto == item.id){
+          console.log("Producto: "+item.producto);
+          this.linea_venta.push(item);
+        }
+      }
+    }
+  }
+}
+</script>
 
 <style>
 .table td {

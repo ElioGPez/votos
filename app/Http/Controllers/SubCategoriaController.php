@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\SubCategoria;
 use DB;
-class ProductoController extends Controller
+class SubCategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -45,9 +46,9 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        //dd("pasa pero no pasa");
-        $productos=DB::table('productos')->where('subcategoria_id','=',$id)->get();
-        return $productos;
+        //dd("Por aqui quiere pasar");
+        $sub_categorias=DB::table('sub_categorias')->where('categoria_id','=',$id)->get();
+        return $sub_categorias;
     }
 
     /**
