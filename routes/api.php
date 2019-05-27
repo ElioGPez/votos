@@ -20,5 +20,6 @@ Route::resource('sub_categoria','SubCategoriaController');
 Route::resource('categoria','CategoriaController');
 Route::resource('producto','ProductoController');
 Route::resource('venta','VentaController');
-Route::resource('compra','CompraController');
+// Route::resource('compra','CompraController');
+Route::get('compra','CompraController@index');
 Route::resource('cliente','ClienteController');

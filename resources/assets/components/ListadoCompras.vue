@@ -101,7 +101,7 @@ export default {
  },
  methods: {
    getCompras: function(){
-     var urlCompras = 'compra';
+     var urlCompras = 'api/compra';
      axios.get(urlCompras).then(response=>{
        this.compras = response.data;
      });

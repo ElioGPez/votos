@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::get('/compra','CompraController@index');
+// Route::get('/compra','CompraController@index');

@@ -20508,7 +20508,7 @@ var axios = __webpack_require__(6);
     getCompras: function getCompras() {
       var _this = this;
 
-      var urlCompras = 'compra';
+      var urlCompras = 'api/compra';
       axios.get(urlCompras).then(function (response) {
         _this.compras = response.data;
       });
