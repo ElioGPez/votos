@@ -38,7 +38,7 @@
             <!-- Lista Producto y Boton -->
             <div class="form-group">
               <div class="row">
-                <div class="col-10">
+                <div class="col-6">
                   <select 
                   class="custom-select" 
                   :disabled="validated2 == 1"
@@ -46,6 +46,9 @@
                   <option value="0" selected>Seleccione el Producto...</option>
                   <option v-for="item of productos" :key="item.id" :value=item.id>{{item.producto}}</option>
                   </select>
+                </div>
+                <div class="col-4">
+                  <input v-model="cantidad" type="number" class="form-control" placeholder="Cantidad">
                 </div>
                 <div class="col-2">
                   <button @click="obtenerProducto()" type="button" class="btn btn-danger">AGREGAR</button>
@@ -71,41 +74,27 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="item of linea_venta" :key="item.id">
+                      <tr v-for="(item,index) of linea_venta" :key="item.id">
                         <td data-label="Votos">
                           <a href>
-                            <button class="btn btn-warning">X</button>
+                            <button class="btn btn-warning" @click.prevent="linea_venta.splice(index,1);actualizar()">X</button>
                           </a>
                         </td>
                         <td data-label="imagen">
                           <img :src=item.imagen width="50" height="50">
                         </td>
                         <td data-label="Producto">{{item.producto}}</td>
-                        <td data-label="Producto">{{item.stock}}</td>
+                        <td data-label="Producto">{{item.cantidad}}</td>
                         <td data-label="Producto">{{item.precio}}</td>
-                        <td data-label="Producto">{{item.precio}}</td>
+                        <td data-label="Producto">{{item.subtotal}}</td>
                       </tr>
 
-                      <!-- tr>
-                        <td data-label="Votos">
-                          <a href>
-                            <button class="btn btn-warning">X</button>
-                          </a>
-                        </td>
-                        <td data-label="imagen">
-                          <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
-                        </td>
-                        <td data-label="Producto">Pizza</td>
-                        <td data-label="Producto">1</td>
-                        <td data-label="Producto">$50</td>
-                        <td data-label="Producto">$50</td>
-                      </tr-->
                     </tbody>
                   </table>
                 </div>
               </fieldset>
               <div>
-                <h4 align="right">TOTAL $500</h4>
+                <h4 align="right">TOTAL ${{total}}</h4>
               </div>
               <div class="row">
                 <div class="col-6" id="btn">
@@ -117,7 +106,7 @@
                   >PENDIENTE</button>
                 </div>
                 <div align="right" class="col-6" id="btn">
-                  <button type="button" class="btn btn-danger">REGISTRAR</button>
+                  <button type="button" class="btn btn-danger" @click="registrarVenta()">REGISTRAR</button>
                 </div>
               </div>
             </div>
@@ -454,7 +443,9 @@ export default {
       productos:[],
       categoria:'0',
       producto:'0',
-      linea_venta:[]
+      linea_venta:[],
+      total:0,
+      cantidad:1
     }
   },
   methods: {
@@ -479,9 +470,41 @@ export default {
     obtenerProducto(){
       for(var item of this.productos){
         if(this.producto == item.id){
-          console.log("Producto: "+item.producto);
-          this.linea_venta.push(item);
+
+          var linea = new Object();
+            linea.id = item.id;
+            linea.imagen = item.imagen;
+            linea.producto = item.producto;
+            linea.cantidad = this.cantidad;
+            linea.precio = item.precio;
+            linea.subtotal = this.cantidad*item.precio;
+          
+          this.total+=linea.subtotal;
+          this.linea_venta.push(linea);
+          this.limpiar();    
         }
+      }
+    },
+    limpiar(){
+      this.cantidad = 1;
+      this.producto = 0;
+    },
+    actualizar(){
+      this.total=0;
+      for(var item of this.linea_venta){
+        this.total+=item.subtotal;
+      }
+    },
+    registrarVenta(){
+      if(this.linea_venta.length != 0){
+            var urlVenta = 'api/venta';
+            axios.post(urlVenta, {
+              linea_venta : this.linea_venta,
+              total : this.total
+            }).then(response => {
+              console.log(response.data);
+               this.limpiar();
+            });
       }
     }
   }

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Venta;
+use App\Linea_Venta;
+use Carbon\Carbon;
 
 class VentaController extends Controller
 {
@@ -34,7 +38,15 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $venta = new Venta;
+        $venta->total = $request->total;
+        //Establecemos la fecha actual
+        $mytime= Carbon::now('America/Argentina/Tucuman');
+        $venta->fecha = $mytime->toDateTimeString();
+        $venta->estado = 'PAGADA';
+        $venta->save();
+
+        return $venta;
     }
 
     /**

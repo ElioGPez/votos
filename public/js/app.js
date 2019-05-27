@@ -17070,17 +17070,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 var axios = __webpack_require__(9);
 
@@ -17094,7 +17083,9 @@ var axios = __webpack_require__(9);
       productos: [],
       categoria: '0',
       producto: '0',
-      linea_venta: []
+      linea_venta: [],
+      total: 0,
+      cantidad: 1
     };
   },
 
@@ -17131,8 +17122,18 @@ var axios = __webpack_require__(9);
           var item = _step.value;
 
           if (this.producto == item.id) {
-            console.log("Producto: " + item.producto);
-            this.linea_venta.push(item);
+
+            var linea = new Object();
+            linea.id = item.id;
+            linea.imagen = item.imagen;
+            linea.producto = item.producto;
+            linea.cantidad = this.cantidad;
+            linea.precio = item.precio;
+            linea.subtotal = this.cantidad * item.precio;
+
+            this.total += linea.subtotal;
+            this.linea_venta.push(linea);
+            this.limpiar();
           }
         }
       } catch (err) {
@@ -17148,6 +17149,51 @@ var axios = __webpack_require__(9);
             throw _iteratorError;
           }
         }
+      }
+    },
+    limpiar: function limpiar() {
+      this.cantidad = 1;
+      this.producto = 0;
+    },
+    actualizar: function actualizar() {
+      this.total = 0;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = this.linea_venta[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var item = _step2.value;
+
+          this.total += item.subtotal;
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+    },
+    registrarVenta: function registrarVenta() {
+      var _this3 = this;
+
+      if (this.linea_venta.length != 0) {
+        var urlVenta = 'api/venta';
+        axios.post(urlVenta, {
+          linea_venta: this.linea_venta,
+          total: this.total
+        }).then(function (response) {
+          console.log(response.data);
+          _this3.limpiar();
+        });
       }
     }
   }
@@ -18154,7 +18200,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-10" }, [
+                  _c("div", { staticClass: "col-6" }, [
                     _c(
                       "select",
                       {
@@ -18201,6 +18247,30 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.cantidad,
+                          expression: "cantidad"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", placeholder: "Cantidad" },
+                      domProps: { value: _vm.cantidad },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.cantidad = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "col-2" }, [
                     _c(
                       "button",
@@ -18234,9 +18304,26 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "tbody",
-                          _vm._l(_vm.linea_venta, function(item) {
+                          _vm._l(_vm.linea_venta, function(item, index) {
                             return _c("tr", { key: item.id }, [
-                              _vm._m(3, true),
+                              _c("td", { attrs: { "data-label": "Votos" } }, [
+                                _c("a", { attrs: { href: "" } }, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-warning",
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.linea_venta.splice(index, 1)
+                                          _vm.actualizar()
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("X")]
+                                  )
+                                ])
+                              ]),
                               _vm._v(" "),
                               _c("td", { attrs: { "data-label": "imagen" } }, [
                                 _c("img", {
@@ -18257,7 +18344,7 @@ var render = function() {
                               _c(
                                 "td",
                                 { attrs: { "data-label": "Producto" } },
-                                [_vm._v(_vm._s(item.stock))]
+                                [_vm._v(_vm._s(item.cantidad))]
                               ),
                               _vm._v(" "),
                               _c(
@@ -18269,7 +18356,7 @@ var render = function() {
                               _c(
                                 "td",
                                 { attrs: { "data-label": "Producto" } },
-                                [_vm._v(_vm._s(item.precio))]
+                                [_vm._v(_vm._s(item.subtotal))]
                               )
                             ])
                           }),
@@ -18280,23 +18367,52 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _c("div", [
+                  _c("h4", { attrs: { align: "right" } }, [
+                    _vm._v("TOTAL $" + _vm._s(_vm.total))
+                  ])
+                ]),
                 _vm._v(" "),
-                _vm._m(5)
+                _c("div", { staticClass: "row" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-6",
+                      attrs: { align: "right", id: "btn" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.registrarVenta()
+                            }
+                          }
+                        },
+                        [_vm._v("REGISTRAR")]
+                      )
+                    ]
+                  )
+                ])
               ])
             ])
           ])
         ]
       ),
       _vm._v(" "),
-      _vm._m(6)
+      _vm._m(4)
     ]),
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _vm._m(7),
+    _vm._m(5),
     _vm._v(" "),
-    _vm._m(8)
+    _vm._m(6)
   ])
 }
 var staticRenderFns = [
@@ -18344,50 +18460,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { "data-label": "Votos" } }, [
-      _c("a", { attrs: { href: "" } }, [
-        _c("button", { staticClass: "btn btn-warning" }, [_vm._v("X")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h4", { attrs: { align: "right" } }, [_vm._v("TOTAL $500")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-6", attrs: { id: "btn" } }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#exampleModalCenter"
-            }
-          },
-          [_vm._v("PENDIENTE")]
-        )
-      ]),
-      _vm._v(" "),
+    return _c("div", { staticClass: "col-6", attrs: { id: "btn" } }, [
       _c(
-        "div",
-        { staticClass: "col-6", attrs: { align: "right", id: "btn" } },
-        [
-          _c(
-            "button",
-            { staticClass: "btn btn-danger", attrs: { type: "button" } },
-            [_vm._v("REGISTRAR")]
-          )
-        ]
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModalCenter"
+          }
+        },
+        [_vm._v("PENDIENTE")]
       )
     ])
   },
