@@ -16570,7 +16570,7 @@ var content = __webpack_require__(27);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("44cb9c05", content, false, {});
+var update = __webpack_require__(3)("16d7a1dc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -16594,7 +16594,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#cardlist {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\n}\n#row1 {\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\ninput[type=\"checkbox\"] {\r\n  transform: scale(1.5);\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  background-color: rgb(173, 166, 166);\n  padding: 5px;\n}\nlabel {\n  font-weight: bold;\n  text-align: center;\n}\n#cardlist {\n  background-color: rgb(235, 235, 235);\n  margin-left: 45px;\n  margin-right: 45px;\n}\n#card {\n  background-color: rgb(235, 235, 235);\n}\n#row1 {\n  margin-left: 45px;\n  margin-right: 45px;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\ninput[type=\"checkbox\"] {\n  transform: scale(1.5);\n}\n", ""]);
 
 // exports
 
@@ -19189,7 +19189,7 @@ var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("5c178ebd", content, false, {});
+var update = __webpack_require__(3)("b53d4560", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -19213,7 +19213,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n    padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\r\n    margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  background-color: rgb(173, 166, 166);\n    padding: 5px;\n}\nlabel {\n  font-weight: bold;\n  text-align: center;\n}\n#card {\n  background-color: rgb(235, 235, 235);\n    margin-left: 45px;\n  margin-right: 45px;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -19538,7 +19538,7 @@ var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("f4c53388", content, false, {});
+var update = __webpack_require__(3)("7ec6c76e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -19562,7 +19562,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#cardlist {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  background-color: rgb(173, 166, 166);\n  padding: 5px;\n}\nlabel {\n  font-weight: bold;\n  text-align: center;\n}\n#cardlist {\n  background-color: rgb(235, 235, 235);\n  margin-left: 45px;\n  margin-right: 45px;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -20017,7 +20017,7 @@ var content = __webpack_require__(60);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("2794e504", content, false, {});
+var update = __webpack_require__(3)("02be3c5e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -20041,7 +20041,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n   \r\n\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  font-weight: bold;\r\n  padding: 5px;\n}\nlabel {\r\n       font-weight: bold;\r\n    font-size: 20px;\n}\n#info {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 20px;\r\n  margin-right: 20px;\n}\n#subtitulo {\r\n     background-color: rgb(190, 190, 190); \r\n       font-weight: bold;\r\n    font-size: 25px;\r\n    text-align: center;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n   \n\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  font-weight: bold;\n  padding: 5px;\n}\nlabel {\n       font-weight: bold;\n    font-size: 20px;\n}\n#info {\n  background-color: rgb(235, 235, 235);\n  margin-left: 20px;\n  margin-right: 20px;\n}\n#subtitulo {\n     background-color: rgb(190, 190, 190); \n       font-weight: bold;\n    font-size: 25px;\n    text-align: center;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -20367,7 +20367,7 @@ var content = __webpack_require__(65);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("0ad7634a", content, false, {});
+var update = __webpack_require__(3)("2fbeeedd", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -20391,7 +20391,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#cardlist {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  background-color: rgb(173, 166, 166);\n  padding: 5px;\n}\nlabel {\n  font-weight: bold;\n  text-align: center;\n}\n#cardlist {\n  background-color: rgb(235, 235, 235);\n  margin-left: 45px;\n  margin-right: 45px;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -21159,7 +21159,7 @@ var content = __webpack_require__(72);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("550ccf0b", content, false, {});
+var update = __webpack_require__(3)("dfe7f5d0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -21183,7 +21183,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nlabel {\r\n  text-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\nlabel {\n  text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -21494,7 +21494,7 @@ var content = __webpack_require__(77);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("0e17f27a", content, false, {});
+var update = __webpack_require__(3)("a9794bf2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -21518,7 +21518,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nlabel {\r\n  text-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\nlabel {\n  text-align: center;\n}\n", ""]);
 
 // exports
 
