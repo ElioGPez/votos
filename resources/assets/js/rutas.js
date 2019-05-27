@@ -47,17 +47,17 @@ export default new Router({
             path : '/producto',
             name : 'producto',
             component: Producto
-        },        
+        },
         {
             path : '/producto_crear',
             name : 'producto_crear',
             component: ProductoCrear
-        },         
+        },
         {
             path : '/producto_modificar',
             name : 'producto_modificar',
             component: ProductoModificar
-        },        
+        },
         {
             path : '/informe',
             name : 'informe',
