@@ -53,5 +53,19 @@ class CategoriaSeeder extends Seeder
             'imagen' => '/images/hamburguesa.jpg',
             'subcategoria_id' => '1'
         ]);
+        DB::table('clientes')->insert([  
+            'producto' => 'Sandwich Especial',
+            'descripcion' => 'Con pan especial',
+            'precio' => '130',
+            'imagen' => '/images/hamburguesa.jpg',
+            'subcategoria_id' => '1'
+        ]);
+        DB::table('productos')->insert([  
+            'producto' => 'Sandwich Especial',
+            'descripcion' => 'Con pan especial',
+            'precio' => '130',
+            'imagen' => '/images/hamburguesa.jpg',
+            'subcategoria_id' => '1'
+        ]);
     }
 }

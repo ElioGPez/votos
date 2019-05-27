@@ -13,12 +13,12 @@ class Venta extends Model
         'total',
         'fecha',
         'estado',
-        'usuario_id'
+        'cliente_id'
     ];
 
-    public function usuario()
+    public function cliente()
     {
-        return $this->hasMany('App\Producto');
+        return $this->hasMany('App\Cliente');
     }
     public function linea_venta()
     {
