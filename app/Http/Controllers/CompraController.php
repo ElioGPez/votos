@@ -14,8 +14,8 @@ class CompraController extends Controller
      */
     public function index()
     {
-        $compras = Compra::get();
-        return $compras;
+
+        return Compra::all();
     }
 
     /**

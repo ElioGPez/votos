@@ -829,6 +829,12 @@ module.exports = g;
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(30);
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -923,10 +929,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 if (false) {
@@ -937,7 +943,7 @@ if (false) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1125,12 +1131,6 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(30);
 
 /***/ }),
 /* 10 */
@@ -1415,11 +1415,11 @@ module.exports = __webpack_require__(16);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rutas__ = __webpack_require__(23);
 
-window.Vue = __webpack_require__(7);
+window.Vue = __webpack_require__(8);
 
 Vue.component('app', __webpack_require__(20));
 
-var axios = __webpack_require__(9);
+var axios = __webpack_require__(6);
 
 var app = new Vue({
     router: __WEBPACK_IMPORTED_MODULE_0__rutas__["a" /* default */],
@@ -13652,7 +13652,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(9)))
 
 /***/ }),
 /* 20 */
@@ -13749,7 +13749,7 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Venta_vue__ = __webpack_require__(25);
@@ -17071,7 +17071,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(9);
+var axios = __webpack_require__(6);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -17209,7 +17209,7 @@ var axios = __webpack_require__(9);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(10);
 var Axios = __webpack_require__(32);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 
 /**
  * Create an instance of Axios
@@ -17292,7 +17292,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(41);
 var dispatchRequest = __webpack_require__(42);
@@ -17824,7 +17824,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(43);
 var isCancel = __webpack_require__(13);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -20491,34 +20491,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+var axios = __webpack_require__(6);
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.getCompras();
+  },
+  data: function data() {
+    return {
+      compras: []
+    };
+  },
+
+  methods: {
+    getCompras: function getCompras() {
+      var _this = this;
+
+      var urlCompras = 'compra';
+      axios.get(urlCompras).then(function (response) {
+        _this.compras = response.data;
+      });
+    }
+  }
+});
 
 /***/ }),
 /* 67 */
@@ -20574,97 +20570,51 @@ var render = function() {
                   [
                     _vm._m(1),
                     _vm._v(" "),
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", { attrs: { "data-label": "Votos" } }, [
-                          _vm._v(
-                            "\n                      1\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { "data-label": "imagen" } }, [
-                          _vm._v(
-                            "\n                      20-05-19\n                      "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { "data-label": "Producto" } }, [
-                          _vm._v("PAGADA")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { "data-label": "Producto" } }, [
-                          _vm._v("$500")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { "data-label": "Producto" } }, [
-                          _c(
-                            "a",
-                            { attrs: { href: "" } },
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: "/venta_detalle" } },
-                                [
-                                  _c(
-                                    "button",
-                                    { staticClass: "btn btn-warning" },
-                                    [_c("i", { staticClass: "far fa-edit" })]
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          ),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.compras, function(compra) {
+                        return _c("tr", [
+                          _c("td", { attrs: { "data-label": "Votos" } }, [
+                            _vm._v(_vm._s(compra.id))
+                          ]),
                           _vm._v(" "),
-                          _vm._m(2)
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", { attrs: { "data-label": "Votos" } }, [
-                          _vm._v(
-                            "\n                      1\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { "data-label": "imagen" } }, [
-                          _vm._v(
-                            "\n                      20-05-19\n                      "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { "data-label": "Producto" } }, [
-                          _vm._v("PAGADA")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { "data-label": "Producto" } }, [
-                          _vm._v("$500")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { "data-label": "Producto" } }, [
-                          _c(
-                            "a",
-                            { attrs: { href: "" } },
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: "/venta_detalle" } },
-                                [
-                                  _c(
-                                    "button",
-                                    { staticClass: "btn btn-warning" },
-                                    [_c("i", { staticClass: "far fa-edit" })]
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          ),
+                          _c("td", { attrs: { "data-label": "imagen" } }, [
+                            _vm._v(_vm._s(compra.fecha))
+                          ]),
                           _vm._v(" "),
-                          _vm._m(3)
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v(_vm._s(compra.estado))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v(_vm._s(compra.total))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "a",
+                              [
+                                _c(
+                                  "router-link",
+                                  { attrs: { to: "/venta_detalle" } },
+                                  [
+                                    _c(
+                                      "button",
+                                      { staticClass: "btn btn-warning" },
+                                      [_c("i", { staticClass: "far fa-edit" })]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _vm._m(2, true)
+                          ])
                         ])
-                      ])
-                    ])
+                      }),
+                      0
+                    )
                   ]
                 )
               ])
@@ -20758,17 +20708,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "" } }, [
-      _c("button", { staticClass: "btn btn-danger" }, [
-        _c("i", { staticClass: "fas fa-trash-alt" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "" } }, [
+    return _c("a", [
       _c("button", { staticClass: "btn btn-danger" }, [
         _c("i", { staticClass: "fas fa-trash-alt" })
       ])

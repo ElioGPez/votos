@@ -14,9 +14,9 @@
             <!-- Listas Tipo y Categoria -->
             <div class="row">
               <div class="col">
-                <select 
-                class="custom-select" 
-                @change="obtenerCategorias($event)" 
+                <select
+                class="custom-select"
+                @change="obtenerCategorias($event)"
                 v-model="tipo">
                   <option value="0" selected>Seleccione el Tipo de Producto...</option>
                   <option value="1">Alimentos</option>
@@ -24,8 +24,8 @@
                 </select>
               </div>
               <div class="col">
-                <select 
-                class="custom-select" 
+                <select
+                class="custom-select"
                 :disabled="validated == 1"
                 @change="obtenerProductos($event)"
                 v-model="categoria">
@@ -39,8 +39,8 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-6">
-                  <select 
-                  class="custom-select" 
+                  <select
+                  class="custom-select"
                   :disabled="validated2 == 1"
                   v-model="producto">
                   <option value="0" selected>Seleccione el Producto...</option>
@@ -478,10 +478,10 @@ export default {
             linea.cantidad = this.cantidad;
             linea.precio = item.precio;
             linea.subtotal = this.cantidad*item.precio;
-          
+
           this.total+=linea.subtotal;
           this.linea_venta.push(linea);
-          this.limpiar();    
+          this.limpiar();
         }
       }
     },

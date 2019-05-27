@@ -36,8 +36,7 @@
               <div class>
                 <table
                   class="table table-striped table-bordered table-condensed table-hover"
-                  style="background-color:white"
-                >
+                  style="background-color:white">
                   <thead style="background-color: rgb(177, 18, 18);">
                     <tr>
                       <th>Id</th>
@@ -45,59 +44,27 @@
                       <th>Estado</th>
                       <th>Total</th>
                       <th>Acciones</th>
-
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td data-label="Votos">
-                        1
-                      </td>
-                      <td data-label="imagen">
-                        20-05-19
-                        </td>
-                      <td data-label="Producto">PAGADA</td>
-                      <td data-label="Producto">$500</td>
-                      <td data-label="Producto">
-                    <a href>
-                      <router-link to="/venta_detalle">
-                      <button class="btn btn-warning">
-                        <i class="far fa-edit"></i>
-                      </button>
-                      </router-link>
-
-                    </a>
-                    <a href>
-                      <button class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Votos">
-                        1
-                      </td>
-                      <td data-label="imagen">
-                        20-05-19
-                        </td>
-                      <td data-label="Producto">PAGADA</td>
-                      <td data-label="Producto">$500</td>
-                      <td data-label="Producto">
-
-                    <a href>
-                      <router-link to="/venta_detalle">
-                      <button class="btn btn-warning">
-                        <i class="far fa-edit"></i>
-                      </button>
-                      </router-link>
-
-                    </a>
-                    <a href>
-                      <button class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </a>
+                    <tr v-for="compra in compras">
+                      <td data-label="Votos">{{compra.id}}</td>
+                      <td data-label="imagen">{{compra.fecha}}</td>
+                      <td data-label="Producto">{{compra.estado}}</td>
+                      <td data-label="Producto">{{compra.total}}</td>
+                      <td>
+                        <a>
+                          <router-link to="/venta_detalle">
+                          <button class="btn btn-warning">
+                            <i class="far fa-edit"></i>
+                          </button>
+                          </router-link>
+                        </a>
+                        <a>
+                          <button class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i>
+                          </button>
+                        </a>
                       </td>
                     </tr>
                   </tbody>
@@ -108,15 +75,40 @@
           </div>
         </div>
       </form>
+      <!-- <div class="col-md-5">
+        <pre>
+          {{compras}}
+        </pre>
+      </div> -->
     </div>
   </div>
+
 </template>
 
+
+
 <script>
+const axios = require('axios');
 
 export default {
-
+ created: function(){
+    this.getCompras();
+  },
+ data() {
+   return {
+     compras: []
+   }
+ },
+ methods: {
+   getCompras: function(){
+     var urlCompras = 'compra';
+     axios.get(urlCompras).then(response=>{
+       this.compras = response.data;
+     });
+   }
+ }
 }
+
 </script>
 <style>
 .table td {
