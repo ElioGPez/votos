@@ -17,10 +17,10 @@ class CreateVentasTable extends Migration
             $table->increments('id');
             $table->double('total');
             $table->date('fecha');
-            $table->enum('estado', ['pagada', 'impaga']);	
+            $table->enum('estado', ['pagada', 'impaga']);
             $table->integer('stock')->nullable();
 	        $table->integer('usuario_id')->unsigned();
-	        $table->foreign('usuario_id')->references('id')->on('usuarios')->ondelete('cascade');
+	        $table->foreign('usuario_id')->references('id')->on('users')->ondelete('cascade');
             $table->timestamps();
         });
     }
