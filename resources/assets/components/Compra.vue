@@ -10,18 +10,18 @@
             <!-- Listas Tipo y Categoria -->
             <div class="row">
               <div class="col">
-                <select class="custom-select" id="exampleFormControlSelect1">
-                  <option selected>Seleccione el Tipo de Producto...</option>
-                  <option>Alimentos</option>
-                  <option>Bebidas</option>
+                <select class="custom-select"  @change="getSubCategorias($event)" >
+                  <option selected >Seleccione el Tipo de Producto...</option>
+                  <option v-for="categoria in categorias" :value=categoria.id >{{categoria.nombre}}</option>
                 </select>
               </div>
               <div class="col">
-                <select class="custom-select" id="exampleFormControlSelect1">
+                <select class="custom-select" @change="getProductos($event)">
                   <option selected>Seleccione la Categoria...</option>
-                  <option>Sandwich</option>
-                  <option>Pizzas</option>
-                  <option>Al Plato</option>
+                  <!-- <option>Sandwich</option> -->
+                  <!-- <option>Pizzas</option> -->
+                  <!-- <option>Al Plato</option> -->
+                  <option v-for="sc in subcategoria" :value=sc.id>{{sc.nombre}}</option>
                 </select>
               </div>
             </div>
@@ -30,12 +30,10 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-10">
-                  <select class="custom-select" id="exampleFormControlSelect1">
+                  <select class="custom-select" >
                     <option selected>Seleccione el Producto...</option>
-                    <option>Pizza Comun</option>
-                    <option
-                      style="background:url(resources/assets/imagenes/hamburguesa.jpg) no-repeat center left; padding-left:20px;"
-                    >Tu texto</option>
+                    <option v-for="producto in productos" :value=producto.id>{{producto.producto}} {{producto.descripcion}}</option>
+
                   </select>
                 </div>
                 <div class="col-2">
@@ -108,6 +106,49 @@
 
   </div>
 </template>
+
+<script>
+  const axios = require('axios');
+
+  export default {
+   created: function(){
+      this.getCategoria();
+    },
+   data() {
+     return {
+       categorias: [],
+       subcategoria: [],
+       productos: []
+     }
+   },
+   methods: {
+     getCategoria: function(){
+       var urlCategoria = 'api/categoria';
+       axios.get(urlCategoria).then(response=>{
+         this.categorias = response.data;
+       });
+     },
+     getSubCategorias: function(event){
+       var urlSubCategoria = 'api/sub_categoria/'+event.target.value;
+       if (event.target.value!=0) {
+         axios.get(urlSubCategoria).then(response=>{
+           this.subcategoria = response.data;
+         });
+       }
+     },
+     getProductos: function(event){
+       var urlProducto = 'api/producto/'+event.target.value;
+       if (event.target.value!=0) {
+         axios.get(urlProducto).then(response=>{
+           this.productos = response.data;
+         });
+       }
+     },
+   }
+  }
+
+</script>
+
 
 <style>
 .table td {

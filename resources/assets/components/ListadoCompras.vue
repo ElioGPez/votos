@@ -24,7 +24,7 @@
 
     <div id="cardlist" class="card">
       <div>
-        <router-link style="color:white;" to="/">
+        <router-link style="color:white;" to="/compra">
           <button style="margin:3px;" align="right" class="btn btn-danger"><i class="fas fa-plus-circle"></i>Nueva compra</button>
         </router-link>
       </div>
