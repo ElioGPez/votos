@@ -17,8 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::resource('sub_categoria','SubCategoriaController');
+// Route::get('sub_categoria/{id}','SubCategoriaController@show');
 Route::resource('categoria','CategoriaController');
 Route::resource('producto','ProductoController');
 Route::resource('venta','VentaController');
-Route::resource('compra','CompraController');
+// Route::resource('compra','CompraController');
+Route::get('compra','CompraController@index');
 Route::resource('cliente','ClienteController');

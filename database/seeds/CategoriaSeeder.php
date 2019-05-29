@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Categoria;
 
 class CategoriaSeeder extends Seeder
 {
@@ -12,13 +13,13 @@ class CategoriaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categorias')->truncate();
-        DB::table('sub_categorias')->truncate();
-        DB::table('productos')->truncate();
+        // DB::table('categorias')->truncate();
+        // DB::table('sub_categorias')->truncate();
+        // DB::table('productos')->truncate();
 
-        DB::table('categorias')->insert([  
-            'nombre' => 'alimento',
-            'descripcion' => 'Abarca las comidas que se venden en el local'
+        Categoria::create([
+          'nombre' => 'alimento',
+          'descripcion' => 'Abarca las comidas que se venden en el local'
         ]);
         DB::table('categorias')->insert([  
             'nombre' => 'bebida',

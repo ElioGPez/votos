@@ -10,18 +10,18 @@
             <!-- Listas Tipo y Categoria -->
             <div class="row">
               <div class="col">
-                <select class="custom-select" id="exampleFormControlSelect1">
-                  <option selected>Seleccione el Tipo de Producto...</option>
-                  <option>Alimentos</option>
-                  <option>Bebidas</option>
+                <select class="custom-select"  @change="getSubCategorias($event)" >
+                  <option selected >Seleccione el Tipo de Producto...</option>
+                  <option v-for="categoria in categorias" :value=categoria.id >{{categoria.nombre}}</option>
                 </select>
               </div>
               <div class="col">
-                <select class="custom-select" id="exampleFormControlSelect1">
+                <select class="custom-select" @change="getProductos($event)">
                   <option selected>Seleccione la Categoria...</option>
-                  <option>Sandwich</option>
-                  <option>Pizzas</option>
-                  <option>Al Plato</option>
+                  <!-- <option>Sandwich</option> -->
+                  <!-- <option>Pizzas</option> -->
+                  <!-- <option>Al Plato</option> -->
+                  <option v-for="sc in subcategoria" :value=sc.id>{{sc.nombre}}</option>
                 </select>
               </div>
             </div>
@@ -30,16 +30,14 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-10">
-                  <select class="custom-select" id="exampleFormControlSelect1">
+                  <select class="custom-select" v-model="producto">
                     <option selected>Seleccione el Producto...</option>
-                    <option>Pizza Comun</option>
-                    <option
-                      style="background:url(resources/assets/imagenes/hamburguesa.jpg) no-repeat center left; padding-left:20px;"
-                    >Tu texto</option>
+                    <option v-for="producto in productos" :key="producto.id" :value=producto.id>{{producto.producto}} {{producto.descripcion}}</option>
+
                   </select>
                 </div>
                 <div class="col-2">
-                  <button type="button" class="btn btn-danger">AGREGAR</button>
+                  <button type="button" class="btn btn-danger" @click="agregarProducto()">AGREGAR</button>
                 </div>
               </div>
             </div>
@@ -62,7 +60,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr v-for="linea in linea_compra">
                         <td data-label="Votos">
                           <a href>
                             <button class="btn btn-danger">Eliminar</button>
@@ -71,25 +69,10 @@
                         <td data-label="imagen">
                           <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
                         </td>
-                        <td data-label="Producto">Pizza</td>
-                        <td data-label="Producto">1</td>
-                        <td data-label="Producto">$50</td>
-                        <td data-label="Producto">$50</td>
-                      </tr>
-
-                      <tr>
-                        <td data-label="Votos">
-                          <a href>
-                            <button class="btn btn-danger">Eliminar</button>
-                          </a>
-                        </td>
-                        <td data-label="imagen">
-                          <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
-                        </td>
-                        <td data-label="Producto">Pizza</td>
-                        <td data-label="Producto">1</td>
-                        <td data-label="Producto">$50</td>
-                        <td data-label="Producto">$50</td>
+                        <td data-label="Producto">{{linea.producto}}</td>
+                        <td data-label="Producto">{{linea.cantidad}}</td>
+                        <td data-label="Producto">{{linea.precio}}</td>
+                        <td data-label="Producto">{{linea.subtotal}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -108,6 +91,69 @@
 
   </div>
 </template>
+
+<script>
+  const axios = require('axios');
+
+  export default {
+   created: function(){
+      this.getCategoria();
+    },
+   data() {
+     return {
+       categorias: [],
+       subcategoria: [],
+       productos: [],
+       linea_compra: [],
+       producto: '0',
+       cantidad: 1,
+       total: 0,
+     }
+   },
+   methods: {
+     getCategoria: function(){
+       var urlCategoria = 'api/categoria';
+       axios.get(urlCategoria).then(response=>{
+         this.categorias = response.data;
+       });
+     },
+     getSubCategorias: function(event){
+       var urlSubCategoria = 'api/sub_categoria/'+event.target.value;
+       if (event.target.value!=0) {
+         axios.get(urlSubCategoria).then(response=>{
+           this.subcategoria = response.data;
+         });
+       }
+     },
+     getProductos: function(event){
+       var urlProducto = 'api/producto/'+event.target.value;
+       if (event.target.value!=0) {
+         axios.get(urlProducto).then(response=>{
+           this.productos = response.data;
+         });
+       }
+     },
+     agregarProducto: function(){
+       // console.log(this.producto);
+       for(var i of this.productos){
+         if (this.producto == i.id) {
+           var linea = new Object();
+           linea.id = i.id;
+           linea.producto = i.producto+' '+i.descripcion;
+           linea.cantidad = this.cantidad;
+           linea.precio = i.precio;
+           linea.subtotal = this.cantidad*i.precio;
+
+           this.total +=linea.subtotal;
+           this.linea_compra.push(linea);
+         }
+       }
+     },
+   }
+  }
+
+</script>
+
 
 <style>
 .table td {

@@ -9,7 +9,7 @@ const app = new Vue({
     router,
     el: '#main',
     created() {
-    this.obtenerCategorias();   
+    //this.obtenerCategorias();   
     },
     data() {
         return {
