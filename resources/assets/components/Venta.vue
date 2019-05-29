@@ -11,26 +11,48 @@
             <h4 class="text-center">Alimentos y Bebidas</h4>
           </div>
           <div class="form-group">
+            <!-- Cliente -->
+            <div class="row">
+              <div class="col">
+                <div style="margin-left:20px;">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                  v-model="cliente"
+                  @change="clienteSeleccionado($event)"
+                >
+                <label class="form-check-label" for="exampleRadios1">Cliente</label>
+                </div>
+              </div>
+              <div class="col">
+                <select
+                  class="custom-select"
+                  :disabled="inputCliente == 1"
+                  @change="obtenerProductos($event)"
+                  v-model="categoria"
+                >
+                  <option value="0" selected>Seleccione al Cliente...</option>
+                  <option v-for="item of categorias" :key="item.id" :value="item.id">{{item.nombre}}</option>
+                </select>
+              </div>
+            </div>
+            <hr>
             <!-- Listas Tipo y Categoria -->
             <div class="row">
               <div class="col">
-                <select 
-                class="custom-select" 
-                @change="obtenerCategorias($event)" 
-                v-model="tipo">
+                <select class="custom-select" @change="obtenerCategorias($event)" v-model="tipo">
                   <option value="0" selected>Seleccione el Tipo de Producto...</option>
                   <option value="1">Alimentos</option>
                   <option value="2">Bebidas</option>
                 </select>
               </div>
               <div class="col">
-                <select 
-                class="custom-select" 
-                :disabled="validated == 1"
-                @change="obtenerProductos($event)"
-                v-model="categoria">
+                <select
+                  class="custom-select"
+                  :disabled="validated == 1"
+                  @change="obtenerProductos($event)"
+                  v-model="categoria"
+                >
                   <option value="0" selected>Seleccione la Categoria de Producto...</option>
-                  <option v-for="item of categorias" :key="item.id" :value=item.id>{{item.nombre}}</option>
+                  <option v-for="item of categorias" :key="item.id" :value="item.id">{{item.nombre}}</option>
                 </select>
               </div>
             </div>
@@ -39,16 +61,22 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-6">
-                  <select 
-                  class="custom-select" 
-                  :disabled="validated2 == 1"
-                  v-model="producto">
-                  <option value="0" selected>Seleccione el Producto...</option>
-                  <option v-for="item of productos" :key="item.id" :value=item.id>{{item.producto}}</option>
+                  <select class="custom-select" :disabled="validated2 == 1" v-model="producto">
+                    <option value="0" selected>Seleccione el Producto...</option>
+                    <option
+                      v-for="item of productos"
+                      :key="item.id"
+                      :value="item.id"
+                    >{{item.producto}}</option>
                   </select>
                 </div>
                 <div class="col-4">
-                  <input v-model="cantidad" type="number" class="form-control" placeholder="Cantidad">
+                  <input
+                    v-model="cantidad"
+                    type="number"
+                    class="form-control"
+                    placeholder="Cantidad"
+                  >
                 </div>
                 <div class="col-2">
                   <button @click="obtenerProducto()" type="button" class="btn btn-danger">AGREGAR</button>
@@ -77,18 +105,20 @@
                       <tr v-for="(item,index) of linea_venta" :key="item.id">
                         <td data-label="Votos">
                           <a href>
-                            <button class="btn btn-warning" @click.prevent="linea_venta.splice(index,1);actualizar()">X</button>
+                            <button
+                              class="btn btn-warning"
+                              @click.prevent="linea_venta.splice(index,1);actualizar()"
+                            >X</button>
                           </a>
                         </td>
                         <td data-label="imagen">
-                          <img :src=item.imagen width="50" height="50">
+                          <img :src="item.imagen" width="50" height="50">
                         </td>
                         <td data-label="Producto">{{item.producto}}</td>
                         <td data-label="Producto">{{item.cantidad}}</td>
                         <td data-label="Producto">{{item.precio}}</td>
                         <td data-label="Producto">{{item.subtotal}}</td>
                       </tr>
-
                     </tbody>
                   </table>
                 </div>
@@ -314,9 +344,14 @@
     </div>
 
     <!-- Modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-
-  <div class="modal-dialog modal-lg">
+    <div
+      class="modal fade bd-example-modal-lg"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div align="center" style="background-color: rgb(177, 18, 18);" class="modal-header">
             <h3>VENTAS PENDIENTES</h3>
@@ -325,7 +360,7 @@
             <label for>Venta Pendiente de Mesa 1</label>
           </div>
           <div class="modal-body">
-                        <!-- Listas Tipo y Categoria -->
+            <!-- Listas Tipo y Categoria -->
             <div class="row">
               <div class="col">
                 <select class="custom-select" id="exampleFormControlSelect1">
@@ -416,7 +451,6 @@
               <div>
                 <h4 align="right">TOTAL $500</h4>
               </div>
-
             </div>
           </div>
           <div class="modal-footer">
@@ -431,84 +465,94 @@
 
 
 <script>
-const axios = require('axios');
+const axios = require("axios");
 
 export default {
   data() {
     return {
-      tipo:'0',
-      categorias:[],
-      validated:1,
-      validated2:1,
-      productos:[],
-      categoria:'0',
-      producto:'0',
-      linea_venta:[],
-      total:0,
-      cantidad:1
-    }
+      tipo: "0",
+      categorias: [],
+      validated: 1,
+      validated2: 1,
+      productos: [],
+      categoria: "0",
+      producto: "0",
+      linea_venta: [],
+      total: 0,
+      cantidad: 1,
+      cliente:false,
+      inputCliente: 1
+    };
   },
   methods: {
-    obtenerCategorias(event){
-      if(event.target.value!=0){
-            var urlCategorias = 'api/sub_categoria/'+event.target.value;
-            axios.get(urlCategorias).then(response => {
-               this.categorias = response.data;
-               this.validated=0;
-            });
+    obtenerCategorias(event) {
+      if (event.target.value != 0) {
+        var urlCategorias = "api/sub_categoria/" + event.target.value;
+        axios.get(urlCategorias).then(response => {
+          this.categorias = response.data;
+          this.validated = 0;
+        });
       }
     },
-    obtenerProductos(event){
-      if(event.target.value!=0){
-            var urlProductos = 'api/producto/'+event.target.value;
-            axios.get(urlProductos).then(response => {
-               this.productos = response.data;
-               this.validated2=0;
-            });
+    obtenerProductos(event) {
+      if (event.target.value != 0) {
+        var urlProductos = "api/producto/" + event.target.value;
+        axios.get(urlProductos).then(response => {
+          this.productos = response.data;
+          this.validated2 = 0;
+        });
       }
     },
-    obtenerProducto(){
-      for(var item of this.productos){
-        if(this.producto == item.id){
-
+    obtenerProducto() {
+      for (var item of this.productos) {
+        if (this.producto == item.id) {
           var linea = new Object();
-            linea.id = item.id;
-            linea.imagen = item.imagen;
-            linea.producto = item.producto;
-            linea.cantidad = this.cantidad;
-            linea.precio = item.precio;
-            linea.subtotal = this.cantidad*item.precio;
-          
-          this.total+=linea.subtotal;
+          linea.id = item.id;
+          linea.imagen = item.imagen;
+          linea.producto = item.producto;
+          linea.cantidad = this.cantidad;
+          linea.precio = item.precio;
+          linea.subtotal = this.cantidad * item.precio;
+
+          this.total += linea.subtotal;
           this.linea_venta.push(linea);
-          this.limpiar();    
+          this.limpiar();
         }
       }
     },
-    limpiar(){
+    limpiar() {
       this.cantidad = 1;
       this.producto = 0;
     },
-    actualizar(){
-      this.total=0;
-      for(var item of this.linea_venta){
-        this.total+=item.subtotal;
+    actualizar() {
+      this.total = 0;
+      for (var item of this.linea_venta) {
+        this.total += item.subtotal;
       }
     },
-    registrarVenta(){
-      if(this.linea_venta.length != 0){
-            var urlVenta = 'api/venta';
-            axios.post(urlVenta, {
-              linea_venta : this.linea_venta,
-              total : this.total
-            }).then(response => {
-              console.log(response.data);
-               this.limpiar();
-            });
+    registrarVenta() {
+      if (this.linea_venta.length != 0) {
+        var urlVenta = "api/venta";
+        axios
+          .post(urlVenta, {
+            linea_venta: this.linea_venta,
+            total: this.total
+          })
+          .then(response => {
+            console.log(response.data);
+            this.limpiar();
+          });
+      }
+    },
+    clienteSeleccionado(event){
+      if(this.cliente){
+        this.inputCliente = 0;
+      }else{
+        this.inputCliente = 1;
       }
     }
   }
-}
+};
 </script>
 
 <style>

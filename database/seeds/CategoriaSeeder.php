@@ -54,18 +54,12 @@ class CategoriaSeeder extends Seeder
             'subcategoria_id' => '1'
         ]);
         DB::table('clientes')->insert([  
-            'producto' => 'Sandwich Especial',
-            'descripcion' => 'Con pan especial',
-            'precio' => '130',
-            'imagen' => '/images/hamburguesa.jpg',
-            'subcategoria_id' => '1'
+            'nombre' => 'cliente'
         ]);
-        DB::table('productos')->insert([  
-            'producto' => 'Sandwich Especial',
-            'descripcion' => 'Con pan especial',
-            'precio' => '130',
-            'imagen' => '/images/hamburguesa.jpg',
-            'subcategoria_id' => '1'
-        ]);
+        DB::table('clientes')->insert([  
+            'nombre' => 'Franco',
+            'telefono' => '0381156988547',
+            'direccion' => 'Laprida 1245'
+        ]); 
     }
 }

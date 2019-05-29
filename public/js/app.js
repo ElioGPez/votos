@@ -17070,22 +17070,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var axios = __webpack_require__(9);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tipo: '0',
+      tipo: "0",
       categorias: [],
       validated: 1,
       validated2: 1,
       productos: [],
-      categoria: '0',
-      producto: '0',
+      categoria: "0",
+      producto: "0",
       linea_venta: [],
       total: 0,
-      cantidad: 1
+      cantidad: 1,
+      cliente: false,
+      inputCliente: 1
     };
   },
 
@@ -17094,7 +17130,7 @@ var axios = __webpack_require__(9);
       var _this = this;
 
       if (event.target.value != 0) {
-        var urlCategorias = 'api/sub_categoria/' + event.target.value;
+        var urlCategorias = "api/sub_categoria/" + event.target.value;
         axios.get(urlCategorias).then(function (response) {
           _this.categorias = response.data;
           _this.validated = 0;
@@ -17105,7 +17141,7 @@ var axios = __webpack_require__(9);
       var _this2 = this;
 
       if (event.target.value != 0) {
-        var urlProductos = 'api/producto/' + event.target.value;
+        var urlProductos = "api/producto/" + event.target.value;
         axios.get(urlProductos).then(function (response) {
           _this2.productos = response.data;
           _this2.validated2 = 0;
@@ -17122,7 +17158,6 @@ var axios = __webpack_require__(9);
           var item = _step.value;
 
           if (this.producto == item.id) {
-
             var linea = new Object();
             linea.id = item.id;
             linea.imagen = item.imagen;
@@ -17186,7 +17221,7 @@ var axios = __webpack_require__(9);
       var _this3 = this;
 
       if (this.linea_venta.length != 0) {
-        var urlVenta = 'api/venta';
+        var urlVenta = "api/venta";
         axios.post(urlVenta, {
           linea_venta: this.linea_venta,
           total: this.total
@@ -17194,6 +17229,13 @@ var axios = __webpack_require__(9);
           console.log(response.data);
           _this3.limpiar();
         });
+      }
+    },
+    clienteSeleccionado: function clienteSeleccionado(event) {
+      if (this.cliente) {
+        this.inputCliente = 0;
+      } else {
+        this.inputCliente = 1;
       }
     }
   }
@@ -18092,6 +18134,119 @@ var render = function() {
             _vm._m(1),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col" }, [
+                  _c("div", { staticStyle: { "margin-left": "20px" } }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.cliente,
+                          expression: "cliente"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { type: "checkbox", id: "exampleCheck1" },
+                      domProps: {
+                        checked: Array.isArray(_vm.cliente)
+                          ? _vm._i(_vm.cliente, null) > -1
+                          : _vm.cliente
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$a = _vm.cliente,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.cliente = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.cliente = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.cliente = $$c
+                            }
+                          },
+                          function($event) {
+                            return _vm.clienteSeleccionado($event)
+                          }
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "exampleRadios1" }
+                      },
+                      [_vm._v("Cliente")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.categoria,
+                          expression: "categoria"
+                        }
+                      ],
+                      staticClass: "custom-select",
+                      attrs: { disabled: _vm.inputCliente == 1 },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.categoria = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          function($event) {
+                            return _vm.obtenerProductos($event)
+                          }
+                        ]
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "0", selected: "" } }, [
+                        _vm._v("Seleccione al Cliente...")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.categorias, function(item) {
+                        return _c(
+                          "option",
+                          { key: item.id, domProps: { value: item.id } },
+                          [_vm._v(_vm._s(item.nombre))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col" }, [
                   _c(
