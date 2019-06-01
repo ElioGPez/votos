@@ -19,8 +19,8 @@ class CreateVentasTable extends Migration
             $table->date('fecha');
             $table->enum('estado', ['pagada', 'impaga']);
             $table->integer('stock')->nullable();
-	        $table->integer('usuario_id')->unsigned();
-	        $table->foreign('usuario_id')->references('id')->on('users')->ondelete('cascade');
+	        $table->integer('cliente_id')->unsigned();
+	        $table->foreign('cliente_id')->references('id')->on('clientes')->ondelete('cascade');
             $table->timestamps();
         });
     }

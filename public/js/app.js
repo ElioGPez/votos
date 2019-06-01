@@ -1425,7 +1425,7 @@ var app = new Vue({
     router: __WEBPACK_IMPORTED_MODULE_0__rutas__["a" /* default */],
     el: '#main',
     created: function created() {
-        this.obtenerCategorias();
+        //this.obtenerCategorias();   
     },
     data: function data() {
         return {
@@ -16570,7 +16570,7 @@ var content = __webpack_require__(27);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("16d7a1dc", content, false, {});
+var update = __webpack_require__(3)("44cb9c05", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -16594,7 +16594,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  background-color: rgb(173, 166, 166);\n  padding: 5px;\n}\nlabel {\n  font-weight: bold;\n  text-align: center;\n}\n#cardlist {\n  background-color: rgb(235, 235, 235);\n  margin-left: 45px;\n  margin-right: 45px;\n}\n#card {\n  background-color: rgb(235, 235, 235);\n}\n#row1 {\n  margin-left: 45px;\n  margin-right: 45px;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\ninput[type=\"checkbox\"] {\n  transform: scale(1.5);\n}\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#cardlist {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\n}\n#row1 {\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\ninput[type=\"checkbox\"] {\r\n  transform: scale(1.5);\n}\r\n", ""]);
 
 // exports
 
@@ -17104,10 +17104,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var axios = __webpack_require__(5);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.obtenerClientes();
+  },
   data: function data() {
     return {
       tipo: "0",
@@ -17121,30 +17144,47 @@ var axios = __webpack_require__(5);
       total: 0,
       cantidad: 1,
       cliente: false,
-      inputCliente: 1
+      inputCliente: 1,
+      clientes: [],
+      cliente_id: '1',
+      mensaje_registro: ''
     };
   },
 
   methods: {
-    obtenerCategorias: function obtenerCategorias(event) {
+    obtenerClientes: function obtenerClientes() {
       var _this = this;
+
+      var urlClientes = "api/cliente";
+      axios.get(urlClientes).then(function (response) {
+        console.log(response.data);
+        _this.clientes = response.data;
+      });
+    },
+    obtenerCategorias: function obtenerCategorias(event) {
+      var _this2 = this;
 
       if (event.target.value != 0) {
         var urlCategorias = "api/sub_categoria/" + event.target.value;
         axios.get(urlCategorias).then(function (response) {
-          _this.categorias = response.data;
-          _this.validated = 0;
+          _this2.categorias = response.data;
+          _this2.validated = 0;
         });
       }
     },
+    establecerCliente: function establecerCliente() {
+      if (event.target.value != 0) {
+        this.cliente_id = event.target.value;
+      }
+    },
     obtenerProductos: function obtenerProductos(event) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (event.target.value != 0) {
         var urlProductos = "api/producto/" + event.target.value;
         axios.get(urlProductos).then(function (response) {
-          _this2.productos = response.data;
-          _this2.validated2 = 0;
+          _this3.productos = response.data;
+          _this3.validated2 = 0;
         });
       }
     },
@@ -17190,6 +17230,13 @@ var axios = __webpack_require__(5);
       this.cantidad = 1;
       this.producto = 0;
     },
+    limpiarRegistro: function limpiarRegistro() {
+      this.cantidad = 1;
+      this.producto = 0;
+      this.cliente_id = '1';
+      this.linea_venta = [];
+      this.total = 0;
+    },
     actualizar: function actualizar() {
       this.total = 0;
       var _iteratorNormalCompletion2 = true;
@@ -17218,16 +17265,19 @@ var axios = __webpack_require__(5);
       }
     },
     registrarVenta: function registrarVenta() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.linea_venta.length != 0) {
         var urlVenta = "api/venta";
         axios.post(urlVenta, {
+          cliente_id: this.cliente_id,
           linea_venta: this.linea_venta,
           total: this.total
         }).then(function (response) {
           console.log(response.data);
-          _this3.limpiar();
+          _this4.limpiar();
+          _this4.limpiarRegistro();
+          _this4.mensaje_registro = "Venta REGISTRADA!!";
         });
       }
     },
@@ -18136,7 +18186,7 @@ var render = function() {
             _c("div", { staticClass: "form-group" }, [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col" }, [
-                  _c("div", { staticStyle: { "margin-left": "20px" } }, [
+                  _c("div", { staticStyle: { "margin-left": "30px" } }, [
                     _c("input", {
                       directives: [
                         {
@@ -18185,7 +18235,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "form-check-label",
-                        attrs: { for: "exampleRadios1" }
+                        attrs: { for: "exampleCheck1" }
                       },
                       [_vm._v("Cliente")]
                     )
@@ -18200,8 +18250,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.categoria,
-                          expression: "categoria"
+                          value: _vm.cliente_id,
+                          expression: "cliente_id"
                         }
                       ],
                       staticClass: "custom-select",
@@ -18217,12 +18267,12 @@ var render = function() {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.categoria = $event.target.multiple
+                            _vm.cliente_id = $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
                           },
                           function($event) {
-                            return _vm.obtenerProductos($event)
+                            return _vm.establecerCliente($event)
                           }
                         ]
                       }
@@ -18232,7 +18282,7 @@ var render = function() {
                         _vm._v("Seleccione al Cliente...")
                       ]),
                       _vm._v(" "),
-                      _vm._l(_vm.categorias, function(item) {
+                      _vm._l(_vm.clientes, function(item) {
                         return _c(
                           "option",
                           { key: item.id, domProps: { value: item.id } },
@@ -18542,7 +18592,11 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-danger",
-                          attrs: { type: "button" },
+                          attrs: {
+                            type: "button",
+                            "data-toggle": "modal",
+                            "data-target": "#mensajeModal"
+                          },
                           on: {
                             click: function($event) {
                               return _vm.registrarVenta()
@@ -18567,7 +18621,38 @@ var render = function() {
     _vm._v(" "),
     _vm._m(5),
     _vm._v(" "),
-    _vm._m(6)
+    _vm._m(6),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "mensajeModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(7),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._v("\n        " + _vm._s(_vm.mensaje_registro) + "\n      ")
+              ]),
+              _vm._v(" "),
+              _vm._m(8)
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -19271,6 +19356,46 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("MENSAJE")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("ACEPTAR")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -19344,7 +19469,7 @@ var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("b53d4560", content, false, {});
+var update = __webpack_require__(3)("5c178ebd", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -19368,7 +19493,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  background-color: rgb(173, 166, 166);\n    padding: 5px;\n}\nlabel {\n  font-weight: bold;\n  text-align: center;\n}\n#card {\n  background-color: rgb(235, 235, 235);\n    margin-left: 45px;\n  margin-right: 45px;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n    padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#card {\r\n  background-color: rgb(235, 235, 235);\r\n    margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -19379,21 +19504,6 @@ exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bo
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -19735,43 +19845,39 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      [
-                        _vm._l(_vm.linea_compra, function(linea) {
-                          return _c("tr", [
-                            _vm._m(2, true),
-                            _vm._v(" "),
-                            _vm._m(3, true),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v(_vm._s(linea.producto))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v(_vm._s(linea.cantidad))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v(_vm._s(linea.precio))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v(_vm._s(linea.subtotal))
-                            ])
+                      _vm._l(_vm.linea_compra, function(linea) {
+                        return _c("tr", [
+                          _vm._m(2, true),
+                          _vm._v(" "),
+                          _vm._m(3, true),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v(_vm._s(linea.producto))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v(_vm._s(linea.cantidad))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v(_vm._s(linea.precio))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { "data-label": "Producto" } }, [
+                            _vm._v(_vm._s(linea.subtotal))
                           ])
-                        }),
-                        _vm._v(" "),
-                        _vm._m(4)
-                      ],
-                      2
+                        ])
+                      }),
+                      0
                     )
                   ]
                 )
               ])
             ]),
             _vm._v(" "),
-            _vm._m(5),
+            _vm._m(4),
             _vm._v(" "),
-            _vm._m(6)
+            _vm._m(5)
           ])
         ])
       ])
@@ -19833,36 +19939,6 @@ var staticRenderFns = [
           height: "50"
         }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { attrs: { "data-label": "Votos" } }, [
-        _c("a", { attrs: { href: "" } }, [
-          _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Eliminar")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("td", { attrs: { "data-label": "imagen" } }, [
-        _c("img", {
-          attrs: {
-            src: __webpack_require__(4),
-            width: "50",
-            height: "50"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("td", { attrs: { "data-label": "Producto" } }, [_vm._v("Pizza")]),
-      _vm._v(" "),
-      _c("td", { attrs: { "data-label": "Producto" } }, [_vm._v("1")]),
-      _vm._v(" "),
-      _c("td", { attrs: { "data-label": "Producto" } }, [_vm._v("$50")]),
-      _vm._v(" "),
-      _c("td", { attrs: { "data-label": "Producto" } }, [_vm._v("$50")])
     ])
   },
   function() {
@@ -19960,7 +20036,7 @@ var content = __webpack_require__(56);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("7ec6c76e", content, false, {});
+var update = __webpack_require__(3)("f4c53388", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -19984,7 +20060,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  background-color: rgb(173, 166, 166);\n  padding: 5px;\n}\nlabel {\n  font-weight: bold;\n  text-align: center;\n}\n#cardlist {\n  background-color: rgb(235, 235, 235);\n  margin-left: 45px;\n  margin-right: 45px;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#cardlist {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -20439,7 +20515,7 @@ var content = __webpack_require__(61);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("02be3c5e", content, false, {});
+var update = __webpack_require__(3)("2794e504", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -20463,7 +20539,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n   \n\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  font-weight: bold;\n  padding: 5px;\n}\nlabel {\n       font-weight: bold;\n    font-size: 20px;\n}\n#info {\n  background-color: rgb(235, 235, 235);\n  margin-left: 20px;\n  margin-right: 20px;\n}\n#subtitulo {\n     background-color: rgb(190, 190, 190); \n       font-weight: bold;\n    font-size: 25px;\n    text-align: center;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n   \r\n\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  font-weight: bold;\r\n  padding: 5px;\n}\nlabel {\r\n       font-weight: bold;\r\n    font-size: 20px;\n}\n#info {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 20px;\r\n  margin-right: 20px;\n}\n#subtitulo {\r\n     background-color: rgb(190, 190, 190); \r\n       font-weight: bold;\r\n    font-size: 25px;\r\n    text-align: center;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -20789,7 +20865,7 @@ var content = __webpack_require__(66);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("2fbeeedd", content, false, {});
+var update = __webpack_require__(3)("0ad7634a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -20813,7 +20889,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.table td {\n  text-align: center;\n  font-weight: bold;\n}\n.table tr {\n  text-align: center;\n}\n.table tr th {\n  color: white;\n}\nh3 {\n  background-color: rgb(177, 18, 18);\n  color: white;\n  padding: 5px;\n}\nh4 {\n  background-color: rgb(173, 166, 166);\n  padding: 5px;\n}\nlabel {\n  font-weight: bold;\n  text-align: center;\n}\n#cardlist {\n  background-color: rgb(235, 235, 235);\n  margin-left: 45px;\n  margin-right: 45px;\n}\n#row2 {\n  margin-left: 40px;\n  margin-right: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.table td {\r\n  text-align: center;\r\n  font-weight: bold;\n}\n.table tr {\r\n  text-align: center;\n}\n.table tr th {\r\n  color: white;\n}\nh3 {\r\n  background-color: rgb(177, 18, 18);\r\n  color: white;\r\n  padding: 5px;\n}\nh4 {\r\n  background-color: rgb(173, 166, 166);\r\n  padding: 5px;\n}\nlabel {\r\n  font-weight: bold;\r\n  text-align: center;\n}\n#cardlist {\r\n  background-color: rgb(235, 235, 235);\r\n  margin-left: 45px;\r\n  margin-right: 45px;\n}\n#row2 {\r\n  margin-left: 40px;\r\n  margin-right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -21521,7 +21597,7 @@ var content = __webpack_require__(73);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("dfe7f5d0", content, false, {});
+var update = __webpack_require__(3)("550ccf0b", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -21545,7 +21621,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nlabel {\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, "\nlabel {\r\n  text-align: center;\n}\r\n", ""]);
 
 // exports
 
@@ -21856,7 +21932,7 @@ var content = __webpack_require__(78);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("a9794bf2", content, false, {});
+var update = __webpack_require__(3)("0e17f27a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -21880,7 +21956,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nlabel {\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, "\nlabel {\r\n  text-align: center;\n}\r\n", ""]);
 
 // exports
 

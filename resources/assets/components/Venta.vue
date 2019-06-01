@@ -14,23 +14,21 @@
             <!-- Cliente -->
             <div class="row">
               <div class="col">
-                <div style="margin-left:20px;">
+                <div style="margin-left:30px;">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1"
                   v-model="cliente"
                   @change="clienteSeleccionado($event)"
                 >
-                <label class="form-check-label" for="exampleRadios1">Cliente</label>
+                <label class="form-check-label" for="exampleCheck1">Cliente</label>
                 </div>
               </div>
               <div class="col">
                 <select
                   class="custom-select"
                   :disabled="inputCliente == 1"
-                  @change="obtenerProductos($event)"
-                  v-model="categoria"
-                >
+                  @change="establecerCliente($event)" v-model="cliente_id">
                   <option value="0" selected>Seleccione al Cliente...</option>
-                  <option v-for="item of categorias" :key="item.id" :value="item.id">{{item.nombre}}</option>
+                  <option v-for="item of clientes" :key="item.id" :value="item.id">{{item.nombre}}</option>
                 </select>
               </div>
             </div>
@@ -136,7 +134,8 @@
                   >PENDIENTE</button>
                 </div>
                 <div align="right" class="col-6" id="btn">
-                  <button type="button" class="btn btn-danger" @click="registrarVenta()">REGISTRAR</button>
+                  <button type="button" class="btn btn-danger" @click="registrarVenta()"
+                  data-toggle="modal"  data-target="#mensajeModal">REGISTRAR</button>
                 </div>
               </div>
             </div>
@@ -222,7 +221,7 @@
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <div class="row">
                   <div class="col-8">
-                    <button type="button" class="btn btn-danger">Mesa 1</button>
+                    <button type="button" class="btn btn-danger">Mesa 2</button>
                   </div>
                   <div class="col-4">
                     <input
@@ -237,7 +236,7 @@
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <div class="row">
                   <div class="col-8">
-                    <button type="button" class="btn btn-danger">Mesa 1</button>
+                    <button type="button" class="btn btn-danger">Mesa 3</button>
                   </div>
                   <div class="col-4">
                     <input
@@ -252,7 +251,7 @@
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <div class="row">
                   <div class="col-8">
-                    <button type="button" class="btn btn-danger">Mesa 1</button>
+                    <button type="button" class="btn btn-danger">Mesa 4</button>
                   </div>
                   <div class="col-4">
                     <input
@@ -460,6 +459,27 @@
         </div>
       </div>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="mensajeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">MENSAJE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{mensaje_registro}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   </div>
 </template>
 
@@ -468,6 +488,10 @@
 const axios = require("axios");
 
 export default {
+  created() {
+    this.obtenerClientes();
+  }
+  ,
   data() {
     return {
       tipo: "0",
@@ -481,10 +505,21 @@ export default {
       total: 0,
       cantidad: 1,
       cliente:false,
-      inputCliente: 1
+      inputCliente: 1,
+      clientes : [],
+      cliente_id : '1',
+      mensaje_registro: ''
     };
   },
   methods: {
+    obtenerClientes() {
+
+        var urlClientes = "api/cliente";
+        axios.get(urlClientes).then(response => {
+          console.log(response.data);
+          this.clientes = response.data;
+        });
+    },
     obtenerCategorias(event) {
       if (event.target.value != 0) {
         var urlCategorias = "api/sub_categoria/" + event.target.value;
@@ -492,6 +527,11 @@ export default {
           this.categorias = response.data;
           this.validated = 0;
         });
+      }
+    },
+    establecerCliente(){
+      if (event.target.value != 0) {
+        this.cliente_id = event.target.value;
       }
     },
     obtenerProductos(event) {
@@ -524,6 +564,13 @@ export default {
       this.cantidad = 1;
       this.producto = 0;
     },
+    limpiarRegistro(){
+      this.cantidad = 1;
+      this.producto = 0;
+      this.cliente_id = '1';
+      this.linea_venta = [];
+      this.total = 0;
+    },
     actualizar() {
       this.total = 0;
       for (var item of this.linea_venta) {
@@ -535,12 +582,15 @@ export default {
         var urlVenta = "api/venta";
         axios
           .post(urlVenta, {
+            cliente_id : this.cliente_id,
             linea_venta: this.linea_venta,
             total: this.total
           })
           .then(response => {
             console.log(response.data);
             this.limpiar();
+            this.limpiarRegistro();
+            this.mensaje_registro = "Venta REGISTRADA!!";
           });
       }
     },

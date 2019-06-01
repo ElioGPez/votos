@@ -44,7 +44,22 @@ class VentaController extends Controller
         $mytime= Carbon::now('America/Argentina/Tucuman');
         $venta->fecha = $mytime->toDateTimeString();
         $venta->estado = 'PAGADA';
+        $venta->cliente_id = $request->cliente_id;
         $venta->save();
+        //dd($request->linea_venta);
+        $linea_venta = $request->linea_venta;
+        foreach ($linea_venta as $linea) {
+        //dd($linea);
+
+          $linea_v = new Linea_Venta();
+          $linea_v->venta_id=$venta->id;
+          $linea_v->producto_id=$linea["id"];
+         // dd($linea["cantidad"]);
+          $linea_v->cantidad=$linea["cantidad"];
+          $linea_v->subtotal=$linea["subtotal"];
+          $linea_v->precio=$linea["precio"];
+          $linea_v->save();
+        }
 
         return $venta;
     }

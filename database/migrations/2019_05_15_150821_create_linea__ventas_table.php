@@ -13,12 +13,11 @@ class CreateLineaVentasTable extends Migration
      */
     public function up()
     {
-        Schema::create('linea__ventas', function (Blueprint $table) {
+        Schema::create('linea_ventas', function (Blueprint $table) {
             $table->increments('id');
             $table->double('subtotal');
             $table->double('precio');
             $table->integer('cantidad');
-	        $table->date('fechafin');
 	        $table->integer('venta_id')->unsigned();
 	        $table->foreign('venta_id')->references('id')->on('ventas')->ondelete('cascade');
             $table->integer('producto_id')->unsigned();

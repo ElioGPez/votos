@@ -13,7 +13,7 @@ class CreateLineaComprasTable extends Migration
      */
     public function up()
     {
-        Schema::create('linea__compras', function (Blueprint $table) {
+        Schema::create('linea_compras', function (Blueprint $table) {
             $table->increments('id');
             $table->double('subtotal');
             $table->double('precio');
