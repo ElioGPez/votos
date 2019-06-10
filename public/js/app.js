@@ -17124,6 +17124,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var axios = __webpack_require__(5);
 
@@ -17147,7 +17168,13 @@ var axios = __webpack_require__(5);
       inputCliente: 1,
       clientes: [],
       cliente_id: '1',
-      mensaje_registro: ''
+      mensaje_registro: '',
+      mesas_check: [{ mesa1: false }, { mesa2: false }, { mesa3: false }, { mesa4: false }],
+      mesas_pendientes: [],
+      mesas_enable: [{ mesa1: 1 }, { mesa2: 1 }, { mesa3: 1 }, { mesa4: 1 }],
+      modal: [{ mesa: "" }, { check_cliente: false }, { inputCliente: 1 }, { cliente_id: '1' }, { total: 0 }, { linea_venta: [] }],
+      modal_estado: 0,
+      indice_modal: 0
     };
   },
 
@@ -17175,6 +17202,11 @@ var axios = __webpack_require__(5);
     establecerCliente: function establecerCliente() {
       if (event.target.value != 0) {
         this.cliente_id = event.target.value;
+      }
+    },
+    establecerClienteModal: function establecerClienteModal() {
+      if (event.target.value != 0) {
+        this.modal.cliente_id = event.target.value;
       }
     },
     obtenerProductos: function obtenerProductos(event) {
@@ -17209,6 +17241,7 @@ var axios = __webpack_require__(5);
             this.total += linea.subtotal;
             this.linea_venta.push(linea);
             this.limpiar();
+            return;
           }
         }
       } catch (err) {
@@ -17226,28 +17259,32 @@ var axios = __webpack_require__(5);
         }
       }
     },
-    limpiar: function limpiar() {
-      this.cantidad = 1;
-      this.producto = 0;
-    },
-    limpiarRegistro: function limpiarRegistro() {
-      this.cantidad = 1;
-      this.producto = 0;
-      this.cliente_id = '1';
-      this.linea_venta = [];
-      this.total = 0;
-    },
-    actualizar: function actualizar() {
-      this.total = 0;
+    obtenerProductoModal: function obtenerProductoModal() {
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator2 = this.linea_venta[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        for (var _iterator2 = this.productos[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var item = _step2.value;
 
-          this.total += item.subtotal;
+          if (this.producto == item.id) {
+            var linea = new Object();
+            linea.id = item.id;
+            linea.imagen = item.imagen;
+            linea.producto = item.producto;
+            linea.cantidad = this.cantidad;
+            linea.precio = item.precio;
+            linea.subtotal = this.cantidad * item.precio;
+
+            this.modal.total += linea.subtotal;
+            console.log(this.indice_modal);
+            this.mesas_pendientes[this.indice_modal].linea_venta.push(linea);
+            this.mesas_pendientes[this.indice_modal].total = this.modal.total;
+            this.mesas_pendientes[this.indice_modal].cliente_id = this.modal.cliente_id;
+            this.limpiar();
+            return;
+          }
         }
       } catch (err) {
         _didIteratorError2 = true;
@@ -17262,6 +17299,128 @@ var axios = __webpack_require__(5);
             throw _iteratorError2;
           }
         }
+      }
+    },
+    indiceModal: function indiceModal(index) {
+      this.indice_modal = index;
+      console.log("indice: " + this.indice_modal);
+    },
+    limpiar: function limpiar() {
+      this.cantidad = 1;
+      this.producto = 0;
+    },
+    limpiarRegistro: function limpiarRegistro() {
+      this.cantidad = 1;
+      this.producto = 0;
+      this.cliente_id = '1';
+      this.linea_venta = [];
+      this.total = 0;
+    },
+    actualizar: function actualizar() {
+      this.total = 0;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = this.linea_venta[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var item = _step3.value;
+
+          this.total += item.subtotal;
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+    },
+    actualizarPendiente: function actualizarPendiente() {
+      this.mesas_pendientes[this.indice_modal].total = 0;
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
+
+      try {
+        for (var _iterator4 = this.mesas_pendientes[this.indice_modal].linea_venta[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var item = _step4.value;
+
+          this.mesas_pendientes[this.indice_modal].total += item.subtotal;
+          this.modal.total = this.mesas_pendientes[this.indice_modal].total;
+        }
+      } catch (err) {
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion4 && _iterator4.return) {
+            _iterator4.return();
+          }
+        } finally {
+          if (_didIteratorError4) {
+            throw _iteratorError4;
+          }
+        }
+      }
+
+      this.modal_estado = 0;
+      this.modal_estado = 1;
+    },
+    modalPendiente: function modalPendiente(mesa) {
+      this.modal_estado = 0;
+      console.log(mesa);
+      this.modal.total = mesa.total;
+      this.modal.linea_venta = mesa.linea_venta;
+      this.modal.mesa = mesa.mesa;
+      this.modal.cliente_id = mesa.cliente_id;
+      console.log("Pasa con valor del total del: " + this.modal.total);
+      this.modal_estado = 1;
+    },
+    mesaPendiente: function mesaPendiente() {
+      if (this.mesas_check.mesa1) {
+        var mesa1 = new Object();
+        mesa1.total = this.total;
+        mesa1.cliente_id = this.cliente_id;
+        mesa1.linea_venta = this.linea_venta;
+        mesa1.mesa = "Mesa 1";
+        this.mesas_pendientes.push(mesa1);
+        this.limpiarRegistro();
+        this.mesas_enable.mesa1 = 0;
+      } else if (this.mesas_check.mesa2) {
+        var mesa2 = new Object();
+        mesa2.total = this.total;
+        mesa2.cliente_id = this.cliente_id;
+        mesa2.linea_venta = this.linea_venta;
+        mesa2.mesa = "Mesa 2";
+        this.mesas_pendientes.push(mesa2);
+        this.limpiarRegistro();
+        this.mesas_enable.mesa2 = 0;
+      } else if (this.mesas_check.mesa3) {
+        var mesa3 = new Object();
+        mesa3.total = this.total;
+        mesa3.cliente_id = this.cliente_id;
+        mesa3.linea_venta = this.linea_venta;
+        mesa3.mesa = "Mesa 3";
+        this.mesas_pendientes.push(mesa3);
+        this.limpiarRegistro();
+        this.mesas_enable.mesa3 = 0;
+      } else if (this.mesas_check.mesa4) {
+        var mesa4 = new Object();
+        mesa4.total = this.total;
+        mesa4.cliente_id = this.cliente_id;
+        mesa4.linea_venta = this.linea_venta;
+        mesa4.mesa = "Mesa 4";
+        this.mesas_pendientes.push(mesa4);
+        this.limpiarRegistro();
+        this.mesas_enable.mesa4 = 0;
       }
     },
     registrarVenta: function registrarVenta() {
@@ -17281,11 +17440,58 @@ var axios = __webpack_require__(5);
         });
       }
     },
+    registrarVentaMesa: function registrarVentaMesa() {
+      var _this5 = this;
+
+      console.log("Tamano: " + this.mesas_pendientes[this.indice_modal].linea_venta.length);
+      if (this.mesas_pendientes[this.indice_modal].linea_venta.length != 0) {
+        var urlVenta = "api/venta";
+        axios.post(urlVenta, {
+          cliente_id: this.mesas_pendientes[this.indice_modal].cliente_id,
+          linea_venta: this.mesas_pendientes[this.indice_modal].linea_venta,
+          total: this.mesas_pendientes[this.indice_modal].total
+        }).then(function (response) {
+          console.log(response.data);
+          _this5.limpiar();
+          _this5.limpiarRegistro();
+          _this5.limpiarMesa();
+          _this5.mensaje_registro = "Venta REGISTRADA!!";
+        });
+      }
+    },
+    limpiarMesa: function limpiarMesa() {
+      var mesa = this.mesas_pendientes[this.indice_modal].mesa;
+      console.log(mesa);
+
+      if (mesa == "Mesa 1") {
+        console.log(mesa);
+        this.mesas_enable.mesa1 = 1;
+        this.mesas_check.mesa1 = 0;
+      } else if (mesa == "Mesa 2") {
+        this.mesas_enable.mesa2 = 1;
+        this.mesas_check.mesa2 = 0;
+      } else if (mesa == "Mesa 3") {
+        this.mesas_enable.mesa3 = 1;
+        this.mesas_check.mesa3 = 0;
+      } else if (mesa == "Mesa 4") {
+        this.mesas_enable.mesa4 = 1;
+        this.mesas_check.mesa4 = 0;
+      }
+      this.mesas_pendientes.splice(this.indice_modal, 1);
+      $('#modal_pendiente').modal('hide');
+    },
     clienteSeleccionado: function clienteSeleccionado(event) {
       if (this.cliente) {
         this.inputCliente = 0;
       } else {
         this.inputCliente = 1;
+      }
+    },
+    clienteSeleccionadoModel: function clienteSeleccionadoModel(event) {
+      if (this.modal.check_cliente) {
+        this.modal.inputCliente = 0;
+      } else {
+        this.modal.inputCliente = 1;
       }
     }
   }
@@ -18614,14 +18820,877 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(4)
+      _c(
+        "div",
+        {
+          staticClass: "col-lg-4 col-md-4 col-sm-12 col-xs-12",
+          attrs: { id: "card" }
+        },
+        [
+          _c("form", { staticClass: "card-body" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row" },
+              [
+                _vm._l(_vm.mesas_pendientes, function(mesa, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3"
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": ".bd-example-modal-lg",
+                                type: "button"
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.modalPendiente(mesa)
+                                  _vm.indiceModal(index)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(mesa.mesa))]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _vm._m(5)
+              ],
+              2
+            )
+          ])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
-    _vm._m(5),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModalCenter",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _vm._m(7),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(9),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.mesas_check.mesa1,
+                                expression: "mesas_check.mesa1"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "checkbox",
+                              disabled: _vm.mesas_enable.mesa1 == 0
+                            },
+                            domProps: {
+                              checked: Array.isArray(_vm.mesas_check.mesa1)
+                                ? _vm._i(_vm.mesas_check.mesa1, null) > -1
+                                : _vm.mesas_check.mesa1
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.mesas_check.mesa1,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.mesas_check,
+                                        "mesa1",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.mesas_check,
+                                        "mesa1",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.mesas_check, "mesa1", $$c)
+                                }
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.mesas_check.mesa2,
+                                expression: "mesas_check.mesa2"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "checkbox",
+                              disabled: _vm.mesas_enable.mesa2 == 0
+                            },
+                            domProps: {
+                              checked: Array.isArray(_vm.mesas_check.mesa2)
+                                ? _vm._i(_vm.mesas_check.mesa2, null) > -1
+                                : _vm.mesas_check.mesa2
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.mesas_check.mesa2,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.mesas_check,
+                                        "mesa2",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.mesas_check,
+                                        "mesa2",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.mesas_check, "mesa2", $$c)
+                                }
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(11),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.mesas_check.mesa3,
+                                expression: "mesas_check.mesa3"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "checkbox",
+                              disabled: _vm.mesas_enable.mesa3 == 0
+                            },
+                            domProps: {
+                              checked: Array.isArray(_vm.mesas_check.mesa3)
+                                ? _vm._i(_vm.mesas_check.mesa3, null) > -1
+                                : _vm.mesas_check.mesa3
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.mesas_check.mesa3,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.mesas_check,
+                                        "mesa3",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.mesas_check,
+                                        "mesa3",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.mesas_check, "mesa3", $$c)
+                                }
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(12),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.mesas_check.mesa4,
+                                expression: "mesas_check.mesa4"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "checkbox",
+                              disabled: _vm.mesas_enable.mesa4 == 0
+                            },
+                            domProps: {
+                              checked: Array.isArray(_vm.mesas_check.mesa4)
+                                ? _vm._i(_vm.mesas_check.mesa4, null) > -1
+                                : _vm.mesas_check.mesa4
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.mesas_check.mesa4,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.mesas_check,
+                                        "mesa4",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.mesas_check,
+                                        "mesa4",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.mesas_check, "mesa4", $$c)
+                                }
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _vm._m(13),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _vm._m(14)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: {
+                      click: function($event) {
+                        return _vm.mesaPendiente()
+                      }
+                    }
+                  },
+                  [_vm._v("GUARDAR")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
-    _vm._m(6),
+    _vm.modal_estado == 1
+      ? _c(
+          "div",
+          {
+            staticClass: "modal fade bd-example-modal-lg",
+            attrs: {
+              id: "modal_pendiente",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "myLargeModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-dialog modal-lg" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(15),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", { attrs: { for: "" } }, [
+                    _vm._v("Venta Pendiente en " + _vm._s(_vm.modal.mesa))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col" }, [
+                      _c("div", { staticStyle: { "margin-left": "30px" } }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.modal.check_cliente,
+                              expression: "modal.check_cliente"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: { type: "checkbox", id: "exampleCheck1" },
+                          domProps: {
+                            checked: Array.isArray(_vm.modal.check_cliente)
+                              ? _vm._i(_vm.modal.check_cliente, null) > -1
+                              : _vm.modal.check_cliente
+                          },
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$a = _vm.modal.check_cliente,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.modal,
+                                        "check_cliente",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.modal,
+                                        "check_cliente",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.modal, "check_cliente", $$c)
+                                }
+                              },
+                              function($event) {
+                                return _vm.clienteSeleccionadoModel($event)
+                              }
+                            ]
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "exampleCheck1" }
+                          },
+                          [_vm._v("Cliente")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.modal.cliente_id,
+                              expression: "modal.cliente_id"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { disabled: _vm.modal.inputCliente == 1 },
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.modal,
+                                  "cliente_id",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              function($event) {
+                                return _vm.establecerClienteModal($event)
+                              }
+                            ]
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { value: "0", selected: "" } },
+                            [_vm._v("Seleccione al Cliente...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.clientes, function(item) {
+                            return _c(
+                              "option",
+                              { key: item.id, domProps: { value: item.id } },
+                              [_vm._v(_vm._s(item.nombre))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tipo,
+                              expression: "tipo"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.tipo = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.obtenerCategorias($event)
+                              }
+                            ]
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { value: "0", selected: "" } },
+                            [_vm._v("Seleccione el Tipo de Producto...")]
+                          ),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("Alimentos")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "2" } }, [
+                            _vm._v("Bebidas")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.categoria,
+                              expression: "categoria"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { disabled: _vm.validated == 1 },
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.categoria = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                              function($event) {
+                                return _vm.obtenerProductos($event)
+                              }
+                            ]
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { value: "0", selected: "" } },
+                            [_vm._v("Seleccione la Categoria de Producto...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.categorias, function(item) {
+                            return _c(
+                              "option",
+                              { key: item.id, domProps: { value: item.id } },
+                              [_vm._v(_vm._s(item.nombre))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-6" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.producto,
+                                expression: "producto"
+                              }
+                            ],
+                            staticClass: "custom-select",
+                            attrs: { disabled: _vm.validated2 == 1 },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.producto = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", selected: "" } },
+                              [_vm._v("Seleccione el Producto...")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.productos, function(item) {
+                              return _c(
+                                "option",
+                                { key: item.id, domProps: { value: item.id } },
+                                [_vm._v(_vm._s(item.producto))]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.cantidad,
+                              expression: "cantidad"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "number", placeholder: "Cantidad" },
+                          domProps: { value: _vm.cantidad },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.cantidad = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-2" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.obtenerProductoModal()
+                              }
+                            }
+                          },
+                          [_vm._v("AGREGAR")]
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("fieldset", [
+                      _c("div", {}, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-striped table-bordered table-condensed table-hover",
+                            staticStyle: { "background-color": "white" }
+                          },
+                          [
+                            _vm._m(16),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(_vm.modal.linea_venta, function(
+                                item,
+                                index
+                              ) {
+                                return _c("tr", { key: item.id }, [
+                                  _c(
+                                    "td",
+                                    { attrs: { "data-label": "Votos" } },
+                                    [
+                                      _c("a", { attrs: { href: "" } }, [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-warning",
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                _vm.mesas_pendientes[
+                                                  _vm.indice_modal
+                                                ].linea_venta.splice(index, 1)
+                                                _vm.actualizarPendiente()
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("X")]
+                                        )
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { attrs: { "data-label": "imagen" } },
+                                    [
+                                      _c("img", {
+                                        attrs: {
+                                          src: item.imagen,
+                                          width: "50",
+                                          height: "50"
+                                        }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { attrs: { "data-label": "Producto" } },
+                                    [_vm._v(_vm._s(item.producto))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { attrs: { "data-label": "Producto" } },
+                                    [_vm._v(_vm._s(item.cantidad))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { attrs: { "data-label": "Producto" } },
+                                    [_vm._v(_vm._s(item.precio))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { attrs: { "data-label": "Producto" } },
+                                    [_vm._v(_vm._s(item.subtotal))]
+                                  )
+                                ])
+                              }),
+                              0
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("h4", { attrs: { align: "right" } }, [
+                        _vm._v("TOTAL $" + _vm._s(_vm.modal.total))
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#mensajeModal"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.registrarVentaMesa()
+                        }
+                      }
+                    },
+                    [_vm._v("REGISTRAR")]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
@@ -18641,13 +19710,13 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(7),
+              _vm._m(17),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _vm._v("\n        " + _vm._s(_vm.mensaje_registro) + "\n      ")
               ]),
               _vm._v(" "),
-              _vm._m(8)
+              _vm._m(18)
             ])
           ]
         )
@@ -18719,640 +19788,256 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h4", { staticClass: "text-center" }, [_vm._v("Ventas Pendientes")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "button",
+            { staticClass: "btn btn-warning", attrs: { type: "button" } },
+            [_vm._v("Mesa Pool 1")]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "div",
       {
-        staticClass: "col-lg-4 col-md-4 col-sm-12 col-xs-12",
-        attrs: { id: "card" }
+        staticClass: "modal-header",
+        staticStyle: { "background-color": "rgb(177, 18, 18)" },
+        attrs: { align: "center" }
       },
-      [
-        _c("form", { staticClass: "card-body" }, [
-          _c("div", [
-            _c("h4", { staticClass: "text-center" }, [
-              _vm._v("Ventas Pendientes")
-            ])
+      [_c("h3", [_vm._v("VENTAS PENDIENTES")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("label", { attrs: { for: "" } }, [
+        _vm._v("Asociar venta pendiente a alguna de las siguientes mesas")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { "background-color": "rgb(173, 166, 166)" },
+        attrs: { align: "center" }
+      },
+      [_c("label", { attrs: { for: "" } }, [_vm._v("Mesas")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        [_vm._v("Mesa 1")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        [_vm._v("Mesa 2")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        [_vm._v("Mesa 3")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        [_vm._v("Mesa 4")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { "background-color": "rgb(173, 166, 166)" },
+        attrs: { align: "center" }
+      },
+      [_c("label", { attrs: { for: "" } }, [_vm._v("Mesas de Pool")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-8" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-warning", attrs: { type: "button" } },
+              [_vm._v("Mesa 1")]
+            )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: {
-                        "data-toggle": "modal",
-                        "data-target": ".bd-example-modal-lg",
-                        type: "button"
-                      }
-                    },
-                    [_vm._v("Mesa 1")]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: { type: "button" }
-                    },
-                    [_vm._v("Mesa 2")]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-warning",
-                      attrs: { type: "button" }
-                    },
-                    [_vm._v("Mesa Pool 1")]
-                  )
-                ])
-              ])
-            ])
+          _c("div", { staticClass: "col-4" }, [
+            _c("input", {
+              staticClass: "form-check-input",
+              attrs: {
+                type: "checkbox",
+                id: "inlineCheckbox1",
+                value: "option1"
+              }
+            })
           ])
         ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "exampleModalCenter",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalCenterTitle",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-dialog-centered",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "modal-header",
-                  staticStyle: { "background-color": "rgb(177, 18, 18)" },
-                  attrs: { align: "center" }
-                },
-                [_c("h3", [_vm._v("VENTAS PENDIENTES")])]
-              ),
-              _vm._v(" "),
-              _c("div", [
-                _c("label", { attrs: { for: "" } }, [
-                  _vm._v(
-                    "Asociar venta pendiente a alguna de las siguientes mesas"
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "div",
-                  {
-                    staticStyle: { "background-color": "rgb(173, 166, 166)" },
-                    attrs: { align: "center" }
-                  },
-                  [_c("label", { attrs: { for: "" } }, [_vm._v("Mesas")])]
-                ),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Mesa 1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "inlineCheckbox1",
-                              value: "option1"
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Mesa 1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "inlineCheckbox1",
-                              value: "option1"
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Mesa 1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "inlineCheckbox1",
-                              value: "option1"
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Mesa 1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "inlineCheckbox1",
-                              value: "option1"
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticStyle: { "background-color": "rgb(173, 166, 166)" },
-                    attrs: { align: "center" }
-                  },
-                  [
-                    _c("label", { attrs: { for: "" } }, [
-                      _vm._v("Mesas de Pool")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-warning",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Mesa 1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "inlineCheckbox1",
-                              value: "option1"
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-warning",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Mesa 1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "inlineCheckbox1",
-                              value: "option1"
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-warning",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Mesa 1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "inlineCheckbox1",
-                              value: "option1"
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-8" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-warning",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Mesa 1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "inlineCheckbox1",
-                              value: "option1"
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cerrar")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                  [_vm._v("GUARDAR")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade bd-example-modal-lg",
-        attrs: {
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myLargeModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog modal-lg" }, [
-          _c("div", { staticClass: "modal-content" }, [
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-8" }, [
             _c(
-              "div",
-              {
-                staticClass: "modal-header",
-                staticStyle: { "background-color": "rgb(177, 18, 18)" },
-                attrs: { align: "center" }
-              },
-              [_c("h3", [_vm._v("VENTAS PENDIENTES")])]
-            ),
-            _vm._v(" "),
-            _c("div", [
-              _c("label", { attrs: { for: "" } }, [
-                _vm._v("Venta Pendiente de Mesa 1")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "custom-select",
-                      attrs: { id: "exampleFormControlSelect1" }
-                    },
-                    [
-                      _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Seleccione el Tipo de Producto...")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Alimentos")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Bebidas")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "custom-select",
-                      attrs: { id: "exampleFormControlSelect1" }
-                    },
-                    [
-                      _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Seleccione la Categoria...")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Sandwich")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Pizzas")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Al Plato")])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-10" }, [
-                    _c(
-                      "select",
-                      {
-                        staticClass: "custom-select",
-                        attrs: { id: "exampleFormControlSelect1" }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "" } }, [
-                          _vm._v("Seleccione el Producto...")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("Pizza Comun")]),
-                        _vm._v(" "),
-                        _c(
-                          "option",
-                          {
-                            staticStyle: {
-                              background:
-                                "url(resources/assets/imagenes/hamburguesa.jpg) no-repeat center left",
-                              "padding-left": "20px"
-                            }
-                          },
-                          [_vm._v("Tu texto")]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-2" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { type: "button" }
-                      },
-                      [_vm._v("AGREGAR")]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("fieldset", [
-                  _c("div", {}, [
-                    _c(
-                      "table",
-                      {
-                        staticClass:
-                          "table table-striped table-bordered table-condensed table-hover",
-                        staticStyle: { "background-color": "white" }
-                      },
-                      [
-                        _c(
-                          "thead",
-                          {
-                            staticStyle: {
-                              "background-color": "rgb(177, 18, 18)"
-                            }
-                          },
-                          [
-                            _c("tr", [
-                              _c("th", [_vm._v("Acciones")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Imagen")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Producto")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Cantidad")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("Precio")]),
-                              _vm._v(" "),
-                              _c("th", [_vm._v("SubTotal")])
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("tbody", [
-                          _c("tr", [
-                            _c("td", { attrs: { "data-label": "Votos" } }, [
-                              _c("a", { attrs: { href: "" } }, [
-                                _c(
-                                  "button",
-                                  { staticClass: "btn btn-warning" },
-                                  [_vm._v("X")]
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "imagen" } }, [
-                              _c("img", {
-                                attrs: {
-                                  src: __webpack_require__(4),
-                                  width: "50",
-                                  height: "50"
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("Pizza")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("1")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("$50")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { attrs: { "data-label": "Producto" } }, [
-                              _vm._v("$50")
-                            ])
-                          ])
-                        ])
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("h4", { attrs: { align: "right" } }, [
-                    _vm._v("TOTAL $500")
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-secondary",
-                  attrs: { type: "button", "data-dismiss": "modal" }
-                },
-                [_vm._v("Cerrar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "btn btn-danger", attrs: { type: "button" } },
-                [_vm._v("REGISTRAR")]
-              )
-            ])
+              "button",
+              { staticClass: "btn btn-warning", attrs: { type: "button" } },
+              [_vm._v("Mesa 1")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4" }, [
+            _c("input", {
+              staticClass: "form-check-input",
+              attrs: {
+                type: "checkbox",
+                id: "inlineCheckbox1",
+                value: "option1"
+              }
+            })
           ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-8" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-warning", attrs: { type: "button" } },
+              [_vm._v("Mesa 1")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4" }, [
+            _c("input", {
+              staticClass: "form-check-input",
+              attrs: {
+                type: "checkbox",
+                id: "inlineCheckbox1",
+                value: "option1"
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-8" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-warning", attrs: { type: "button" } },
+              [_vm._v("Mesa 1")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4" }, [
+            _c("input", {
+              staticClass: "form-check-input",
+              attrs: {
+                type: "checkbox",
+                id: "inlineCheckbox1",
+                value: "option1"
+              }
+            })
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal-header",
+        staticStyle: { "background-color": "rgb(177, 18, 18)" },
+        attrs: { align: "center" }
+      },
+      [_c("h3", [_vm._v("VENTAS PENDIENTES")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "thead",
+      { staticStyle: { "background-color": "rgb(177, 18, 18)" } },
+      [
+        _c("tr", [
+          _c("th", [_vm._v("Acciones")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Imagen")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Producto")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Cantidad")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Precio")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("SubTotal")])
         ])
       ]
     )
