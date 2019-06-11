@@ -17145,6 +17145,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var axios = __webpack_require__(5);
 
@@ -17174,7 +17195,12 @@ var axios = __webpack_require__(5);
       mesas_enable: [{ mesa1: 1 }, { mesa2: 1 }, { mesa3: 1 }, { mesa4: 1 }],
       modal: [{ mesa: "" }, { check_cliente: false }, { inputCliente: 1 }, { cliente_id: '1' }, { total: 0 }, { linea_venta: [] }],
       modal_estado: 0,
-      indice_modal: 0
+      indice_modal: 0,
+      mesa_normal_valor: 0,
+      mesa_pool_valor: 0,
+      mesa_pool: 0,
+      mesa_normal: 1,
+      opcion_mesa: "mesa_normal"
     };
   },
 
@@ -17301,6 +17327,15 @@ var axios = __webpack_require__(5);
         }
       }
     },
+    tipoMesa: function tipoMesa() {
+      if (this.opcion_mesa == "mesa_normal") {
+        this.mesa_normal = 1;
+        this.mesa_pool = 0;
+      } else {
+        this.mesa_normal = 0;
+        this.mesa_pool = 1;
+      }
+    },
     indiceModal: function indiceModal(index) {
       this.indice_modal = index;
       console.log("indice: " + this.indice_modal);
@@ -17385,43 +17420,60 @@ var axios = __webpack_require__(5);
       this.modal_estado = 1;
     },
     mesaPendiente: function mesaPendiente() {
-      if (this.mesas_check.mesa1) {
-        var mesa1 = new Object();
-        mesa1.total = this.total;
-        mesa1.cliente_id = this.cliente_id;
-        mesa1.linea_venta = this.linea_venta;
-        mesa1.mesa = "Mesa 1";
-        this.mesas_pendientes.push(mesa1);
-        this.limpiarRegistro();
-        this.mesas_enable.mesa1 = 0;
-      } else if (this.mesas_check.mesa2) {
-        var mesa2 = new Object();
-        mesa2.total = this.total;
-        mesa2.cliente_id = this.cliente_id;
-        mesa2.linea_venta = this.linea_venta;
-        mesa2.mesa = "Mesa 2";
-        this.mesas_pendientes.push(mesa2);
-        this.limpiarRegistro();
-        this.mesas_enable.mesa2 = 0;
-      } else if (this.mesas_check.mesa3) {
-        var mesa3 = new Object();
-        mesa3.total = this.total;
-        mesa3.cliente_id = this.cliente_id;
-        mesa3.linea_venta = this.linea_venta;
-        mesa3.mesa = "Mesa 3";
-        this.mesas_pendientes.push(mesa3);
-        this.limpiarRegistro();
-        this.mesas_enable.mesa3 = 0;
-      } else if (this.mesas_check.mesa4) {
-        var mesa4 = new Object();
-        mesa4.total = this.total;
-        mesa4.cliente_id = this.cliente_id;
-        mesa4.linea_venta = this.linea_venta;
-        mesa4.mesa = "Mesa 4";
-        this.mesas_pendientes.push(mesa4);
-        this.limpiarRegistro();
-        this.mesas_enable.mesa4 = 0;
+      var mesa = "Mesa " + this.mesa_normal_valor;
+      var esPool = false;
+      if (this.mesa_pool == 1) {
+        esPool = true;
+        mesa = "Mesa Pool " + this.mesa_pool_valor;
       }
+      var mesa1 = new Object();
+      mesa1.total = this.total;
+      mesa1.cliente_id = this.cliente_id;
+      mesa1.linea_venta = this.linea_venta;
+      mesa1.mesa = mesa;
+      mesa1.esPool = esPool;
+      this.mesas_pendientes.push(mesa1);
+      this.limpiarRegistro();
+      /*if(this.mesas_check.mesa1){
+        var mesa1 = new Object();
+          mesa1.total = this.total;
+          mesa1.cliente_id = this.cliente_id;
+          mesa1.linea_venta = this.linea_venta;
+          mesa1.mesa = "Mesa 1";
+      this.mesas_pendientes.push(mesa1);
+      this.limpiarRegistro();
+      this.mesas_enable.mesa1 = 0;
+      }else
+      if(this.mesas_check.mesa2){
+        var mesa2 = new Object();
+          mesa2.total = this.total;
+          mesa2.cliente_id = this.cliente_id;
+          mesa2.linea_venta = this.linea_venta;
+          mesa2.mesa = "Mesa 2";
+      this.mesas_pendientes.push(mesa2);
+      this.limpiarRegistro();
+      this.mesas_enable.mesa2 = 0;
+      }else
+      if(this.mesas_check.mesa3){
+        var mesa3 = new Object();
+          mesa3.total = this.total;
+          mesa3.cliente_id = this.cliente_id;
+          mesa3.linea_venta = this.linea_venta;
+          mesa3.mesa = "Mesa 3";
+      this.mesas_pendientes.push(mesa3);
+      this.limpiarRegistro();
+      this.mesas_enable.mesa3 = 0;
+      }else
+      if(this.mesas_check.mesa4){
+        var mesa4 = new Object();
+          mesa4.total = this.total;
+          mesa4.cliente_id = this.cliente_id;
+          mesa4.linea_venta = this.linea_venta;
+          mesa4.mesa = "Mesa 4";
+      this.mesas_pendientes.push(mesa4);
+      this.limpiarRegistro();
+      this.mesas_enable.mesa4 = 0;
+      }*/
     },
     registrarVenta: function registrarVenta() {
       var _this4 = this;
@@ -18913,264 +18965,143 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c(
                     "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
+                    {
+                      staticClass: "form-check col",
+                      attrs: { align: "center" }
+                    },
                     [
-                      _c("div", { staticClass: "row" }, [
-                        _vm._m(9),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.mesas_check.mesa1,
-                                expression: "mesas_check.mesa1"
-                              }
-                            ],
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              disabled: _vm.mesas_enable.mesa1 == 0
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.opcion_mesa,
+                            expression: "opcion_mesa"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "exampleRadios",
+                          id: "exampleRadios1",
+                          value: "mesa_normal",
+                          checked: ""
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.opcion_mesa, "mesa_normal")
+                        },
+                        on: {
+                          change: [
+                            function($event) {
+                              _vm.opcion_mesa = "mesa_normal"
                             },
-                            domProps: {
-                              checked: Array.isArray(_vm.mesas_check.mesa1)
-                                ? _vm._i(_vm.mesas_check.mesa1, null) > -1
-                                : _vm.mesas_check.mesa1
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.mesas_check.mesa1,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      _vm.$set(
-                                        _vm.mesas_check,
-                                        "mesa1",
-                                        $$a.concat([$$v])
-                                      )
-                                  } else {
-                                    $$i > -1 &&
-                                      _vm.$set(
-                                        _vm.mesas_check,
-                                        "mesa1",
-                                        $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1))
-                                      )
-                                  }
-                                } else {
-                                  _vm.$set(_vm.mesas_check, "mesa1", $$c)
-                                }
-                              }
+                            function($event) {
+                              return _vm.tipoMesa(_vm.event)
                             }
-                          })
-                        ])
-                      ])
+                          ]
+                        }
+                      })
                     ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _vm._m(10),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.mesas_check.mesa2,
-                                expression: "mesas_check.mesa2"
-                              }
-                            ],
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              disabled: _vm.mesas_enable.mesa2 == 0
-                            },
-                            domProps: {
-                              checked: Array.isArray(_vm.mesas_check.mesa2)
-                                ? _vm._i(_vm.mesas_check.mesa2, null) > -1
-                                : _vm.mesas_check.mesa2
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.mesas_check.mesa2,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      _vm.$set(
-                                        _vm.mesas_check,
-                                        "mesa2",
-                                        $$a.concat([$$v])
-                                      )
-                                  } else {
-                                    $$i > -1 &&
-                                      _vm.$set(
-                                        _vm.mesas_check,
-                                        "mesa2",
-                                        $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1))
-                                      )
-                                  }
-                                } else {
-                                  _vm.$set(_vm.mesas_check, "mesa2", $$c)
-                                }
-                              }
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  ),
+                  _vm._m(9),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _vm._m(11),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.mesas_check.mesa3,
-                                expression: "mesas_check.mesa3"
-                              }
-                            ],
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              disabled: _vm.mesas_enable.mesa3 == 0
-                            },
-                            domProps: {
-                              checked: Array.isArray(_vm.mesas_check.mesa3)
-                                ? _vm._i(_vm.mesas_check.mesa3, null) > -1
-                                : _vm.mesas_check.mesa3
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.mesas_check.mesa3,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      _vm.$set(
-                                        _vm.mesas_check,
-                                        "mesa3",
-                                        $$a.concat([$$v])
-                                      )
-                                  } else {
-                                    $$i > -1 &&
-                                      _vm.$set(
-                                        _vm.mesas_check,
-                                        "mesa3",
-                                        $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1))
-                                      )
-                                  }
-                                } else {
-                                  _vm.$set(_vm.mesas_check, "mesa3", $$c)
-                                }
-                              }
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _vm._m(12),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.mesas_check.mesa4,
-                                expression: "mesas_check.mesa4"
-                              }
-                            ],
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "checkbox",
-                              disabled: _vm.mesas_enable.mesa4 == 0
-                            },
-                            domProps: {
-                              checked: Array.isArray(_vm.mesas_check.mesa4)
-                                ? _vm._i(_vm.mesas_check.mesa4, null) > -1
-                                : _vm.mesas_check.mesa4
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.mesas_check.mesa4,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      _vm.$set(
-                                        _vm.mesas_check,
-                                        "mesa4",
-                                        $$a.concat([$$v])
-                                      )
-                                  } else {
-                                    $$i > -1 &&
-                                      _vm.$set(
-                                        _vm.mesas_check,
-                                        "mesa4",
-                                        $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1))
-                                      )
-                                  }
-                                } else {
-                                  _vm.$set(_vm.mesas_check, "mesa4", $$c)
-                                }
-                              }
-                            }
-                          })
-                        ])
-                      ])
-                    ]
-                  )
+                  _c("div", { staticClass: "col" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.mesa_normal_valor,
+                          expression: "mesa_normal_valor"
+                        }
+                      ],
+                      attrs: { disabled: _vm.mesa_normal == 0, type: "number" },
+                      domProps: { value: _vm.mesa_normal_valor },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.mesa_normal_valor = $event.target.value
+                        }
+                      }
+                    })
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("hr"),
                 _vm._v(" "),
-                _vm._m(13),
+                _vm._m(10),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
-                _vm._m(14)
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-check col",
+                      attrs: { align: "center" }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.opcion_mesa,
+                            expression: "opcion_mesa"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "exampleRadios",
+                          id: "exampleRadios2",
+                          value: "mesa_pool"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.opcion_mesa, "mesa_pool")
+                        },
+                        on: {
+                          change: [
+                            function($event) {
+                              _vm.opcion_mesa = "mesa_pool"
+                            },
+                            function($event) {
+                              return _vm.tipoMesa(_vm.event)
+                            }
+                          ]
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(11),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.mesa_pool_valor,
+                          expression: "mesa_pool_valor"
+                        }
+                      ],
+                      attrs: { disabled: _vm.mesa_pool == 0, type: "number" },
+                      domProps: { value: _vm.mesa_pool_valor },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.mesa_pool_valor = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
@@ -19219,7 +19150,7 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-dialog modal-lg" }, [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(15),
+                _vm._m(12),
                 _vm._v(" "),
                 _c("div", [
                   _c("label", { attrs: { for: "" } }, [
@@ -19570,7 +19501,7 @@ var render = function() {
                             staticStyle: { "background-color": "white" }
                           },
                           [
-                            _vm._m(16),
+                            _vm._m(13),
                             _vm._v(" "),
                             _c(
                               "tbody",
@@ -19710,13 +19641,13 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(17),
+              _vm._m(14),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _vm._v("\n        " + _vm._s(_vm.mensaje_registro) + "\n      ")
               ]),
               _vm._v(" "),
-              _vm._m(18)
+              _vm._m(15)
             ])
           ]
         )
@@ -19849,48 +19780,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
-        [_vm._v("Mesa 1")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
-        [_vm._v("Mesa 2")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
-        [_vm._v("Mesa 3")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
-        [_vm._v("Mesa 4")]
-      )
+    return _c("div", { staticClass: "col" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Mesa: ")])
     ])
   },
   function() {
@@ -19910,98 +19801,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-8" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-warning", attrs: { type: "button" } },
-              [_vm._v("Mesa 1")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
-            _c("input", {
-              staticClass: "form-check-input",
-              attrs: {
-                type: "checkbox",
-                id: "inlineCheckbox1",
-                value: "option1"
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-8" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-warning", attrs: { type: "button" } },
-              [_vm._v("Mesa 1")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
-            _c("input", {
-              staticClass: "form-check-input",
-              attrs: {
-                type: "checkbox",
-                id: "inlineCheckbox1",
-                value: "option1"
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-8" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-warning", attrs: { type: "button" } },
-              [_vm._v("Mesa 1")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
-            _c("input", {
-              staticClass: "form-check-input",
-              attrs: {
-                type: "checkbox",
-                id: "inlineCheckbox1",
-                value: "option1"
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-md-3 col-sm-3 col-xs-3" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-8" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-warning", attrs: { type: "button" } },
-              [_vm._v("Mesa 1")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
-            _c("input", {
-              staticClass: "form-check-input",
-              attrs: {
-                type: "checkbox",
-                id: "inlineCheckbox1",
-                value: "option1"
-              }
-            })
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Mesa: ")])
     ])
   },
   function() {

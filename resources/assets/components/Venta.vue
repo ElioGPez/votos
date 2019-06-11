@@ -162,13 +162,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-              <div class="row">
-                <div class="col">
-                  <button type="button" class="btn btn-warning">Mesa Pool 1</button>
-                </div>
-              </div>
-            </div>
+
           </div>
         </form>
       </div>
@@ -198,6 +192,16 @@
             </div>
             <br>
             <div class="row">
+                <div align="center" class="form-check col">
+                  <input
+                                    v-model="opcion_mesa"
+                  @change="tipoMesa(event)"
+                   class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="mesa_normal" checked>
+                </div>
+                <div class="col"><label for="">Mesa: </label></div>
+                <div class="col"><input :disabled="mesa_normal == 0" v-model="mesa_normal_valor" type="number"></div>
+            </div>
+            <!-- div class="row">
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <div class="row">
                   <div class="col-8">
@@ -258,7 +262,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div -->
             <hr>
             <!-- -->
             <div align="center" style="background-color: rgb(173, 166, 166);">
@@ -266,67 +270,78 @@
             </div>
             <br>
             <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="row">
-                  <div class="col-8">
-                    <button type="button" class="btn btn-warning">Mesa 1</button>
-                  </div>
-                  <div class="col-4">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="inlineCheckbox1"
-                      value="option1"
-                    >
-                  </div>
+                <div  align="center" class="form-check col">
+                  <input 
+                  @change="tipoMesa(event)"
+                  v-model="opcion_mesa"
+                  class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="mesa_pool">
                 </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="row">
-                  <div class="col-8">
-                    <button type="button" class="btn btn-warning">Mesa 1</button>
-                  </div>
-                  <div class="col-4">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="inlineCheckbox1"
-                      value="option1"
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="row">
-                  <div class="col-8">
-                    <button type="button" class="btn btn-warning">Mesa 1</button>
-                  </div>
-                  <div class="col-4">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="inlineCheckbox1"
-                      value="option1"
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="row">
-                  <div class="col-8">
-                    <button type="button" class="btn btn-warning">Mesa 1</button>
-                  </div>
-                  <div class="col-4">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="inlineCheckbox1"
-                      value="option1"
-                    >
-                  </div>
-                </div>
-              </div>
+                <div class="col"><label for="">Mesa: </label></div>
+                <div class="col"><input :disabled="mesa_pool == 0" v-model="mesa_pool_valor" type="number"></div>
             </div>
+            <!--div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-warning">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-warning">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-warning">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                  <div class="col-8">
+                    <button type="button" class="btn btn-warning">Mesa 1</button>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="option1"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div -->
+
             <!-- Fin -->
           </div>
           <div class="modal-footer">
@@ -552,7 +567,12 @@ export default {
         {linea_venta : []}
         ],
         modal_estado : 0,
-        indice_modal : 0
+        indice_modal : 0,
+        mesa_normal_valor : 0,
+        mesa_pool_valor : 0,
+        mesa_pool : 0,
+        mesa_normal : 1,
+        opcion_mesa : "mesa_normal"
     };
   },
   methods: {
@@ -631,6 +651,15 @@ export default {
         }
       }
     },
+    tipoMesa(){
+      if(this.opcion_mesa == "mesa_normal"){
+        this.mesa_normal = 1;
+        this.mesa_pool = 0; 
+      }else{
+        this.mesa_normal = 0;
+        this.mesa_pool = 1; 
+      }
+    },
     indiceModal(index){
       this.indice_modal = index;
       console.log("indice: "+this.indice_modal);
@@ -672,7 +701,21 @@ export default {
       this.modal_estado = 1;
     },
     mesaPendiente(){
-      if(this.mesas_check.mesa1){
+      var mesa = "Mesa "+ this.mesa_normal_valor;
+      var esPool = false;
+      if(this.mesa_pool == 1){
+        esPool = true;
+        mesa = "Mesa Pool "+ this.mesa_pool_valor;
+      }
+      var mesa1 = new Object();
+          mesa1.total = this.total;
+          mesa1.cliente_id = this.cliente_id;
+          mesa1.linea_venta = this.linea_venta;
+          mesa1.mesa = mesa;
+          mesa1.esPool = esPool;
+      this.mesas_pendientes.push(mesa1);
+      this.limpiarRegistro();
+      /*if(this.mesas_check.mesa1){
         var mesa1 = new Object();
           mesa1.total = this.total;
           mesa1.cliente_id = this.cliente_id;
@@ -711,7 +754,7 @@ export default {
       this.mesas_pendientes.push(mesa4);
       this.limpiarRegistro();
       this.mesas_enable.mesa4 = 0;
-      }
+      }*/
     },
     registrarVenta() {
       if (this.linea_venta.length != 0) {
