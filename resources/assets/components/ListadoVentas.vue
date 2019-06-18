@@ -91,6 +91,26 @@
         </div>
       </form>
     </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="mensajeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">MENSAJE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{mensaje}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </template>
 
@@ -102,7 +122,8 @@ export default {
     return {
       listado_ventas : {},
       fecha_desde : '',
-      fecha_hasta : ''
+      fecha_hasta : '',
+      mensaje : ''
     }
   },
   methods: {
@@ -115,11 +136,23 @@ export default {
         });
     },
     obtenerVentasFechas(){
+      var desde = new Date(this.fecha_desde);
+      var hasta = new Date(this.fecha_hasta);
+
+
+      if(this.fecha_desde=='' || this.fecha_hasta==''){
+            $('#mensajeModal').modal('show');
+            this.mensaje = 'Los campos DESDE y HASTA no deben estar vacios!';
+      }else
+      if(desde.getTime()>hasta.getTime()){
+            $('#mensajeModal').modal('show');
+            this.mensaje = 'El campo DESDE no puede ser mayor que el campo HASTA';
+      }else{
         var urlVentas = "api/venta/"+this.fecha_desde+'/'+this.fecha_hasta;
         axios.get(urlVentas).then(response => {
           this.listado_ventas = response.data;
           console.log(this.listado_ventas);
-        });
+        });}
     },
 		getResults(page = 1) {
 			axios.get('api/venta?page=' + page)

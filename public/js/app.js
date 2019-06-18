@@ -21998,6 +21998,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var axios = __webpack_require__(2);
 
@@ -22006,7 +22026,8 @@ var axios = __webpack_require__(2);
     return {
       listado_ventas: {},
       fecha_desde: '',
-      fecha_hasta: ''
+      fecha_hasta: '',
+      mensaje: ''
     };
   },
 
@@ -22023,11 +22044,22 @@ var axios = __webpack_require__(2);
     obtenerVentasFechas: function obtenerVentasFechas() {
       var _this2 = this;
 
-      var urlVentas = "api/venta/" + this.fecha_desde + '/' + this.fecha_hasta;
-      axios.get(urlVentas).then(function (response) {
-        _this2.listado_ventas = response.data;
-        console.log(_this2.listado_ventas);
-      });
+      var desde = new Date(this.fecha_desde);
+      var hasta = new Date(this.fecha_hasta);
+
+      if (this.fecha_desde == '' || this.fecha_hasta == '') {
+        $('#mensajeModal').modal('show');
+        this.mensaje = 'Los campos DESDE y HASTA no deben estar vacios!';
+      } else if (desde.getTime() > hasta.getTime()) {
+        $('#mensajeModal').modal('show');
+        this.mensaje = 'El campo DESDE no puede ser mayor que el campo HASTA';
+      } else {
+        var urlVentas = "api/venta/" + this.fecha_desde + '/' + this.fecha_hasta;
+        axios.get(urlVentas).then(function (response) {
+          _this2.listado_ventas = response.data;
+          console.log(_this2.listado_ventas);
+        });
+      }
     },
     getResults: function getResults() {
       var _this3 = this;
@@ -22192,17 +22224,17 @@ var render = function() {
                           return _c("tr", { key: item.id }, [
                             _c("td", { attrs: { "data-label": "Votos" } }, [
                               _vm._v(
-                                "\n                      " +
+                                "\n                        " +
                                   _vm._s(item.id) +
-                                  "\n                    "
+                                  "\n                      "
                               )
                             ]),
                             _vm._v(" "),
                             _c("td", { attrs: { "data-label": "fecha" } }, [
                               _vm._v(
-                                "\n                      " +
+                                "\n                        " +
                                   _vm._s(item.fecha) +
-                                  "                     \n                      "
+                                  "                     \n                        "
                               )
                             ]),
                             _vm._v(" "),
@@ -22289,7 +22321,38 @@ var render = function() {
           )
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "mensajeModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._v("\n        " + _vm._s(_vm.mensaje) + "\n      ")
+              ]),
+              _vm._v(" "),
+              _vm._m(6)
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -22349,6 +22412,46 @@ var staticRenderFns = [
       _c("button", { staticClass: "btn btn-danger" }, [
         _c("i", { staticClass: "fas fa-trash-alt" })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("MENSAJE")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("ACEPTAR")]
+      )
     ])
   }
 ]
