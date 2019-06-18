@@ -18,7 +18,7 @@ class Venta extends Model
 
     public function cliente()
     {
-        return $this->hasMany('App\Cliente');
+        return $this->belongsTo('App\Cliente');
     }
     public function linea_venta()
     {

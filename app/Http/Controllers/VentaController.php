@@ -17,9 +17,27 @@ class VentaController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $ventas = Venta::orderBy('id','DESC')->paginate(8);
+        return $ventas;
+        /*return [
+            'paginate' => [
 
+            ],
+            'ventas' => $ventas
+        ];*/
+    }
+    public function buscarPorFecha($desde,$hasta)
+    {
+        $ventas = Venta::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8)
+        ;
+        return $ventas;
+        /*return [
+            'paginate' => [
+
+            ],
+            'ventas' => $ventas
+        ];*/
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -43,8 +61,12 @@ class VentaController extends Controller
         //Establecemos la fecha actual
         $mytime= Carbon::now('America/Argentina/Tucuman');
         $venta->fecha = $mytime->toDateTimeString();
-        $venta->estado = 'PAGADA';
         $venta->cliente_id = $request->cliente_id;
+        if($venta->cliente_id == '0'){
+            $venta->estado = 'PAGADA'; 
+        }else{
+            $venta->estado = 'IMPAGA'; 
+        }
         $venta->save();
         //dd($request->linea_venta);
         $linea_venta = $request->linea_venta;
@@ -72,7 +94,9 @@ class VentaController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $venta = Venta::with(['cliente','linea_venta','linea_venta.producto'])->where('id',$id)->get();
+        return $venta;
     }
 
     /**

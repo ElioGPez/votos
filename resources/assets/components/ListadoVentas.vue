@@ -9,14 +9,14 @@
       </div>
       <div class="col-4 row">
         <div class="col-6" align="right"><label for="">Desde</label></div>
-        <div class="col-6"><input class="form-control" type="date" id="example-datetime-local-input"></div>
+        <div class="col-6"><input class="form-control" type="date" v-model="fecha_desde"></div>
       </div>
       <div class="col-4 row">
         <div class="col-6" align="right"><label for="">Hasta</label></div>
-        <div class="col-6"><input class="form-control" type="date" id="example-datetime-local-input"></div>
+        <div class="col-6"><input class="form-control" type="date" v-model="fecha_hasta"></div>
       </div>
       <div class="col-2" align="center">
-          <button style="margin:3px;" align="right" class="btn btn-danger">FILTRAR</button>
+          <button @click.prevent="obtenerVentasFechas()" style="margin:3px;" align="right" class="btn btn-danger">FILTRAR</button>
       </div>
     </div>
     </div>
@@ -49,18 +49,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr v-for="item of listado_ventas.data" :key="item.id">
                       <td data-label="Votos">
-                        1
+                        {{item.id}}
                       </td>
-                      <td data-label="imagen">
-                        20-05-19                      
+                      <td data-label="fecha">
+                        {{item.fecha}}                     
                         </td>
-                      <td data-label="Producto">PAGADA</td>
-                      <td data-label="Producto">$500</td>
+                      <td data-label="Producto">
+                        <span style="font-size: 15px;" v-if="item.estado == `pagada`" class="badge badge-success badge-pill">{{item.estado}}</span>
+                        <span style="font-size: 15px;" v-if="item.estado == `impaga`" class="badge badge-danger badge-pill">{{item.estado}}</span>
+                      </td>
+                      <td data-label="Producto">${{item.total}}</td>
                       <td data-label="Producto">
                     <a href>
-                      <router-link to="/venta_detalle">
+                      <router-link :to="{
+                        name : 'venta_detalle',
+                        params : {id : item.id}
+                      }">
                       <button class="btn btn-warning">
                         <i class="far fa-edit"></i>
                       </button>        
@@ -74,37 +80,13 @@
                     </a>
                       </td>
                     </tr>
-                    <tr>
-                      <td data-label="Votos">
-                        1
-                      </td>
-                      <td data-label="imagen">
-                        20-05-19                      
-                        </td>
-                      <td data-label="Producto">PAGADA</td>
-                      <td data-label="Producto">$500</td>
-                      <td data-label="Producto">
-
-                    <a href>
-                      <router-link to="/venta_detalle">
-                      <button class="btn btn-warning">
-                        <i class="far fa-edit"></i>
-                      </button>        
-                      </router-link>
-
-                    </a>
-                    <a href>
-                      <button class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </a>
-                      </td>
-                    </tr>
+                    
                   </tbody>
                 </table>
               </div>
             </fieldset>
             <br>
+            <pagination :data="listado_ventas" @pagination-change-page="getResults"></pagination>            
           </div>
         </div>
       </form>
@@ -113,9 +95,47 @@
 </template>
 
 <script>
+const axios = require("axios");
 
 export default {
-  
+  data() {
+    return {
+      listado_ventas : {},
+      fecha_desde : '',
+      fecha_hasta : ''
+    }
+  },
+  methods: {
+
+    obtenerVentas(){
+        var urlVentas = "api/venta";
+        axios.get(urlVentas).then(response => {
+          console.log(response.data);
+          this.listado_ventas = response.data.data;
+        });
+    },
+    obtenerVentasFechas(){
+        var urlVentas = "api/venta/"+this.fecha_desde+'/'+this.fecha_hasta;
+        axios.get(urlVentas).then(response => {
+          this.listado_ventas = response.data;
+          console.log(this.listado_ventas);
+        });
+    },
+		getResults(page = 1) {
+			axios.get('api/venta?page=' + page)
+				.then(response => {
+
+          this.listado_ventas = response.data;
+          console.log(this.listado_ventas);
+				});
+		}
+  },
+  created() {
+    //this.obtenerVentas();
+  },
+  mounted() {
+		this.getResults();
+  },
 }
 </script>
 <style>

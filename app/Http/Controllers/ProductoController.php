@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Producto;
+
 class ProductoController extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $productos = Producto::orderBy('id','DESC')->paginate(8);
+        return $productos;
     }
 
     /**
@@ -34,7 +37,31 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $producto = new Producto;
+        $producto->producto = $request->producto;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->stock ='0';
+        $producto->subcategoria_id = $request->subcategoria_id;
+
+        // $file=Input::file($request->imagen);
+        //$file->move(public_path().'/imagenes/productos',$file->name);
+
+        //Pasos para la decodificacion de la imagen recibida base64
+        $exploded = explode(',',$request->imagen);
+        $decoded = base64_decode($exploded[1]);
+
+        if(str_contains($exploded[0], 'jpeg')){
+            $extension = 'jpg';
+        }else{
+            $extension = 'png';
+        }
+        $fileName = str_random().'.'.$extension;
+        $path = public_path().'/images/'.$fileName;
+        file_put_contents($path,$decoded);
+        $producto->imagen=$fileName;
+        //$producto->imagen='';
+        $producto->save();
     }
 
     /**

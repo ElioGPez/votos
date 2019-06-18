@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('venta/{fecha_inicio}/{fecha_fin}', [
+    'as' => 'venta_fecha',
+    'uses' => 'VentaController@buscarPorFecha',
+]);
 Route::resource('sub_categoria','SubCategoriaController');
 // Route::get('sub_categoria/{id}','SubCategoriaController@show');
 Route::resource('categoria','CategoriaController');

@@ -33,7 +33,7 @@ export default new Router({
 
         },
         {
-            path : '/venta_detalle',
+            path : '/venta_detalle/:id',
             name : 'venta_detalle',
             component: VentaDetalle
 

@@ -5,16 +5,16 @@
       <h3 class="text-center">Detalle de Venta</h3>
     <div id="info" class="row">
       <div class="col-12">
-        <label for="">Fecha: 05/06/19</label>
+        <label for="">Fecha: {{venta[0].fecha}}</label>
       </div>
       <div class="col-12">
-        <label for="">Estado: PAGADA</label>
+        <label for="">Estado: {{venta[0].estado}}</label>
       </div>
       <div class="col-12">
-        <label for="">Cliente: Alberto Gomez</label>
+        <label for="">Cliente: {{venta[0].cliente.nombre}}</label>
       </div>
       <div class="col-12">
-        <label style="color: rgb(0, 175, 67);" for="">Total: $500</label>
+        <label style="color: rgb(0, 175, 67);" for="">Total: ${{venta[0].total}}</label>
       </div>
     </div>
 
@@ -45,25 +45,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr v-for="item of venta[0].linea_venta" :key="item.id">
                         <td data-label="imagen">
-                          <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
+                        <img :src="'/images/'+item.imagen"  width="50" height="50">
                         </td>
-                        <td data-label="Producto">Pizza</td>
-                        <td data-label="Producto">1</td>
-                        <td data-label="Producto">$50</td>
-                        <td data-label="Producto">$50</td>
+                        <td data-label="Producto">{{item.producto.nombre}}</td>
+                        <td data-label="Producto">{{item.cantidad}}</td>
+                        <td data-label="Producto">{{item.precio}}</td>
+                        <td data-label="Producto">{{item.subtotal}}</td>
                       </tr>
 
-                      <tr>
-                        <td data-label="imagen">
-                          <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
-                        </td>
-                        <td data-label="Producto">Pizza</td>
-                        <td data-label="Producto">1</td>
-                        <td data-label="Producto">$50</td>
-                        <td data-label="Producto">$50</td>
-                      </tr>
                     </tbody>
                 </table>
               </div>
@@ -81,9 +72,28 @@
 </template>
 
 <script>
+const axios = require("axios");
 
 export default {
-  
+  data() {
+    return {
+            venta_id : this.$route.params.id,
+            venta : {}
+    }
+  },
+  methods: {
+    obtenerVenta(){
+        var urlVenta = "http://127.0.0.1:8000/api/venta/"+this.venta_id;
+        console.log(urlVenta);
+        axios.get(urlVenta).then(response => {
+          console.log(response.data);
+          this.venta = response.data;
+        });
+    }
+  },
+  created() {
+    this.obtenerVenta();
+  },
 }
 </script>
 <style>
