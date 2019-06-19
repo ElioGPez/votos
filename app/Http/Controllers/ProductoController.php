@@ -15,10 +15,25 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::orderBy('id','DESC')->paginate(8);
+        $productos = Producto::orderBy('producto','ASC')->paginate(8);
         return $productos;
     }
-
+    public function obtenerProductos($filtro)
+    {
+        //$productos = Producto::orderBy('id','DESC')->paginate(8);
+        if($filtro != '0'){
+            $productos=DB::table('productos as p')
+            ->join('sub_categorias as sc','p.subcategoria_id','=','sc.id')
+            ->join('categorias as c','sc.categoria_id','=','c.id')
+            ->select('p.*')
+            ->where('c.id','=',$filtro)
+            ->orderBy('p.producto','ASC')
+            ->paginate(8);
+        }else{
+            $productos = Producto::orderBy('producto','ASC')->paginate(8);
+        }
+        return $productos;
+    }
     /**
      * Show the form for creating a new resource.
      *

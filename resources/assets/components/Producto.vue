@@ -7,12 +7,15 @@
         <div class="col-2">
           <label for>Filtrar Productos por Tipo</label>
         </div>
-        <div class="col-10">
-          <select class="custom-select" id="exampleFormControlSelect1">
-            <option selected>Todos</option>
-            <option>Alimento</option>
-            <option>Bebida</option>
+        <div class="col-8">
+          <select v-model="categoria" class="custom-select" id="exampleFormControlSelect1">
+            <option value="0" selected>Todos</option>
+            <option value="1">Alimento</option>
+            <option value="2">Bebida</option>
           </select>
+        </div>
+        <div class="col-2">
+          <button @click.prevent="obtenerProductosFiltro()" style="margin:3px;" align="right" class="btn btn-danger">FILTRAR</button>
         </div>
       </div>
     </div>
@@ -89,7 +92,8 @@ const axios = require("axios");
 export default {
   data() {
     return {
-      listado_productos : {}
+      listado_productos : {},
+      categoria : '0'
     }
   },
   methods: {
@@ -100,8 +104,20 @@ export default {
           this.listado_productos = response.data.data;
         });
     },
+    obtenerProductosFiltro(){
+      //if(this.categoria =! '0'){
+
+        var url = "api/producto/"+ this.categoria;
+        console.log(url);
+      	axios.get(url)
+				.then(response => {
+          this.listado_productos = response.data;
+          console.log(this.listado_productos);
+				});
+      //}
+    },
 		getResults(page = 1) {
-			axios.get('api/producto?page=' + page)
+			axios.get('api/producto/'+this.categoria+'?page=' + page)
 				.then(response => {
 
           this.listado_productos = response.data;

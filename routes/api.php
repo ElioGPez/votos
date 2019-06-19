@@ -20,6 +20,10 @@ Route::get('venta/{fecha_inicio}/{fecha_fin}', [
     'as' => 'venta_fecha',
     'uses' => 'VentaController@buscarPorFecha',
 ]);
+Route::get('producto/{categoria_id}', [
+    'as' => 'producto_filtro',
+    'uses' => 'ProductoController@obtenerProductos',
+]);
 Route::resource('sub_categoria','SubCategoriaController');
 // Route::get('sub_categoria/{id}','SubCategoriaController@show');
 Route::resource('categoria','CategoriaController');

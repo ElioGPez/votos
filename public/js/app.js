@@ -23368,13 +23368,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 var axios = __webpack_require__(2);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      listado_productos: {}
+      listado_productos: {},
+      categoria: '0'
     };
   },
 
@@ -23388,15 +23392,28 @@ var axios = __webpack_require__(2);
         _this.listado_productos = response.data.data;
       });
     },
-    getResults: function getResults() {
+    obtenerProductosFiltro: function obtenerProductosFiltro() {
       var _this2 = this;
+
+      //if(this.categoria =! '0'){
+
+      var url = "api/producto/" + this.categoria;
+      console.log(url);
+      axios.get(url).then(function (response) {
+        _this2.listado_productos = response.data;
+        console.log(_this2.listado_productos);
+      });
+      //}
+    },
+    getResults: function getResults() {
+      var _this3 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-      axios.get('api/producto?page=' + page).then(function (response) {
+      axios.get('api/producto/' + this.categoria + '?page=' + page).then(function (response) {
 
-        _this2.listado_productos = response.data;
-        console.log(_this2.listado_productos);
+        _this3.listado_productos = response.data;
+        console.log(_this3.listado_productos);
       });
     }
   },
@@ -23419,7 +23436,75 @@ var render = function() {
   return _c("div", [
     _c("br"),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { attrs: { id: "row2" } }, [
+      _c("h3", { staticClass: "text-center" }, [
+        _vm._v("Listado de Productos")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-8" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.categoria,
+                  expression: "categoria"
+                }
+              ],
+              staticClass: "custom-select",
+              attrs: { id: "exampleFormControlSelect1" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.categoria = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0", selected: "" } }, [
+                _vm._v("Todos")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("Alimento")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("Bebida")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-2" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              staticStyle: { margin: "3px" },
+              attrs: { align: "right" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.obtenerProductosFiltro()
+                }
+              }
+            },
+            [_vm._v("FILTRAR")]
+          )
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("br"),
     _vm._v(" "),
@@ -23550,34 +23635,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "row2" } }, [
-      _c("h3", { staticClass: "text-center" }, [
-        _vm._v("Listado de Productos")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-2" }, [
-          _c("label", { attrs: { for: "" } }, [
-            _vm._v("Filtrar Productos por Tipo")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c(
-            "select",
-            {
-              staticClass: "custom-select",
-              attrs: { id: "exampleFormControlSelect1" }
-            },
-            [
-              _c("option", { attrs: { selected: "" } }, [_vm._v("Todos")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Alimento")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Bebida")])
-            ]
-          )
-        ])
+    return _c("div", { staticClass: "col-2" }, [
+      _c("label", { attrs: { for: "" } }, [
+        _vm._v("Filtrar Productos por Tipo")
       ])
     ])
   },
