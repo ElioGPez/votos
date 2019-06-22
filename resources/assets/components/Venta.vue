@@ -110,9 +110,9 @@
                           </a>
                         </td>
                         <td data-label="imagen">
-                          <img :src="item.imagen" width="50" height="50">
+                          <img :src="'/images/'+item.imagen" width="50" height="50">
                         </td>
-                        <td data-label="Producto">{{item.producto}}</td>
+                        <td data-label="Producto">{{item.producto.producto}}</td>
                         <td data-label="Producto">{{item.cantidad}}</td>
                         <td data-label="Producto">{{item.precio}}</td>
                         <td data-label="Producto">{{item.subtotal}}</td>
@@ -471,9 +471,9 @@
                           </a>
                         </td>
                         <td data-label="imagen">
-                          <img :src="item.imagen" width="50" height="50">
+                          <img :src="'/images/'+item.imagen" width="50" height="50">
                         </td>
-                        <td data-label="Producto">{{item.producto}}</td>
+                        <td data-label="Producto">{{item.producto.producto}}</td>
                         <td data-label="Producto">{{item.cantidad}}</td>
                         <td data-label="Producto">{{item.precio}}</td>
                         <td data-label="Producto">{{item.subtotal}}</td>
@@ -484,6 +484,9 @@
               </fieldset>
               <div>
                 <h4 align="right">TOTAL ${{modal.total}}</h4>
+              </div>
+              <div>
+                <button type="button" class="btn btn-warning" @click="limpiarMesa()">Cancelar Venta</button>
               </div>
             </div>
           </div>
@@ -618,10 +621,11 @@ export default {
           var linea = new Object();
           linea.id = item.id;
           linea.imagen = item.imagen;
-          linea.producto = item.producto;
+          linea.producto = item;
           linea.cantidad = this.cantidad;
           linea.precio = item.precio;
           linea.subtotal = this.cantidad * item.precio;
+          linea.categoria_id = this.tipo;
 
           this.total += linea.subtotal;
           this.linea_venta.push(linea);
@@ -636,10 +640,11 @@ export default {
           var linea = new Object();
           linea.id = item.id;
           linea.imagen = item.imagen;
-          linea.producto = item.producto;
+          linea.producto = item;
           linea.cantidad = this.cantidad;
           linea.precio = item.precio;
           linea.subtotal = this.cantidad * item.precio;
+          linea.categoria_id = this.tipo;
 
           this.modal.total += linea.subtotal;
           console.log(this.indice_modal);

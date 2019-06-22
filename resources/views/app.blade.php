@@ -91,7 +91,25 @@
             </a>
         </div>
       </li>
-
+      <li class="nav-item dropdown">
+        <a id="ac" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b>Insumos</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a id="ab" class="nav-link">
+                <router-link style="color:red;" to="insumo_crear">
+                <i class="fas fa-plus-circle"></i>
+                    <b>Nuevo Insumo</b>
+                </router-link>
+            </a>
+            <a id="ab" class="nav-link">
+                <router-link style="color:red;" to="/insumo">
+                <i class="fas fa-list-ol"></i>    
+                    <b>Listado</b>
+                </router-link>
+            </a>
+        </div>
+      </li>
                     <li class="nav-item">
                         <a id="ac" class="nav-link">
                         <router-link style="color:white;" to="/informe"><b>Informe</b></router-link>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Venta;
 use App\Linea_Venta;
+use App\Producto;
 use Carbon\Carbon;
 
 class VentaController extends Controller
@@ -62,7 +63,7 @@ class VentaController extends Controller
         $mytime= Carbon::now('America/Argentina/Tucuman');
         $venta->fecha = $mytime->toDateTimeString();
         $venta->cliente_id = $request->cliente_id;
-        if($venta->cliente_id == '0'){
+        if($venta->cliente_id == '1'){
             $venta->estado = 'PAGADA'; 
         }else{
             $venta->estado = 'IMPAGA'; 
@@ -81,6 +82,12 @@ class VentaController extends Controller
           $linea_v->subtotal=$linea["subtotal"];
           $linea_v->precio=$linea["precio"];
           $linea_v->save();
+
+          if($linea["categoria_id"] == '2'){
+            $producto = Producto::findOrFail($linea["producto"]["id"]);
+            $producto->stock -= $linea["cantidad"];
+            $producto->save();
+          }
         }
 
         return $venta;

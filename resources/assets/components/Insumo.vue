@@ -2,10 +2,10 @@
   <div>
     <br>
     <div id="row2">
-      <h3 class="text-center">Listado de Productos</h3>
+      <h3 class="text-center">Listado de Insumos</h3>
       <div class="row">
         <div class="col-2">
-          <label for>Filtrar Productos por Tipo</label>
+          <label for>Filtrar Insumos por Tipo</label>
         </div>
         <div class="col-8">
           <select v-model="categoria" class="custom-select" id="exampleFormControlSelect1">

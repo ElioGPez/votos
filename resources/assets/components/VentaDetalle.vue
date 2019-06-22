@@ -47,7 +47,7 @@
                     <tbody>
                       <tr v-for="item of venta[0].linea_venta" :key="item.id">
                         <td data-label="imagen">
-                        <img :src="'/images/'+item.imagen"  width="50" height="50">
+                        <img :src="'/images/'+item.producto.imagen"  width="50" height="50">
                         </td>
                         <td data-label="Producto">{{item.producto.nombre}}</td>
                         <td data-label="Producto">{{item.cantidad}}</td>

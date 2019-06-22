@@ -7,6 +7,8 @@ import VentaDetalle from '../components/VentaDetalle.vue'
 import ListadoCompras from '../components/ListadoCompras.vue'
 import Producto from '../components/Producto.vue'
 import ProductoCrear from '../components/ProductoCrear.vue'
+import Insumo from '../components/Insumo.vue'
+import InsumoCrear from '../components/InsumoCrear.vue'
 import ProductoModificar from '../components/ProductoModificar.vue'
 import Informe from '../components/Informe.vue'
 
@@ -57,6 +59,16 @@ export default new Router({
             path : '/producto_modificar',
             name : 'producto_modificar',
             component: ProductoModificar
+        },
+        {
+            path : '/insumo',
+            name : 'insumo',
+            component: Insumo
+        },
+        {
+            path : '/insumo_crear',
+            name : 'insumo_crear',
+            component: InsumoCrear
         },
         {
             path : '/informe',

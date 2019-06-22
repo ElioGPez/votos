@@ -18525,6 +18525,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 var axios = __webpack_require__(2);
 
@@ -18618,10 +18621,11 @@ var axios = __webpack_require__(2);
             var linea = new Object();
             linea.id = item.id;
             linea.imagen = item.imagen;
-            linea.producto = item.producto;
+            linea.producto = item;
             linea.cantidad = this.cantidad;
             linea.precio = item.precio;
             linea.subtotal = this.cantidad * item.precio;
+            linea.categoria_id = this.tipo;
 
             this.total += linea.subtotal;
             this.linea_venta.push(linea);
@@ -18657,10 +18661,11 @@ var axios = __webpack_require__(2);
             var linea = new Object();
             linea.id = item.id;
             linea.imagen = item.imagen;
-            linea.producto = item.producto;
+            linea.producto = item;
             linea.cantidad = this.cantidad;
             linea.precio = item.precio;
             linea.subtotal = this.cantidad * item.precio;
+            linea.categoria_id = this.tipo;
 
             this.modal.total += linea.subtotal;
             console.log(this.indice_modal);
@@ -20150,7 +20155,7 @@ var render = function() {
                               _c("td", { attrs: { "data-label": "imagen" } }, [
                                 _c("img", {
                                   attrs: {
-                                    src: item.imagen,
+                                    src: "/images/" + item.imagen,
                                     width: "50",
                                     height: "50"
                                   }
@@ -20160,7 +20165,7 @@ var render = function() {
                               _c(
                                 "td",
                                 { attrs: { "data-label": "Producto" } },
-                                [_vm._v(_vm._s(item.producto))]
+                                [_vm._v(_vm._s(item.producto.producto))]
                               ),
                               _vm._v(" "),
                               _c(
@@ -20896,7 +20901,7 @@ var render = function() {
                                     [
                                       _c("img", {
                                         attrs: {
-                                          src: item.imagen,
+                                          src: "/images/" + item.imagen,
                                           width: "50",
                                           height: "50"
                                         }
@@ -20907,7 +20912,7 @@ var render = function() {
                                   _c(
                                     "td",
                                     { attrs: { "data-label": "Producto" } },
-                                    [_vm._v(_vm._s(item.producto))]
+                                    [_vm._v(_vm._s(item.producto.producto))]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -20940,6 +20945,22 @@ var render = function() {
                       _c("h4", { attrs: { align: "right" } }, [
                         _vm._v("TOTAL $" + _vm._s(_vm.modal.total))
                       ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.limpiarMesa()
+                            }
+                          }
+                        },
+                        [_vm._v("Cancelar Venta")]
+                      )
                     ])
                   ])
                 ]),
@@ -22731,7 +22752,7 @@ var render = function() {
                             _c("td", { attrs: { "data-label": "imagen" } }, [
                               _c("img", {
                                 attrs: {
-                                  src: "/images/" + item.imagen,
+                                  src: "/images/" + item.producto.imagen,
                                   width: "50",
                                   height: "50"
                                 }
@@ -23397,7 +23418,7 @@ var axios = __webpack_require__(2);
 
       //if(this.categoria =! '0'){
 
-      var url = "api/producto/" + this.categoria;
+      var url = "api/producto/filtro/" + this.categoria;
       console.log(url);
       axios.get(url).then(function (response) {
         _this2.listado_productos = response.data;
@@ -23410,7 +23431,7 @@ var axios = __webpack_require__(2);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-      axios.get('api/producto/' + this.categoria + '?page=' + page).then(function (response) {
+      axios.get('api/producto/filtro/' + this.categoria + '?page=' + page).then(function (response) {
 
         _this3.listado_productos = response.data;
         console.log(_this3.listado_productos);

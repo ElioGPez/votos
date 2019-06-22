@@ -28,7 +28,9 @@ class ProductoController extends Controller
             ->select('p.*')
             ->where('c.id','=',$filtro)
             ->orderBy('p.producto','ASC')
-            ->paginate(8);
+            ->paginate(8)
+            ;
+
         }else{
             $productos = Producto::orderBy('producto','ASC')->paginate(8);
         }
