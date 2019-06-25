@@ -7,34 +7,36 @@
       <div id="card" class="card">
         <form class="card-body">
           <div class="form-group">
-            <!-- Listas Tipo y Categoria -->
-            <div class="row">
-              <div class="col">
-                <select class="custom-select"  @change="getSubCategorias($event)" >
-                  <option selected >Seleccione el Tipo de Producto...</option>
-                  <option v-for="categoria in categorias" :value=categoria.id >{{categoria.nombre}}</option>
-                </select>
-              </div>
-              <div class="col">
-                <select class="custom-select" @change="getProductos($event)">
-                  <option selected>Seleccione la Categoria...</option>
-                  <!-- <option>Sandwich</option> -->
-                  <!-- <option>Pizzas</option> -->
-                  <!-- <option>Al Plato</option> -->
-                  <option v-for="sc in subcategoria" :value=sc.id>{{sc.nombre}}</option>
-                </select>
-              </div>
-            </div>
-            <hr>
+
             <!-- Lista Producto y Boton -->
             <div class="form-group">
               <div class="row">
-                <div class="col-10">
+                <div class="col-1">
+                  <label for="Insumo">Insumo</label>
+                </div>
+                <div class="col-11">
                   <select class="custom-select" v-model="producto">
-                    <option selected>Seleccione el Producto...</option>
-                    <option v-for="producto in productos" :key="producto.id" :value=producto.id>{{producto.producto}} {{producto.descripcion}}</option>
-
+                    <option value="0" selected>Seleccione el Insumo...</option>
+                    <option v-for="producto in productos" :key="producto.id" :value=producto.id>Producto: {{producto.producto}}- Descripcion: {{producto.descripcion}}</option>
                   </select>
+                </div>
+                <!--div class="col-2">
+                  <button type="button" class="btn btn-danger" @click="agregarProducto()">AGREGAR</button>
+                </div-->
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-2">
+                  <label for="cantidad">Cantidad (unidades/kg)</label>
+                </div>
+                <div class="col-3">
+                  <input v-model="cantidad" type="number" class="form-control">
+                </div>                
+                <div class="col-2">
+                  <label for="cantidad">Costo (unitario)</label>
+                </div>
+                <div class="col-3">
+                  <input v-model="costo" type="number" class="form-control">
                 </div>
                 <div class="col-2">
                   <button type="button" class="btn btn-danger" @click="agregarProducto()">AGREGAR</button>
@@ -60,16 +62,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="linea in linea_compra">
+                      <tr v-for="linea in linea_compra" :key="linea.id">
                         <td data-label="Votos">
                           <a href>
                             <button class="btn btn-danger">Eliminar</button>
                           </a>
                         </td>
                         <td data-label="imagen">
-                          <img src="../imagenes/hamburguesa.jpg" width="50" height="50">
+                          <img :src="'/images/'+linea.imagen" width="50" height="50">
                         </td>
-                        <td data-label="Producto">{{linea.producto}}</td>
+                        <td data-label="Producto">{{linea.producto.producto}}</td>
                         <td data-label="Producto">{{linea.cantidad}}</td>
                         <td data-label="Producto">{{linea.precio}}</td>
                         <td data-label="Producto">{{linea.subtotal}}</td>
@@ -79,10 +81,10 @@
                 </div>
               </fieldset>
               <div>
-                <h4 align="right">TOTAL $500</h4>
+                <h4 align="right">TOTAL ${{total}}</h4>
               </div>
               <div id="btn">
-                <button type="button" class="btn btn-danger btn-lg btn-block">REGISTRAR</button>
+                <button @click.prevent="registrarCompra()" type="button" class="btn btn-danger btn-lg btn-block">REGISTRAR</button>
               </div>
             </div>
           </div>
@@ -97,7 +99,7 @@
 
   export default {
    created: function(){
-      this.getCategoria();
+      this.getProductos();
     },
    data() {
      return {
@@ -106,12 +108,13 @@
        productos: [],
        linea_compra: [],
        producto: '0',
-       cantidad: 1,
+       cantidad: '',
+       costo: '',
        total: 0,
      }
    },
    methods: {
-     getCategoria: function(){
+     /*getCategoria: function(){
        var urlCategoria = 'api/categoria';
        axios.get(urlCategoria).then(response=>{
          this.categorias = response.data;
@@ -124,14 +127,12 @@
            this.subcategoria = response.data;
          });
        }
-     },
-     getProductos: function(event){
-       var urlProducto = 'api/producto/'+event.target.value;
-       if (event.target.value!=0) {
+     },*/
+     getProductos: function(){
+       var urlProducto = 'api/insumos';
          axios.get(urlProducto).then(response=>{
            this.productos = response.data;
          });
-       }
      },
      agregarProducto: function(){
        // console.log(this.producto);
@@ -139,16 +140,43 @@
          if (this.producto == i.id) {
            var linea = new Object();
            linea.id = i.id;
-           linea.producto = i.producto+' '+i.descripcion;
+           linea.producto = i;
            linea.cantidad = this.cantidad;
            linea.precio = i.precio;
+           linea.imagen = i.imagen;
            linea.subtotal = this.cantidad*i.precio;
 
            this.total +=linea.subtotal;
            this.linea_compra.push(linea);
+
+           this.limpiarAgregar();
          }
        }
      },
+     limpiarAgregar (){
+       this.producto = '0';
+       this.cantidad = '';
+       this.costo = '';
+     },
+     registrarCompra(){
+      if (this.linea_compra.length != 0) {
+        var url = "api/compra";
+        axios
+          .post(url, {
+            linea_compra: this.linea_compra,
+            total: this.total
+          })
+          .then(response => {
+            console.log(response.data);
+            this.limpiarRegistro();
+          });
+      }
+     },
+    limpiarRegistro(){
+       this.limpiarAgregar();
+       this.linea_compra = [];
+       this.total = 0;
+    }
    }
   }
 

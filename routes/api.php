@@ -24,11 +24,23 @@ Route::get('producto/filtro/{categoria_id}', [
     'as' => 'producto_filtro',
     'uses' => 'ProductoController@obtenerProductos',
 ]);
+Route::get('insumo', [
+    'as' => 'insumo',
+    'uses' => 'ProductoController@obtenerInsumos',
+]);
+Route::get('insumos', [
+    'as' => 'insumo_all',
+    'uses' => 'ProductoController@obtenerInsumosAll',
+]);
+Route::post('insumo', [
+    'as' => 'insumo.store',
+    'uses' => 'ProductoController@guardarInsumo',
+]);
 Route::resource('sub_categoria','SubCategoriaController');
 // Route::get('sub_categoria/{id}','SubCategoriaController@show');
 Route::resource('categoria','CategoriaController');
 Route::resource('producto','ProductoController');
 Route::resource('venta','VentaController');
-// Route::resource('compra','CompraController');
-Route::get('compra','CompraController@index');
+Route::resource('compra','CompraController');
+//Route::get('compra','CompraController@index');
 Route::resource('cliente','ClienteController');

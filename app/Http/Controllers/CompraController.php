@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Compra;
+use Carbon\Carbon;
+use App\Linea_Compra;
+use App\Producto;
 
 class CompraController extends Controller
 {
@@ -14,8 +17,8 @@ class CompraController extends Controller
      */
     public function index()
     {
-
-        return Compra::all();
+        $compra = Compra::orderBy('id','DESC')->paginate(8);
+        return $compra;
     }
 
     /**
@@ -36,7 +39,32 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $compra = new Compra;
+        $compra->total = $request->total;
+        //Establecemos la fecha actual
+        $mytime= Carbon::now('America/Argentina/Tucuman');
+        $compra->fecha = $mytime->toDateTimeString();
+        $compra->estado = 'PAGADA'; 
+
+        $compra->save();
+
+        $linea_compra = $request->linea_compra;
+        foreach ($linea_compra as $linea) {
+
+          $linea_c = new Linea_Compra();
+          $linea_c->compra_id=$compra->id;
+          $linea_c->producto_id=$linea["id"];
+          $linea_c->cantidad=$linea["cantidad"];
+          $linea_c->subtotal=$linea["subtotal"];
+          $linea_c->precio=$linea["precio"];
+          $linea_c->save();
+
+            $producto = Producto::findOrFail($linea["producto"]["id"]);
+            $producto->stock += $linea["cantidad"];
+            $producto->save();
+        }
+
+        return $compra;
     }
 
     /**

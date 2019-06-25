@@ -36,6 +36,31 @@ class ProductoController extends Controller
         }
         return $productos;
     }
+    public function obtenerInsumos()
+    {
+
+            $productos=DB::table('productos as p')
+            ->join('sub_categorias as sc','p.subcategoria_id','=','sc.id')
+            ->join('categorias as c','sc.categoria_id','=','c.id')
+            ->select('p.*')
+            ->where('c.id','=','3')
+            ->orderBy('p.producto','ASC')
+            ->paginate(8)
+            ;
+        return $productos;
+    }
+    public function obtenerInsumosAll()
+    {
+
+            $productos=DB::table('productos as p')
+            ->join('sub_categorias as sc','p.subcategoria_id','=','sc.id')
+            ->join('categorias as c','sc.categoria_id','=','c.id')
+            ->select('p.*')
+            ->where('c.id','=','3')
+            ->orderBy('p.producto','ASC')
+            ;
+        return $productos->get();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -60,6 +85,35 @@ class ProductoController extends Controller
         $producto->precio = $request->precio;
         $producto->stock ='0';
         $producto->subcategoria_id = $request->subcategoria_id;
+
+        // $file=Input::file($request->imagen);
+        //$file->move(public_path().'/imagenes/productos',$file->name);
+
+        //Pasos para la decodificacion de la imagen recibida base64
+        $exploded = explode(',',$request->imagen);
+        $decoded = base64_decode($exploded[1]);
+
+        if(str_contains($exploded[0], 'jpeg')){
+            $extension = 'jpg';
+        }else{
+            $extension = 'png';
+        }
+        $fileName = str_random().'.'.$extension;
+        $path = public_path().'/images/'.$fileName;
+        file_put_contents($path,$decoded);
+        $producto->imagen=$fileName;
+        //$producto->imagen='';
+        $producto->save();
+    }
+
+    public function guardarInsumo(Request $request)
+    {
+        $producto = new Producto;
+        $producto->producto = $request->producto;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->stock =$request->stock;
+        $producto->subcategoria_id = '5';
 
         // $file=Input::file($request->imagen);
         //$file->move(public_path().'/imagenes/productos',$file->name);

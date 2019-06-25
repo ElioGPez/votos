@@ -44,10 +44,10 @@
                       <th>Estado</th>
                       <th>Total</th>
                       <th>Acciones</th>
-                    </tr>
+                    </tr> 
                   </thead>
                   <tbody>
-                    <tr v-for="compra in compras">
+                    <tr v-for="compra in compras.data" :key="compra.id">
                       <td data-label="Votos">{{compra.id}}</td>
                       <td data-label="imagen">{{compra.fecha}}</td>
                       <td data-label="Producto">{{compra.estado}}</td>
@@ -75,6 +75,8 @@
           </div>
         </div>
       </form>
+                  <pagination :data="compras" @pagination-change-page="getCompras"></pagination>            
+
       <!-- <div class="col-md-5">
         <pre>
           {{compras}}
@@ -96,12 +98,12 @@ export default {
   },
  data() {
    return {
-     compras: []
+     compras: {}
    }
  },
  methods: {
-   getCompras: function(){
-     var urlCompras = 'api/compra';
+   getCompras: function(page = 1){
+     var urlCompras = 'api/compra?page=' + page;
      axios.get(urlCompras).then(response=>{
        this.compras = response.data;
      });

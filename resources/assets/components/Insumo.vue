@@ -3,29 +3,14 @@
     <br>
     <div id="row2">
       <h3 class="text-center">Listado de Insumos</h3>
-      <div class="row">
-        <div class="col-2">
-          <label for>Filtrar Insumos por Tipo</label>
-        </div>
-        <div class="col-8">
-          <select v-model="categoria" class="custom-select" id="exampleFormControlSelect1">
-            <option value="0" selected>Todos</option>
-            <option value="1">Alimento</option>
-            <option value="2">Bebida</option>
-          </select>
-        </div>
-        <div class="col-2">
-          <button @click.prevent="obtenerProductosFiltro()" style="margin:3px;" align="right" class="btn btn-danger">FILTRAR</button>
-        </div>
-      </div>
     </div>
     <br>
 
     <div id="cardlist" class="card">
       <div>
-        <router-link style="color:white;" to="/producto_crear">
+        <router-link style="color:white;" to="/insumo_crear">
           <button style="margin:3px;" align="right" class="btn btn-danger">
-            <i class="fas fa-plus-circle"></i>Nuevo Producto
+            <i class="fas fa-plus-circle"></i>Nuevo Insumo
           </button>
         </router-link>
       </div>
@@ -42,7 +27,7 @@
                   <thead style="background-color: rgb(177, 18, 18);">
                     <tr>
                       <th>Imagen</th>
-                      <th>Producto</th>
+                      <th>Insumo</th>
                       <th>Stock</th>
                       <th>Precio</th>
                       <th>Acciones</th>
@@ -93,31 +78,12 @@ export default {
   data() {
     return {
       listado_productos : {},
-      categoria : '0'
     }
   },
   methods: {
-    obtenerProductos(){
-        var urlVentas = "api/producto";
-        axios.get(urlVentas).then(response => {
-          console.log(response.data);
-          this.listado_productos = response.data.data;
-        });
-    },
-    obtenerProductosFiltro(){
-      //if(this.categoria =! '0'){
 
-        var url = "api/producto/filtro/"+ this.categoria;
-        console.log(url);
-      	axios.get(url)
-				.then(response => {
-          this.listado_productos = response.data;
-          console.log(this.listado_productos);
-				});
-      //}
-    },
 		getResults(page = 1) {
-			axios.get('api/producto/filtro/'+this.categoria+'?page=' + page)
+			axios.get('api/insumo?page=' + page)
 				.then(response => {
 
           this.listado_productos = response.data;
