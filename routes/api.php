@@ -20,6 +20,10 @@ Route::get('venta/{fecha_inicio}/{fecha_fin}', [
     'as' => 'venta_fecha',
     'uses' => 'VentaController@buscarPorFecha',
 ]);
+Route::get('compra/{fecha_inicio}/{fecha_fin}', [
+    'as' => 'compra_fecha',
+    'uses' => 'compraController@buscarPorFecha',
+]);
 Route::get('producto/filtro/{categoria_id}', [
     'as' => 'producto_filtro',
     'uses' => 'ProductoController@obtenerProductos',

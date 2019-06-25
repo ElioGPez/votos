@@ -75,9 +75,16 @@ class CompraController extends Controller
      */
     public function show($id)
     {
-        //
+        $compra = Compra::with(['linea_compra','linea_compra.producto'])->where('id',$id)->get();
+        return $compra;
     }
+    public function buscarPorFecha($desde,$hasta)
+    {
+        $compras = Compra::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
 
+        return $compras;
+
+    }
     /**
      * Show the form for editing the specified resource.
      *

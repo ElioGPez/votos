@@ -4,6 +4,7 @@ import Venta from '../components/Venta.vue'
 import Compra from '../components/Compra.vue'
 import ListadoVentas from '../components/ListadoVentas.vue'
 import VentaDetalle from '../components/VentaDetalle.vue'
+import CompraDetalle from '../components/CompraDetalle.vue'
 import ListadoCompras from '../components/ListadoCompras.vue'
 import Producto from '../components/Producto.vue'
 import ProductoCrear from '../components/ProductoCrear.vue'
@@ -38,6 +39,12 @@ export default new Router({
             path : '/venta_detalle/:id',
             name : 'venta_detalle',
             component: VentaDetalle
+
+        },
+        {
+            path : '/compra_detalle/:id',
+            name : 'compra_detalle',
+            component: CompraDetalle
 
         },
         {
