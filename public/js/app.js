@@ -176,6 +176,12 @@ module.exports = function normalizeComponent (
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(30);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -481,12 +487,6 @@ module.exports = {
   trim: trim
 };
 
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(30);
 
 /***/ }),
 /* 3 */
@@ -832,7 +832,7 @@ module.exports = g;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var normalizeHeaderName = __webpack_require__(33);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -1151,7 +1151,7 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var settle = __webpack_require__(34);
 var buildURL = __webpack_require__(36);
 var parseHeaders = __webpack_require__(37);
@@ -1415,7 +1415,7 @@ Vue.component('app', __webpack_require__(19));
 Vue.component('pagination', __webpack_require__(22));
 
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 var app = new Vue({
     router: __WEBPACK_IMPORTED_MODULE_0__rutas__["a" /* default */],
@@ -15197,7 +15197,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         name: 'producto_crear',
         component: __WEBPACK_IMPORTED_MODULE_9__components_ProductoCrear_vue___default.a
     }, {
-        path: '/producto_modificar',
+        path: '/producto_modificar/:id',
         name: 'producto_modificar',
         component: __WEBPACK_IMPORTED_MODULE_12__components_ProductoModificar_vue___default.a
     }, {
@@ -18551,7 +18551,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -18942,7 +18942,7 @@ var axios = __webpack_require__(2);
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var bind = __webpack_require__(9);
 var Axios = __webpack_require__(32);
 var defaults = __webpack_require__(6);
@@ -19029,7 +19029,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(6);
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var InterceptorManager = __webpack_require__(41);
 var dispatchRequest = __webpack_require__(42);
 var isAbsoluteURL = __webpack_require__(44);
@@ -19121,7 +19121,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -19201,7 +19201,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -19276,7 +19276,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 /**
  * Parse headers into an object
@@ -19320,7 +19320,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -19438,7 +19438,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -19498,7 +19498,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -19557,7 +19557,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var transformData = __webpack_require__(43);
 var isCancel = __webpack_require__(12);
 var defaults = __webpack_require__(6);
@@ -19643,7 +19643,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 /**
  * Transform the data for a request or a response
@@ -21469,7 +21469,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -22099,7 +22099,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -22715,7 +22715,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -23059,7 +23059,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -23441,7 +23441,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -23983,8 +23983,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -24200,7 +24203,14 @@ var render = function() {
                                 [
                                   _c(
                                     "router-link",
-                                    { attrs: { to: "/producto_modificar" } },
+                                    {
+                                      attrs: {
+                                        to: {
+                                          name: "producto_modificar",
+                                          params: { id: item.id }
+                                        }
+                                      }
+                                    },
                                     [
                                       _c(
                                         "button",
@@ -24483,7 +24493,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -25043,7 +25053,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -25429,7 +25439,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var axios = __webpack_require__(2);
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -25909,18 +25919,94 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+var axios = __webpack_require__(1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      url: null
+      url: null,
+      producto_id: this.$route.params.id,
+      producto: [],
+      categorias: [],
+      categoria_id: '',
+      tipo: '0',
+      categoria: ''
     };
+  },
+  created: function created() {
+    this.obtenerProducto();
   },
 
   methods: {
     onFileChange: function onFileChange(e) {
+      var _this = this;
+
       var file = e.target.files[0];
       this.url = URL.createObjectURL(file);
+      //Siguiendo el tutorial desde aqui
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+
+      reader.onload = function (e) {
+        _this.producto.imagen = e.target.result;
+      };
+      //  reader.readAsDataURL(file);
+
+      console.log(this.producto.imagen);
+    },
+    obtenerProducto: function obtenerProducto() {
+      var _this2 = this;
+
+      var url = "http://127.0.0.1:8000/api/producto/show/" + this.producto_id;
+      console.log(url);
+      axios.get(url).then(function (response) {
+        console.log(response.data);
+        _this2.producto = response.data;
+        _this2.obtenerSubcategorias();
+        _this2.url = 'http://127.0.0.1:8000/images/' + _this2.producto.imagen;
+      });
+    },
+    obtenerSubcategorias: function obtenerSubcategorias() {
+      var _this3 = this;
+
+      var url = "http://127.0.0.1:8000/api/sub_categorias/" + this.producto.subcategoria_id;
+      console.log(url);
+      axios.get(url).then(function (response) {
+        console.log(response.data);
+        _this3.categorias = response.data;
+        _this3.categoria = _this3.producto.subcategoria_id;
+      });
+    },
+    obtenerCategorias: function obtenerCategorias(event) {
+      var _this4 = this;
+
+      if (event.target.value != 0) {
+        var urlCategorias = "api/sub_categoria/" + event.target.value;
+        axios.get(urlCategorias).then(function (response) {
+          _this4.categorias = response.data;
+        });
+      }
+    },
+    modificarProducto: function modificarProducto() {
+      this.producto.subcategoria_id = this.categoria;
+      var url = "http://127.0.0.1:8000/api/producto/" + this.producto.id;
+      console.log(url);
+      axios.put(url, this.producto).then(function (response) {
+        console.log(response.data);
+      });
     }
   }
 });
@@ -25943,20 +26029,186 @@ var render = function() {
     _c("div", { staticClass: "card", attrs: { id: "cardlist" } }, [
       _c("form", { staticClass: "card-body" }, [
         _c("div", { staticClass: "form-group" }, [
-          _vm._m(1),
+          _c("div", [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Tipo de Producto")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tipo,
+                    expression: "tipo"
+                  }
+                ],
+                staticClass: "custom-select",
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.tipo = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.obtenerCategorias($event)
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0", selected: "" } }, [
+                  _vm._v("Seleccione el Tipo de Producto...")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("Alimentos")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [_vm._v("Bebidas")])
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Categoria")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.categoria,
+                    expression: "categoria"
+                  }
+                ],
+                staticClass: "custom-select",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.categoria = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0", selected: "" } }, [
+                  _vm._v("Seleccione la Categoria de Producto...")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.categorias, function(item) {
+                  return _c(
+                    "option",
+                    { key: item.id, domProps: { value: item.id } },
+                    [_vm._v(_vm._s(item.nombre))]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
           _vm._v(" "),
-          _vm._m(3),
+          _c("div", [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Nombre")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.producto.producto,
+                  expression: "producto.producto"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.producto.producto },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.producto, "producto", $event.target.value)
+                }
+              }
+            })
+          ]),
           _vm._v(" "),
-          _vm._m(4),
+          _c("div", [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Descripcion")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.producto.descripcion,
+                  expression: "producto.descripcion"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.producto.descripcion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.producto, "descripcion", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Precio")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.producto.precio,
+                  expression: "producto.precio"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number" },
+              domProps: { value: _vm.producto.precio },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.producto, "precio", $event.target.value)
+                }
+              }
+            })
+          ]),
           _vm._v(" "),
           _c("div", [
             _c("label", { attrs: { for: "" } }, [_vm._v("Imagen")]),
             _vm._v(" "),
             _c("input", {
               staticClass: "form-control",
-              attrs: { type: "file", placeholder: "imagen.png" },
+              attrs: { type: "file" },
               on: { change: _vm.onFileChange }
             }),
             _vm._v(" "),
@@ -25969,11 +26221,50 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(5),
+          _c("div", [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Stock")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.producto.stock,
+                  expression: "producto.stock"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number" },
+              domProps: { value: _vm.producto.stock },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.producto, "stock", $event.target.value)
+                }
+              }
+            })
+          ]),
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
-          _vm._m(6)
+          _c("div", { attrs: { id: "btn" } }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-lg btn-block",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.modificarProducto()
+                  }
+                }
+              },
+              [_vm._v("Modificar")]
+            )
+          ])
         ])
       ])
     ]),
@@ -25988,94 +26279,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "row2" } }, [
       _c("h3", { staticClass: "text-center" }, [_vm._v("Modificar Producto")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Tipo de Producto")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass: "custom-select",
-          attrs: { id: "exampleFormControlSelect1" }
-        },
-        [
-          _c("option", { attrs: { selected: "" } }, [_vm._v("Almineto")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("Bebida")])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Nombre")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Sandwich Comun" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Descripcion")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "De milanesa comun" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Precio")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "$200" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("label", { attrs: { for: "" } }, [_vm._v("Stock")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", placeholder: "10" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "btn" } }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger btn-lg btn-block",
-          attrs: { type: "button" }
-        },
-        [_vm._v("Modificar")]
-      )
     ])
   }
 ]

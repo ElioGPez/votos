@@ -9,7 +9,7 @@ class SubCategoria extends Model
 	protected $table = "sub_categorias";
     protected $primaryKey ="id";
 
-	protected $filable = ['nombre','descripcion'];
+	protected $filable = ['nombre','descripcion','categoria_id'];
 
 	public function producto()
     {

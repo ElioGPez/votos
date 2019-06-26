@@ -148,6 +148,11 @@ class ProductoController extends Controller
         return $productos;
     }
 
+    public function getProducto($id){
+
+        $producto = Producto::findOrFail($id);
+        return $producto;
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -168,7 +173,32 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+
+        $producto->subcategoria_id = $request->get('subcategoria_id');
+        $producto->producto = $request->get('producto');
+        $producto->stock = $request->get('stock');
+        $producto->descripcion = $request->get('descripcion');
+        $producto->precio = $request->get('precio');
+
+        //dd($producto->imagen);
+        if ($producto->imagen != $request->get('imagen')) {
+            $exploded = explode(',',$request->imagen);
+            $decoded = base64_decode($exploded[1]);
+    
+            if(str_contains($exploded[0], 'jpeg')){
+                $extension = 'jpg';
+            }else{
+                $extension = 'png';
+            }
+            $fileName = str_random().'.'.$extension;
+            $path = public_path().'/images/'.$fileName;
+            file_put_contents($path,$decoded);
+            $producto->imagen=$fileName;
+        }
+        $producto->update();
+
+        return $producto;
     }
 
     /**

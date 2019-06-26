@@ -50,7 +50,12 @@ class SubCategoriaController extends Controller
         $sub_categorias=DB::table('sub_categorias')->where('categoria_id','=',$id)->get();
         return $sub_categorias;
     }
+    public function getSubCategorias($subcategoria_id){
+        $sub_categoria=SubCategoria::findOrFail($subcategoria_id);
+        $sub_categorias=DB::table('sub_categorias')->where('categoria_id','=',$sub_categoria->categoria_id)->get();
 
+        return $sub_categorias;
+    }
     /**
      * Show the form for editing the specified resource.
      *

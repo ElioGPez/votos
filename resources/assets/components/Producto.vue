@@ -58,11 +58,14 @@
                       <td data-label="Precio">{{item.precio}}</td>
                       <td data-label="Acciones">
                         <a href>
-                          <router-link to="/producto_modificar">
-                            <button class="btn btn-warning">
-                              <i class="far fa-edit"></i>
-                            </button>
-                          </router-link>
+                      <router-link :to="{
+                        name : 'producto_modificar',
+                        params : {id : item.id}
+                      }">
+                      <button class="btn btn-warning">
+                        <i class="far fa-edit"></i>
+                      </button>        
+                      </router-link>
                         </a>
                         <a href>
                           <button class="btn btn-danger">

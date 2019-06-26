@@ -15,7 +15,7 @@ class Producto extends Model
         'precio',
         'imagen',
         'stock',
-        'categoria_id'
+        'subcategoria_id'
     ];
 
     public function sub_categoria()

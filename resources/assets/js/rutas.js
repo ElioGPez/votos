@@ -63,7 +63,7 @@ export default new Router({
             component: ProductoCrear
         },
         {
-            path : '/producto_modificar',
+            path : '/producto_modificar/:id',
             name : 'producto_modificar',
             component: ProductoModificar
         },
