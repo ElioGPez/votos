@@ -2,7 +2,7 @@
   <div>
     <br>
     <div id="row2">
-      <h3 class="text-center">Registro de Compras</h3>
+      <h3 class="text-center">Registro de Gastos realizados</h3>
     </div>
       <div id="card" class="card">
         <form class="card-body">
@@ -12,11 +12,11 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-1">
-                  <label for="Insumo">Insumo</label>
+                  <label for="Insumo">Gasto</label>
                 </div>
                 <div class="col-11">
                   <select class="custom-select" v-model="producto">
-                    <option value="0" selected>Seleccione el Insumo...</option>
+                    <option value="0" selected>Seleccione el Gasto...</option>
                     <option v-for="producto in productos" :key="producto.id" :value=producto.id>Producto: {{producto.producto}}- Descripcion: {{producto.descripcion}}</option>
                   </select>
                 </div>
@@ -27,7 +27,7 @@
               <hr>
               <div class="row">
                 <div class="col-2">
-                  <label for="cantidad">Cantidad (unidades/kg)</label>
+                  <label for="cantidad">Cantidad (unidades/litros)</label>
                 </div>
                 <div class="col-3">
                   <input v-model="cantidad" type="number" class="form-control">
@@ -55,7 +55,7 @@
                       <tr>
                         <th>Acciones</th>
                         <th>Imagen</th>
-                        <th>Producto</th>
+                        <th>Gasto</th>
                         <th>Cantidad</th>
                         <th>Precio</th>
                         <th>SubTotal</th>
@@ -85,8 +85,7 @@
               </div>
               <div id="btn">
                 <button
-                data-toggle="modal"  data-target="#mensajeModal"
-                 @click.prevent="registrarCompra()" type="button" class="btn btn-danger btn-lg btn-block">REGISTRAR</button>
+                data-toggle="modal"  data-target="#mensajeModal" @click.prevent="registrarCompra()" type="button" class="btn btn-danger btn-lg btn-block">REGISTRAR</button>
               </div>
             </div>
           </div>
@@ -113,6 +112,7 @@
   </div>
 </div>
 
+
   </div>
 </template>
 
@@ -130,7 +130,7 @@
        productos: [],
        linea_compra: [],
        producto: '0',
-       cantidad: '',
+       cantidad: '1',
        costo: '',
        total: 0,
        mensaje_registro : ''
@@ -152,7 +152,7 @@
        }
      },*/
      getProductos: function(){
-       var urlProducto = 'api/insumos';
+       var urlProducto = 'api/gasto_all';
          axios.get(urlProducto).then(response=>{
            this.productos = response.data;
          });
@@ -178,12 +178,12 @@
      },
      limpiarAgregar (){
        this.producto = '0';
-       this.cantidad = '';
+       this.cantidad = '1';
        this.costo = '';
      },
      registrarCompra(){
       if (this.linea_compra.length != 0) {
-        var url = "api/compra";
+        var url = "api/gastos";
         axios
           .post(url, {
             linea_compra: this.linea_compra,
@@ -192,7 +192,7 @@
           .then(response => {
             console.log(response.data);
             this.limpiarRegistro();
-            this.mensaje_registro = "Compra REGISTRADA!!";
+                        this.mensaje_registro = "Gasto REGISTRADO!!";
 
           });
       }

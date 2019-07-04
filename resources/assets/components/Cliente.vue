@@ -2,22 +2,7 @@
   <div>
     <br>
     <div id="row2">
-      <h3 class="text-center">Listado de Productos</h3>
-      <div class="row">
-        <div class="col-2">
-          <label for>Filtrar Productos por Tipo</label>
-        </div>
-        <div class="col-8">
-          <select v-model="categoria" class="custom-select" id="exampleFormControlSelect1">
-            <option value="0" selected>Todos</option>
-            <option value="1">Alimento</option>
-            <option value="2">Bebida</option>
-          </select>
-        </div>
-        <div class="col-2">
-          <button @click.prevent="obtenerProductosFiltro()" style="margin:3px;" align="right" class="btn btn-danger">FILTRAR</button>
-        </div>
-      </div>
+      <h3 class="text-center">Listado de Clientes</h3>
     </div>
     <br>
 
@@ -25,7 +10,7 @@
       <div>
         <router-link style="color:white;" to="/producto_crear">
           <button style="margin:3px;" align="right" class="btn btn-danger">
-            <i class="fas fa-plus-circle"></i>Nuevo Producto
+            <i class="fas fa-plus-circle"></i>Nuevo Cliente
           </button>
         </router-link>
       </div>
@@ -42,20 +27,20 @@
                   <thead style="background-color: rgb(177, 18, 18);">
                     <tr>
                       <th>Imagen</th>
-                      <th>Producto</th>
-                      <th>Stock</th>
-                      <th>Precio</th>
+                      <th>Nombre</th>
+                      <th>Telefono</th>
+                      <th>Direccion</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(item,index) of listado_productos.data" :key="item.id">
+                    <tr v-for="(item,index) of listado_clientes.data" :key="item.id">
                       <td data-label="imagen">
                         <img :src="'/images/'+item.imagen"  width="50" height="50">
                       </td>
-                      <td data-label="Producto">{{item.producto}}</td>
-                      <td data-label="Stock">{{item.stock}}</td>
-                      <td data-label="Precio">{{item.precio}}</td>
+                      <td data-label="Producto">{{item.nombre}}</td>
+                      <td data-label="Stock">{{item.telefono}}</td>
+                      <td data-label="Precio">{{item.direccion}}</td>
                       <td data-label="Acciones">
                         <a href>
                       <router-link :to="{
@@ -122,7 +107,7 @@ const axios = require("axios");
 export default {
   data() {
     return {
-      listado_productos : {},
+      listado_clientes : {},
       categoria : '0',
       eliminar_id : '',
       eliminar_index : ''
@@ -137,34 +122,22 @@ export default {
           this.listado_productos = response.data.data;
         });
     },
-    obtenerProductosFiltro(){
-      //if(this.categoria =! '0'){
-
-        var url = "api/producto/filtro/"+ this.categoria;
-        console.log(url);
-      	axios.get(url)
-				.then(response => {
-          this.listado_productos = response.data;
-          console.log(this.listado_productos);
-				});
-      //}
-    },
-		getResults(page = 1) {
-			axios.get('api/producto/filtro/'+this.categoria+'?page=' + page)
+	getResults(page = 1) {
+			axios.get('api/cliente?page=' + page)
 				.then(response => {
 
-          this.listado_productos = response.data;
-          console.log(this.listado_productos);
+          this.listado_clientes = response.data;
+          console.log(this.listado_clientes);
 				});
     },
     eliminarModal(id,index){
       this.eliminar_id = id;
       this.eliminar_index = index;
     },
-    eliminarProducto(){
-			axios.delete('api/producto/'+this.eliminar_id)
+    eliminarCliente(){
+			axios.delete('api/cliente/'+this.eliminar_id)
 				.then(response => {
-          console.log("Producto Eliminado!!");
+          console.log("Cliente Eliminado!!");
           this.listado_productos.data.splice(this.eliminar_index,1)
           $('#exampleModal').modal('hide');
 

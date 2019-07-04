@@ -2,7 +2,7 @@
   <div>
     <br>
     <div id="row2">
-      <h3 class="text-center">Modificar Producto</h3>
+      <h3 class="text-center">Modificar Insumo</h3>
     </div>
     <br>
 
@@ -10,24 +10,6 @@
       <form class="card-body">
         <div class="form-group">
           <!-- Datos -->
-          <div>
-            <label for>Tipo de Producto</label>
-              <select class="custom-select" @change="obtenerCategorias($event)" v-model="tipo">
-                  <option value="0" selected>Seleccione el Tipo de Producto...</option>
-                  <option value="1">Alimentos</option>
-                  <option value="2">Bebidas</option>
-            </select>
-          </div>
-          <div>
-            <label for>Categoria</label>
-                <select
-                  class="custom-select"
-                  v-model="categoria"
-                >
-                  <option value="0" selected>Seleccione la Categoria de Producto...</option>
-                  <option v-for="item of categorias" :key="item.id" :value="item.id">{{item.nombre}}</option>
-                </select>
-          </div>
 
           <div>
             <label for>Nombre</label>
@@ -60,34 +42,12 @@
           <!-- Fin Datos -->
           <br>
           <div id="btn">
-            <button  data-toggle="modal"  data-target="#mensajeModal"
- @click.prevent="modificarProducto()" type="button" class="btn btn-danger btn-lg btn-block">Modificar</button>
+            <button @click.prevent="modificarProducto()" type="button" class="btn btn-danger btn-lg btn-block">Modificar</button>
           </div>
         </div>
       </form>
     </div>
     <br>
-
-        <!-- Modal -->
-<div class="modal fade" id="mensajeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">MENSAJE</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{mensaje}}
-      </div>
-      <div class="modal-footer">
-        <button  
-         type="button" class="btn btn-secondary" data-dismiss="modal">ACEPTAR</button>
-      </div>
-    </div>
-  </div>
-</div>
   </div>
 </template>
 <script>
@@ -103,8 +63,7 @@ export default {
       categorias: [],
       categoria_id : '',
       tipo : '0',
-      categoria : '',
-      mensaje : ''
+      categoria : ''
     };
   },
   created() {
@@ -131,37 +90,16 @@ export default {
         axios.get(url).then(response => {
           console.log(response.data);
           this.producto = response.data;
-          this.obtenerSubcategorias();
           this.url = 'http://127.0.0.1:8000/images/'+this.producto.imagen;
         });
     },
-    obtenerSubcategorias(){
-        var url = "http://127.0.0.1:8000/api/sub_categorias/"+this.producto.subcategoria_id;
-        console.log(url);
-        axios.get(url).then(response => {
-          console.log(response.data);
-          this.categorias = response.data;
-          this.categoria = this.producto.subcategoria_id;
-        });
-    },
-    obtenerCategorias(event) {
-      if (event.target.value != 0) {
-        var urlCategorias = "api/sub_categoria/" + event.target.value;
-        axios.get(urlCategorias).then(response => {
-          this.categorias = response.data;
-        });
-      }
-    },
     modificarProducto(){
-        this.producto.subcategoria_id = this.categoria;
         var url = "http://127.0.0.1:8000/api/producto/"+this.producto.id;
         console.log(url);
         axios.put(url,this.producto).then(response => {
           console.log(response.data);
-                      this.mensaje = "PRODUCTO MODIFICADO!!"
-
         });
-    },
+    }
   }
 };
 </script>

@@ -22,11 +22,6 @@
           </div>
 
           <div>
-            <label for>Precio</label>
-            <input v-model="precio" type="text" class="form-control">
-          </div>
-
-          <div>
             <label for>Imagen</label>
             <input type="file" @change="onFileChange" class="form-control">
 
@@ -94,7 +89,7 @@ export default {
       let datos = new FormData();
       datos.append('producto',this.nombre);
       datos.append('descripcion',this.descripcion);
-      datos.append('precio',this.precio);
+      datos.append('precio','0');
       datos.append('stock',this.stock);
       datos.append('imagen',this.imagen);
       datos.append('subcategoria_id',this.categoria);

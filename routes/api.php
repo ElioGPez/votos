@@ -20,6 +20,10 @@ Route::get('venta/{fecha_inicio}/{fecha_fin}', [
     'as' => 'venta_fecha',
     'uses' => 'VentaController@buscarPorFecha',
 ]);
+Route::get('venta/informe/{fecha_inicio}/{fecha_fin}', [
+    'as' => 'infome',
+    'uses' => 'VentaController@obtenerInforme',
+]);
 Route::get('compra/{fecha_inicio}/{fecha_fin}', [
     'as' => 'compra_fecha',
     'uses' => 'compraController@buscarPorFecha',
@@ -36,9 +40,21 @@ Route::get('insumo', [
     'as' => 'insumo',
     'uses' => 'ProductoController@obtenerInsumos',
 ]);
+Route::get('gasto', [
+    'as' => 'gasto',
+    'uses' => 'ProductoController@obtenerGastos',
+]);
+Route::post('gasto', [
+    'as' => 'gasto.store',
+    'uses' => 'ProductoController@guardarGasto',
+]);
 Route::get('insumos', [
     'as' => 'insumo_all',
     'uses' => 'ProductoController@obtenerInsumosAll',
+]);
+Route::get('gasto_all', [
+    'as' => 'gasto_all',
+    'uses' => 'ProductoController@obtenerGastosAll',
 ]);
 Route::post('insumo', [
     'as' => 'insumo.store',
@@ -53,4 +69,5 @@ Route::resource('categoria','CategoriaController');
 Route::resource('producto','ProductoController');
 Route::resource('venta','VentaController');
 Route::resource('compra','CompraController');
+Route::resource('gastos','GastoController');
 Route::resource('cliente','ClienteController');

@@ -10,8 +10,17 @@ import Producto from '../components/Producto.vue'
 import ProductoCrear from '../components/ProductoCrear.vue'
 import Insumo from '../components/Insumo.vue'
 import InsumoCrear from '../components/InsumoCrear.vue'
+import InsumoModificar from '../components/InsumoModificar.vue'
 import ProductoModificar from '../components/ProductoModificar.vue'
 import Informe from '../components/Informe.vue'
+import Gasto from '../components/Gasto.vue'
+import GastoCrear from '../components/GastoCrear.vue'
+import GastoModificar from '../components/GastoModificar.vue'
+import GastoRegistro from '../components/GastoRegistro.vue'
+import GastoDetalle from '../components/GastoDetalle.vue'
+import Cliente from '../components/Cliente.vue'
+import ClienteCrear from '../components/ClienteCrear.vue'
+import ClienteModificar from '../components/ClienteModificar.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -68,6 +77,11 @@ export default new Router({
             component: ProductoModificar
         },
         {
+            path : '/insumo_modificar/:id',
+            name : 'insumo_modificar',
+            component: InsumoModificar
+        },
+        {
             path : '/insumo',
             name : 'insumo',
             component: Insumo
@@ -78,10 +92,50 @@ export default new Router({
             component: InsumoCrear
         },
         {
+            path : '/gasto',
+            name : 'gasto',
+            component: Gasto
+        },
+        {
+            path : '/gasto_crear',
+            name : 'gasto_crear',
+            component: GastoCrear
+        },
+        {
+            path : '/gasto_modificar',
+            name : 'gasto_modificar',
+            component: GastoModificar
+        },
+        {
+            path : '/gasto_registro',
+            name : 'gasto_registro',
+            component: GastoRegistro
+        },
+        {
+            path : '/gasto_detalle',
+            name : 'gasto_detalle',
+            component: GastoDetalle
+        },
+        {
             path : '/informe',
             name : 'informe',
             component: Informe
-        }
+        },
+        {
+            path : '/cliente',
+            name : 'cliente',
+            component: Cliente
+        },
+        {
+            path : '/cliente_crear',
+            name : 'cliente_crear',
+            component: ClienteCrear
+        },
+        {
+            path : '/cliente_modificar/:id',
+            name : 'cliente_modificar',
+            component: ClienteModificar
+        },
     ],
     mode : 'history'  //evita que aparezca el # en las rutas
 

@@ -49,7 +49,7 @@
                         <td data-label="imagen">
                         <img :src="'/images/'+item.producto.imagen"  width="50" height="50">
                         </td>
-                        <td data-label="Producto">{{item.producto.nombre}}</td>
+                        <td data-label="Producto">{{item.producto.producto}}</td>
                         <td data-label="Producto">{{item.cantidad}}</td>
                         <td data-label="Producto">{{item.precio}}</td>
                         <td data-label="Producto">{{item.subtotal}}</td>

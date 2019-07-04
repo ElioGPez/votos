@@ -11,12 +11,13 @@ class ClientesSeeder extends Seeder
      */
     public function run()
     {
-        //
-        // Cliente::create([
-        //   
-        // ]);
-        // DB::table('clientes')->insert([
-        //
-        // ]);
+        DB::table('clientes')->insert([  
+            'nombre' => 'cliente'
+        ]);
+        DB::table('clientes')->insert([  
+            'nombre' => 'Franco',
+            'telefono' => '0381156988547',
+            'direccion' => 'Laprida 1245'
+        ]); 
     }
 }

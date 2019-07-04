@@ -20,6 +20,7 @@ class CreateProductosTable extends Migration
             $table->double('precio');
 	        $table->string('imagen');
             $table->integer('stock')->nullable();
+            $table->string('estado')->default('activo');
 	        $table->integer('subcategoria_id')->unsigned();
 	        $table->foreign('subcategoria_id')->references('id')->on('sub_categorias')->ondelete('cascade');
             $table->timestamps();

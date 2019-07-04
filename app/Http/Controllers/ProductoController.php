@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Producto;
+use App\SubCategoria;
 
 class ProductoController extends Controller
 {
@@ -15,11 +16,18 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::orderBy('producto','ASC')->paginate(8);
-        return $productos;
+        $productos=DB::table('productos as p')
+        ->join('sub_categorias as sc','p.subcategoria_id','=','sc.id')
+        ->join('categorias as c','sc.categoria_id','=','c.id')
+        ->select('p.*')
+        ->where('c.id','>','0')
+        ->where('c.id','<','3')
+        ->where('p.estado','=','activo')
+        ->paginate(8);
     }
     public function obtenerProductos($filtro)
     {
+
         //$productos = Producto::orderBy('id','DESC')->paginate(8);
         if($filtro != '0'){
             $productos=DB::table('productos as p')
@@ -27,12 +35,20 @@ class ProductoController extends Controller
             ->join('categorias as c','sc.categoria_id','=','c.id')
             ->select('p.*')
             ->where('c.id','=',$filtro)
+            ->where('p.estado','=','activo')
             ->orderBy('p.producto','ASC')
             ->paginate(8)
             ;
-
         }else{
-            $productos = Producto::orderBy('producto','ASC')->paginate(8);
+
+            $productos=DB::table('productos as p')
+            ->join('sub_categorias as sc','p.subcategoria_id','=','sc.id')
+            ->join('categorias as c','sc.categoria_id','=','c.id')
+            ->select('p.*')
+            ->where('c.id','>','0')
+            ->where('c.id','<','3')
+            ->where('p.estado','=','activo')
+            ->paginate(8);
         }
         return $productos;
     }
@@ -44,6 +60,7 @@ class ProductoController extends Controller
             ->join('categorias as c','sc.categoria_id','=','c.id')
             ->select('p.*')
             ->where('c.id','=','3')
+            ->where('p.estado','=','activo')
             ->orderBy('p.producto','ASC')
             ->paginate(8)
             ;
@@ -57,6 +74,34 @@ class ProductoController extends Controller
             ->join('categorias as c','sc.categoria_id','=','c.id')
             ->select('p.*')
             ->where('c.id','=','3')
+            ->where('p.estado','=','activo')
+            ->orderBy('p.producto','ASC')
+            ;
+        return $productos->get();
+    }
+
+    public function obtenerGastos()
+    {
+            $productos=DB::table('productos as p')
+            ->join('sub_categorias as sc','p.subcategoria_id','=','sc.id')
+            ->join('categorias as c','sc.categoria_id','=','c.id')
+            ->select('sc.nombre','p.*')
+            ->where('c.id','=','4')
+            ->where('p.estado','=','activo')
+            //->orderBy('p.producto','ASC')
+            ->paginate(4)
+            ;
+        return $productos;
+    }
+    public function obtenerGastosAll()
+    {
+
+            $productos=DB::table('productos as p')
+            ->join('sub_categorias as sc','p.subcategoria_id','=','sc.id')
+            ->join('categorias as c','sc.categoria_id','=','c.id')
+            ->select('p.*')
+            ->where('c.id','=','4')
+            ->where('p.estado','=','activo')
             ->orderBy('p.producto','ASC')
             ;
         return $productos->get();
@@ -90,18 +135,32 @@ class ProductoController extends Controller
         //$file->move(public_path().'/imagenes/productos',$file->name);
 
         //Pasos para la decodificacion de la imagen recibida base64
-        $exploded = explode(',',$request->imagen);
-        $decoded = base64_decode($exploded[1]);
-
-        if(str_contains($exploded[0], 'jpeg')){
-            $extension = 'jpg';
+        if($request->imagen != ''){
+            $exploded = explode(',',$request->imagen);
+            $decoded = base64_decode($exploded[1]);
+    
+            if(str_contains($exploded[0], 'jpeg')){
+                $extension = 'jpg';
+            }else{
+                $extension = 'png';
+            }
+            $fileName = str_random().'.'.$extension;
+            $path = public_path().'/images/'.$fileName;
+            file_put_contents($path,$decoded);
+            $producto->imagen=$fileName;
         }else{
-            $extension = 'png';
+            $subcategoria = SubCategoria::findOrFail($producto->subcategoria_id);
+            if($subcategoria->nombre == 'Sandwich'){
+                $producto->imagen = 'sandwich.png';
+            }else
+            if($subcategoria->nombre == 'Pizzas'){
+                $producto->imagen = 'pizzas.png';
+            }
+            if($subcategoria->nombre == 'Al plato'){
+                $producto->imagen = 'al-plato.png';
+            }
         }
-        $fileName = str_random().'.'.$extension;
-        $path = public_path().'/images/'.$fileName;
-        file_put_contents($path,$decoded);
-        $producto->imagen=$fileName;
+
         //$producto->imagen='';
         $producto->save();
     }
@@ -119,22 +178,62 @@ class ProductoController extends Controller
         //$file->move(public_path().'/imagenes/productos',$file->name);
 
         //Pasos para la decodificacion de la imagen recibida base64
-        $exploded = explode(',',$request->imagen);
-        $decoded = base64_decode($exploded[1]);
-
-        if(str_contains($exploded[0], 'jpeg')){
-            $extension = 'jpg';
+        if($request->imagen != ''){
+            $exploded = explode(',',$request->imagen);
+            $decoded = base64_decode($exploded[1]);
+    
+            if(str_contains($exploded[0], 'jpeg')){
+                $extension = 'jpg';
+            }else{
+                $extension = 'png';
+            }
+            $fileName = str_random().'.'.$extension;
+            $path = public_path().'/images/'.$fileName;
+            file_put_contents($path,$decoded);
+            $producto->imagen=$fileName;
         }else{
-            $extension = 'png';
+                $producto->imagen = 'insumo.png';
         }
-        $fileName = str_random().'.'.$extension;
-        $path = public_path().'/images/'.$fileName;
-        file_put_contents($path,$decoded);
-        $producto->imagen=$fileName;
         //$producto->imagen='';
         $producto->save();
     }
+    public function guardarGasto(Request $request)
+    {
+        $producto = new Producto;
+        $producto->producto = $request->producto;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->stock =$request->stock;
+        if($producto->nombre == 'Gasto Fijo'){
+            $producto->subcategoria_id = '6';
+        }else{
+            $producto->subcategoria_id = '7';
+        }
+        $producto->nombre = '5';
 
+        // $file=Input::file($request->imagen);
+        //$file->move(public_path().'/imagenes/productos',$file->name);
+
+        //Pasos para la decodificacion de la imagen recibida base64
+        if($request->imagen != ''){
+            $exploded = explode(',',$request->imagen);
+            $decoded = base64_decode($exploded[1]);
+    
+            if(str_contains($exploded[0], 'jpeg')){
+                $extension = 'jpg';
+            }else{
+                $extension = 'png';
+            }
+            $fileName = str_random().'.'.$extension;
+            $path = public_path().'/images/'.$fileName;
+            file_put_contents($path,$decoded);
+            $producto->imagen=$fileName;
+        }else{
+                $producto->imagen = 'gasto.png';
+        }
+        //$producto->imagen='';
+        $producto->save();
+    }
     /**
      * Display the specified resource.
      *
@@ -144,7 +243,9 @@ class ProductoController extends Controller
     public function show($id)
     {
         //dd("pasa pero no pasa");
-        $productos=DB::table('productos')->where('subcategoria_id','=',$id)->get();
+        $productos=DB::table('productos as p')
+        ->where('p.estado','=','activo')
+        ->where('subcategoria_id','=',$id)->get();
         return $productos;
     }
 
@@ -209,6 +310,10 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        $producto->estado = 'inactivo';
+        $producto->update();
+
+        return $producto;
     }
 }

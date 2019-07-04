@@ -73,11 +73,7 @@
                       </router-link>
 
                     </a>
-                    <a href>
-                      <button class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </a>
+
                       </td>
                     </tr>
                     

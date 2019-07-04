@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Venta;
+use App\Compra;
+use App\Gasto;
 use App\Linea_Venta;
 use App\Producto;
 use Carbon\Carbon;
-
+use \stdClass;
 class VentaController extends Controller
 {
     /**
@@ -20,24 +22,37 @@ class VentaController extends Controller
     {
         $ventas = Venta::orderBy('id','DESC')->paginate(8);
         return $ventas;
-        /*return [
-            'paginate' => [
 
-            ],
-            'ventas' => $ventas
-        ];*/
     }
     public function buscarPorFecha($desde,$hasta)
     {
-        $ventas = Venta::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8)
-        ;
+        $ventas = Venta::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
         return $ventas;
-        /*return [
-            'paginate' => [
+    }
+    public function obtenerInforme($desde,$hasta){
+        if($hasta == '-'){
+            $ventas = Venta::where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
+            //dd($ventas->all());
 
-            ],
-            'ventas' => $ventas
-        ];*/
+            $compras = Compra::where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
+            $gastos = Gasto::where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
+        }else{
+            $ventas = Venta::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
+            $compras = Compra::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
+            $gastos = Gasto::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
+   
+        }
+        $informe = new stdClass();
+        $informe->ventas = $ventas;
+        $informe->compras = $compras;
+        $informe->gastos = $gastos;
+
+        $informe2[] = [
+            'ventas' => $ventas,
+            'compras' => $compras,
+            'gastos' => $gastos
+        ];
+        return $informe2;
     }
     /**
      * Show the form for creating a new resource.

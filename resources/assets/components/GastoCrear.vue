@@ -2,7 +2,7 @@
   <div>
     <br>
     <div id="row2">
-      <h3 class="text-center">Crear Producto</h3>
+      <h3 class="text-center">Crear Gasto</h3>
     </div>
     <br>
 
@@ -11,32 +11,18 @@
         <div class="form-group">
           <!-- Datos -->
           <div>
-            <label for>Tipo de Producto</label>
-              <select class="custom-select" @change="obtenerCategorias($event)" v-model="tipo">
-                  <option value="0" selected>Seleccione el Tipo de Producto...</option>
-                  <option value="1">Alimentos</option>
-                  <option value="2">Bebidas</option>
+            <label for>Tipo de Gasto</label>
+              <select class="custom-select"  v-model="tipo">
+                  <option value="0" selected>Seleccione el Tipo de Gasto...</option>
+                  <option value="1">Fijo</option>
+                  <option value="2">Variable</option>
             </select>
           </div>
           <div>
-            <label for>Categoria</label>
-                <select
-                  class="custom-select"
-                  v-model="categoria"
-                >
-                  <option value="0" selected>Seleccione la Categoria de Producto...</option>
-                  <option v-for="item of categorias" :key="item.id" :value="item.id">{{item.nombre}}</option>
-                </select>
-          </div>
-          <div>
             <label for>Nombre</label>
-            <input v-model="nombre" type="text" class="form-control" :class="{ error: $v.nombre.$error }">
+            <input v-model="nombre" type="text" class="form-control">
           </div>
-          <div v-if="$v.nombre.$dirty">
-            <div v-if="!$v.nombre.required" class="alert alert-danger" role="alert">
-              <strong>Cuidado!</strong> Este campo es requerido
-            </div>
-          </div>
+
           <div>
             <label for>Descripcion</label>
             <input v-model="descripcion" type="text" class="form-control">
@@ -56,10 +42,6 @@
             </div>
           </div>
 
-          <div>
-            <label for>Stock</label>
-            <input :disabled="tipo < 2" v-model="stock" type="number" class="form-control">
-          </div>
           <!-- Fin Datos -->
           <br>
           <div id="btn">
@@ -96,21 +78,11 @@
 const axios = require("axios");
 
 
-
-
-import {
-  required,
-  minLength,
-  between,
-  integer
-} from "vuelidate/lib/validators";
-
 export default {
   data() {
     return {
       url: null,
       tipo : '0',
-      categorias: [],
       categoria: "0",
       nombre : '',
       descripcion : '',
@@ -120,37 +92,31 @@ export default {
       mensaje : ''
     };
   },
-  validations: {
-    nombre: {
-      required
-    },
-    precio: {
-      required,
-    }
-  },
   methods: {
     registrarProducto(){
       let datos = new FormData();
       datos.append('producto',this.nombre);
       datos.append('descripcion',this.descripcion);
-      datos.append('precio',this.precio);
-      datos.append('stock',this.stock);
+      datos.append('precio','0');
+      datos.append('stock','0');
       datos.append('imagen',this.imagen);
-      datos.append('tipo_id',this.tipo);
       datos.append('subcategoria_id',this.categoria);
 
-        var urlProducto = "api/producto";
+    if(this.tipo != '0'){
+        var urlProducto = "api/gasto";
         axios
           .post(urlProducto, 
             datos
           )
           .then(response => {
             console.log("Producto Agregado!!");
-            this.mensaje = "PRODUCTO AGREGADO!!"
+            this.mensaje = "GASTO AGREGADO!!"
             this.limpiar();
             /*this.limpiarRegistro();
             this.mensaje_registro = "Producto Agregado!!";*/
           });
+    }
+
     },
     limpiar(){
       this.nombre = '';
@@ -158,7 +124,6 @@ export default {
       this.precio = '';
       this.stock = '';
       this.imagen = '';
-      this.tipo = '0';
       this.categoria = '0';
       this.url = null;
     },
@@ -175,15 +140,7 @@ export default {
                 //  reader.readAsDataURL(file);
 
       console.log(this.imagen);
-    },
-    obtenerCategorias(event) {
-      if (event.target.value != 0) {
-        var urlCategorias = "api/sub_categoria/" + event.target.value;
-        axios.get(urlCategorias).then(response => {
-          this.categorias = response.data;
-        });
-      }
-    },
+    }
   }
 };
 </script>
@@ -191,8 +148,5 @@ export default {
 <style>
 label {
   text-align: center;
-}
-.error {
-  border: 1px solid red;
 }
 </style>

@@ -2,30 +2,20 @@
   <div>
     <br>
     <div id="row2">
-      <h3 class="text-center">Listado de Productos</h3>
-      <div class="row">
-        <div class="col-2">
-          <label for>Filtrar Productos por Tipo</label>
-        </div>
-        <div class="col-8">
-          <select v-model="categoria" class="custom-select" id="exampleFormControlSelect1">
-            <option value="0" selected>Todos</option>
-            <option value="1">Alimento</option>
-            <option value="2">Bebida</option>
-          </select>
-        </div>
-        <div class="col-2">
-          <button @click.prevent="obtenerProductosFiltro()" style="margin:3px;" align="right" class="btn btn-danger">FILTRAR</button>
-        </div>
-      </div>
+      <h3 class="text-center">Listado de Gastos</h3>
     </div>
     <br>
 
     <div id="cardlist" class="card">
+        <div align="center">
+            <h4>
+                Gastos Fijos y Variables
+            </h4>
+        </div>
       <div>
-        <router-link style="color:white;" to="/producto_crear">
+        <router-link style="color:white;" to="/gasto_crear">
           <button style="margin:3px;" align="right" class="btn btn-danger">
-            <i class="fas fa-plus-circle"></i>Nuevo Producto
+            <i class="fas fa-plus-circle"></i>Nuevo Gasto
           </button>
         </router-link>
       </div>
@@ -42,8 +32,8 @@
                   <thead style="background-color: rgb(177, 18, 18);">
                     <tr>
                       <th>Imagen</th>
-                      <th>Producto</th>
-                      <th>Stock</th>
+                      <th>Gasto</th>
+                      <th>Tipo</th>
                       <th>Precio</th>
                       <th>Acciones</th>
                     </tr>
@@ -54,12 +44,12 @@
                         <img :src="'/images/'+item.imagen"  width="50" height="50">
                       </td>
                       <td data-label="Producto">{{item.producto}}</td>
-                      <td data-label="Stock">{{item.stock}}</td>
+                      <td data-label="Stock">{{item.nombre}}</td>
                       <td data-label="Precio">{{item.precio}}</td>
                       <td data-label="Acciones">
                         <a href>
                       <router-link :to="{
-                        name : 'producto_modificar',
+                        name : 'gasto_modificar',
                         params : {id : item.id}
                       }">
                       <button class="btn btn-warning">
@@ -73,6 +63,69 @@
                            class="btn btn-danger">
                             <i class="fas fa-trash-alt"></i>
                           </button>
+                        </a>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </fieldset>
+                        <pagination :data="listado_productos" @pagination-change-page="getResults"></pagination>            
+
+            <br>
+
+          </div>
+        </div>
+      </form>
+    </div>
+    <br>
+    <div id="cardlist" class="card">
+            <div align="center">
+            <h4>
+                Registro de Gastos
+            </h4>
+            </div>
+      <div>
+        <router-link style="color:white;" to="/gasto_registro">
+          <button style="margin:3px;" align="right" class="btn btn-danger">
+            <i class="fas fa-plus-circle"></i>Nuevo Registro
+          </button>
+        </router-link>
+      </div>
+      <form class="card-body">
+        <div class="form-group">
+          <!-- Tabla -->
+          <div class="form-group">
+            <fieldset>
+              <div class>
+                <table
+                  class="table table-striped table-bordered table-condensed table-hover"
+                  style="background-color:white"
+                >
+                  <thead style="background-color: rgb(177, 18, 18);">
+                    <tr>
+                      <th>Id</th>
+                      <th>Fecha</th>
+                      <th>Total</th>
+                      <th>Acciones</th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                    <tr v-for="compra in compras.data" :key="compra.id">
+                      <td data-label="Votos">{{compra.id}}</td>
+                      <td data-label="imagen">{{compra.fecha}}</td>
+                      <td data-label="Producto">{{compra.total}}</td>
+                      <td>
+                        <a>
+                      <router-link :to="{
+                        name : 'gasto_detalle',
+                        params : {id : compra.id}
+                      }">
+                      <button class="btn btn-warning">
+                        <i class="far fa-edit"></i>
+                      </button>        
+                      </router-link>
                         </a>
                       </td>
                     </tr>
@@ -117,46 +170,34 @@
 <script>
 const axios = require("axios");
 
-
-
 export default {
   data() {
     return {
       listado_productos : {},
-      categoria : '0',
+      compras: {},
+      fecha_desde : '',
+      fecha_hasta : '',
+      mensaje : '',
       eliminar_id : '',
       eliminar_index : ''
     }
   },
-
   methods: {
-    obtenerProductos(){
-        var urlVentas = "api/producto";
-        axios.get(urlVentas).then(response => {
-          console.log(response.data);
-          this.listado_productos = response.data.data;
-        });
-    },
-    obtenerProductosFiltro(){
-      //if(this.categoria =! '0'){
 
-        var url = "api/producto/filtro/"+ this.categoria;
-        console.log(url);
-      	axios.get(url)
-				.then(response => {
-          this.listado_productos = response.data;
-          console.log(this.listado_productos);
-				});
-      //}
-    },
 		getResults(page = 1) {
-			axios.get('api/producto/filtro/'+this.categoria+'?page=' + page)
+			axios.get('api/gasto?page=' + page)
 				.then(response => {
 
           this.listado_productos = response.data;
           console.log(this.listado_productos);
 				});
-    },
+        },
+   getCompras: function(page = 1){
+     var urlCompras = 'api/gastos?page=' + page;
+     axios.get(urlCompras).then(response=>{
+       this.compras = response.data;
+     });
+   },
     eliminarModal(id,index){
       this.eliminar_id = id;
       this.eliminar_index = index;
@@ -175,7 +216,8 @@ export default {
     //this.obtenerVentas();
   },
   mounted() {
-		this.getResults();
+        this.getResults();
+        this.getCompras();
   },
 }
 </script>

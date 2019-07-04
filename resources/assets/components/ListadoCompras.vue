@@ -41,7 +41,6 @@
                     <tr>
                       <th>Id</th>
                       <th>Fecha</th>
-                      <th>Estado</th>
                       <th>Total</th>
                       <th>Acciones</th>
                     </tr> 
@@ -50,7 +49,6 @@
                     <tr v-for="compra in compras.data" :key="compra.id">
                       <td data-label="Votos">{{compra.id}}</td>
                       <td data-label="imagen">{{compra.fecha}}</td>
-                      <td data-label="Producto">{{compra.estado}}</td>
                       <td data-label="Producto">{{compra.total}}</td>
                       <td>
                         <a>
@@ -62,11 +60,6 @@
                         <i class="far fa-edit"></i>
                       </button>        
                       </router-link>
-                        </a>
-                        <a>
-                          <button class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i>
-                          </button>
                         </a>
                       </td>
                     </tr>

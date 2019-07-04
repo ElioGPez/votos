@@ -2,7 +2,7 @@
   <div>
     <br>
     <div class="container">
-      <h3 class="text-center">Detalle de Compra</h3>
+      <h3 class="text-center">Detalle de Registro de Gasto</h3>
     <div id="info" class="row">
       <div class="col-12">
         <label for="">Fecha: {{compra[0].fecha}}</label>
@@ -18,7 +18,7 @@
     <hr>
     <div id="info" class="card">
       <div>
-        <p id="subtitulo">Lineas de Venta</p>
+        <p id="subtitulo">Lineas de Gasto</p>
       </div>
       <form class="card-body">
         <div class="form-group">
@@ -33,20 +33,20 @@
                     <thead style="background-color: rgb(177, 18, 18);">
                       <tr>
                         <th>Imagen</th>
-                        <th>Producto</th>
+                        <th>Gasto</th>
                         <th>Cantidad</th>
-                        <th>Precio</th>
+                        <th>Costo</th>
                         <th>SubTotal</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="item of compra[0].linea_compra" :key="item.id">
+                      <tr v-for="item of compra[0].linea_gasto" :key="item.id">
                         <td data-label="imagen">
                         <img :src="'/images/'+item.producto.imagen"  width="50" height="50">
                         </td>
                         <td data-label="Producto">{{item.producto.producto}}</td>
                         <td data-label="Producto">{{item.cantidad}}</td>
-                        <td data-label="Producto">{{item.precio}}</td>
+                        <td data-label="Producto">{{item.costo}}</td>
                         <td data-label="Producto">{{item.subtotal}}</td>
                       </tr>
 
@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     obtenerCompra(){
-        var url = "http://127.0.0.1:8000/api/compra/"+this.compra_id;
+        var url = "http://127.0.0.1:8000/api/gastos/"+this.compra_id;
         console.log(url);
         axios.get(url).then(response => {
           console.log(response.data);

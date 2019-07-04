@@ -15,7 +15,8 @@ class Producto extends Model
         'precio',
         'imagen',
         'stock',
-        'subcategoria_id'
+        'subcategoria_id',
+        'estado'
     ];
 
     public function sub_categoria()
@@ -29,5 +30,9 @@ class Producto extends Model
     public function linea_venta()
     {
         return $this->hasMany('App\Linea_Venta');
+    }
+    public function linea_gasto()
+    {
+        return $this->hasMany('App\Linea_Gasto');
     }
 }
