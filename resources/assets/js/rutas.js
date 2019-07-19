@@ -21,6 +21,7 @@ import GastoDetalle from '../components/GastoDetalle.vue'
 import Cliente from '../components/Cliente.vue'
 import ClienteCrear from '../components/ClienteCrear.vue'
 import ClienteModificar from '../components/ClienteModificar.vue'
+import ClienteDetalle from '../components/ClienteDetalle.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -135,6 +136,11 @@ export default new Router({
             path : '/cliente_modificar/:id',
             name : 'cliente_modificar',
             component: ClienteModificar
+        },
+        {
+            path : '/cliente_detalle/:id',
+            name : 'cliente_detalle',
+            component: ClienteDetalle
         },
     ],
     mode : 'history'  //evita que aparezca el # en las rutas

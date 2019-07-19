@@ -11,7 +11,44 @@ class ProductosSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //+
+        //Pool
+        DB::table('productos')->insert([
+            'producto' => 'Mesa1',
+            'descripcion' => 'Ficha para mesa de Pool 1',
+            'precio' => '20',
+            'imagen' => '/pool.png',
+            'subcategoria_id' => '8'
+        ]);
+        DB::table('productos')->insert([
+            'producto' => 'Mesa2',
+            'descripcion' => 'Ficha para mesa de Pool 2',
+            'precio' => '20',
+            'imagen' => '/pool.png',
+            'subcategoria_id' => '8'
+        ]);
+        DB::table('productos')->insert([
+            'producto' => 'Mesa3',
+            'descripcion' => 'Ficha para mesa de Pool 3',
+            'precio' => '20',
+            'imagen' => '/pool.png',
+            'subcategoria_id' => '8'
+        ]);
+        DB::table('productos')->insert([
+            'producto' => 'Mesa4',
+            'descripcion' => 'Ficha para mesa de Pool 4',
+            'precio' => '20',
+            'imagen' => '/pool.png',
+            'subcategoria_id' => '8'
+        ]);
+        DB::table('productos')->insert([
+            'producto' => 'Mesa5',
+            'descripcion' => 'Ficha para mesa de Pool 5',
+            'precio' => '20',
+            'imagen' => '/pool.png',
+            'subcategoria_id' => '8'
+        ]);
+        //Alimentos
         DB::table('productos')->insert([
             'producto' => 'Sandwich Comun',
             'descripcion' => 'Con pan Comun',

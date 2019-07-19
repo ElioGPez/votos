@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cliente;
+use App\Venta;
 
 class ClienteController extends Controller
 {
@@ -37,7 +38,11 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = new Cliente;
+        $cliente->nombre = $request->nombre;
+        $cliente->direccion = $request->direccion;
+        $cliente->telefono = $request->telefono;
+        $cliente->save();
     }
 
     /**
@@ -48,9 +53,19 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        return $cliente;
     }
 
+    public function clienteDetalle($id){
+        $ventas = Venta::where('cliente_id','=',$id)->get();
+        $cliente = Cliente::findOrFail($id);
+        $detalle[] = [
+            'cliente' => $cliente,
+            'ventas' => $ventas
+        ];
+        return $detalle;  
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -71,7 +86,15 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+
+        $cliente->nombre = $request->get('nombre');
+        $cliente->direccion = $request->get('direccion');
+        $cliente->telefono = $request->get('telefono');
+
+        $cliente->update();
+
+        return $cliente;
     }
 
     /**
@@ -82,6 +105,8 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $cliente->estado = 'inactivo';
+        $cliente->update();
     }
 }

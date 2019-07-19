@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Pool;
 use App\Venta;
 use App\Compra;
 use App\Gasto;
@@ -31,26 +32,54 @@ class VentaController extends Controller
     }
     public function obtenerInforme($desde,$hasta){
         if($hasta == '-'){
-            $ventas = Venta::where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
-            //dd($ventas->all());
+            $mesa1 = DB::table('pools')->select(DB::raw('COUNT(monto) as cantidad'), DB::raw('SUM(monto) as suma'))->where('producto_id','=','1')->where('fecha', '=', $desde)->count();
+            $mesa2 = DB::table('pools')->select(DB::raw('COUNT(monto) as cantidad'), DB::raw('SUM(monto) as suma'))->where('producto_id','=','2')->where('fecha', '=', $desde)->count();
+            $mesa3 = DB::table('pools')->select(DB::raw('COUNT(monto) as cantidad'), DB::raw('SUM(monto) as suma'))->where('producto_id','=','3')->where('fecha', '=', $desde)->count();
 
-            $compras = Compra::where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
-            $gastos = Gasto::where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
+            $ventas = Venta::with(['cliente','linea_venta','linea_venta.producto'])->where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
+            $compras = Compra::with(['linea_compra','linea_compra.producto'])->where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
+            $gastos = Gasto::with(['linea_gasto','linea_gasto.producto'])->where('fecha', '=', $desde)->orderBy('id','DESC')->paginate(8);
         }else{
-            $ventas = Venta::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
-            $compras = Compra::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
-            $gastos = Gasto::whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
+            $mesa1 = DB::table('pools')->select(DB::raw('COUNT(monto) as cantidad'), DB::raw('SUM(monto) as suma'))->where('producto_id','=','1')->whereBetween('fecha', array($desde, $hasta))->get();
+            $mesa2 = DB::table('pools')->select(DB::raw('COUNT(monto) as cantidad'), DB::raw('SUM(monto) as suma'))->where('producto_id','=','2')->whereBetween('fecha', array($desde, $hasta))->get();
+            $mesa3 = DB::table('pools')->select(DB::raw('COUNT(monto) as cantidad'), DB::raw('SUM(monto) as suma'))->where('producto_id','=','3')->whereBetween('fecha', array($desde, $hasta))->get();
+        
+            $ventas = Venta::with(['cliente','linea_venta','linea_venta.producto'])->whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
+            $compras = Compra::with(['linea_compra','linea_compra.producto'])->whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
+            $gastos = Gasto::with(['linea_gasto','linea_gasto.producto'])->whereBetween('fecha', array($desde, $hasta))->orderBy('id','DESC')->paginate(8);
    
         }
-        $informe = new stdClass();
-        $informe->ventas = $ventas;
-        $informe->compras = $compras;
-        $informe->gastos = $gastos;
+        if(gettype($mesa1) == 'integer'){
+                $mesa1 = [[
+                    'cantidad' => 0,
+                    'suma' => 0
+                ]];
+        }
+        if(gettype($mesa2) == 'integer'){
+            $mesa2 = [[
+                'cantidad' => 0,
+                'suma' => 0
+            ]];
+        }
+        if(gettype($mesa3) == 'integer'){
+            $mesa3 = [[
+                'cantidad' => 0,
+                'suma' => 0
+            ]];
+        }
+
+        $mesas[] = [
+            'mesa1' => $mesa1,
+            'mesa2' => $mesa2,
+            'mesa3' => $mesa3
+        ];
+
 
         $informe2[] = [
             'ventas' => $ventas,
             'compras' => $compras,
-            'gastos' => $gastos
+            'gastos' => $gastos,
+            'mesas' => $mesas
         ];
         return $informe2;
     }
@@ -141,7 +170,13 @@ class VentaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $venta = Venta::findOrFail($id);
+        //dd($request->get('estado'));
+        $venta->estado = $request->get('estado');
+        
+        $venta->update();
+
+        return $venta;
     }
 
     /**

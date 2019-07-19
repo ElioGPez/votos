@@ -53,5 +53,11 @@ class SubcategoriaSeeder extends Seeder
         'descripcion' => 'Abarca los Gastos variables',
         'categoria_id' => 4
       ]);
+      //Pool 8
+      SubCategoria::create([
+        'nombre' => 'Ficha Pool',
+        'descripcion' => 'Abarca las fichas de Pool',
+        'categoria_id' => 5
+      ]);
     }
 }

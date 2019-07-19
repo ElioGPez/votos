@@ -62,18 +62,16 @@
                       </td>
                       <td data-label="Producto">${{item.total}}</td>
                       <td data-label="Producto">
-                    <a href>
-                      <router-link :to="{
-                        name : 'venta_detalle',
-                        params : {id : item.id}
-                      }">
-                      <button class="btn btn-warning">
-                        <i class="far fa-edit"></i>
-                      </button>        
-                      </router-link>
-
-                    </a>
-
+                        <a href>
+                          <router-link :to="{
+                            name : 'venta_detalle',
+                            params : {id : item.id}
+                          }">
+                            <button class="btn btn-warning">
+                              <i class="far fa-edit"></i>
+                            </button>        
+                          </router-link>
+                        </a>
                       </td>
                     </tr>
                     
@@ -84,6 +82,10 @@
             <br>
             <pagination :data="listado_ventas" @pagination-change-page="getResults"></pagination>            
           </div>
+
+        <!-- -->
+        <PoolListado></PoolListado>
+          
         </div>
       </form>
     </div>

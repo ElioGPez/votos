@@ -33,5 +33,9 @@ class CategoriaSeeder extends Seeder
             'nombre' => 'Gasto',
             'descripcion' => 'Abarca los gastos fijos y variables'
         ]);
+        DB::table('categorias')->insert([  
+            'nombre' => 'Pool',
+            'descripcion' => 'Abarca todo sobre el Pool'
+        ]);
     }
 }

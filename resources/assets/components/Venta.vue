@@ -167,6 +167,8 @@
         </form>
       </div>
     </div>
+                      <Pool></Pool>
+
     <br>
 
     <!-- Modal -->
@@ -194,12 +196,12 @@
             <div class="row">
                 <div align="center" class="form-check col">
                   <input
-                                    v-model="opcion_mesa"
+                  v-model="opcion_mesa"
                   @change="tipoMesa(event)"
                    class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="mesa_normal" checked>
                 </div>
                 <div class="col"><label for="">Mesa: </label></div>
-                <div class="col"><input :disabled="mesa_normal == 0" v-model="mesa_normal_valor" type="number"></div>
+                <div class="col"><input class="form-control" min="1" max="9" pattern="[0-9]+" :disabled="mesa_normal == 0" v-model="mesa_normal_valor" type="number"></div>
             </div>
             <!-- div class="row">
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -277,7 +279,7 @@
                   class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="mesa_pool">
                 </div>
                 <div class="col"><label for="">Mesa: </label></div>
-                <div class="col"><input :disabled="mesa_pool == 0" v-model="mesa_pool_valor" type="number"></div>
+                <div class="col"><input  class="form-control" min="1" max="9" pattern="[0-9]+" :disabled="mesa_pool == 0" v-model="mesa_pool_valor" type="number"></div>
             </div>
             <!--div class="row">
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">

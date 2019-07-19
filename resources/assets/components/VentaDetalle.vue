@@ -8,13 +8,21 @@
         <label for="">Fecha: {{venta[0].fecha}}</label>
       </div>
       <div class="col-12">
-        <label for="">Estado: {{venta[0].estado}}</label>
+        <label for="">Estado: 
+        <span style="font-size: 20px;" v-if="venta[0].estado == `pagada`" class="badge badge-success badge-pill">{{venta[0].estado}}</span>
+        <span style="font-size: 20px;" v-if="venta[0].estado == `impaga`" class="badge badge-danger badge-pill">{{venta[0].estado}}</span>
+      </label>
       </div>
       <div class="col-12">
         <label for="">Cliente: {{venta[0].cliente.nombre}}</label>
       </div>
       <div class="col-12">
         <label style="color: rgb(0, 175, 67);" for="">Total: ${{venta[0].total}}</label>
+      </div>
+      <div class="col-12">
+        <button @click.prevent="cambiarEstado(venta[0].estado)" class="btn btn-warning">
+          Cambiar ESTADO
+        </button>
       </div>
     </div>
 
@@ -89,6 +97,18 @@ export default {
           console.log(response.data);
           this.venta = response.data;
         });
+    },
+    cambiarEstado(estado){
+        var url = "http://127.0.0.1:8000/api/venta/"+this.venta[0].id;
+
+      if(estado == 'pagada'){
+        this.venta[0].estado = 'impaga';
+      }else{
+        this.venta[0].estado = 'pagada';
+      }
+      axios.put(url,this.venta[0]).then(response => {
+        console.log(response.data);
+      });
     }
   },
   created() {

@@ -44,9 +44,13 @@
 
           <div>
             <label for>Precio</label>
-            <input v-model="precio" type="text" class="form-control">
+            <input v-model="precio" type="number" class="form-control" :class="{ error: $v.precio.$error }">
           </div>
-
+          <div v-if="$v.precio.$dirty">
+            <div v-if="!$v.precio.required" class="alert alert-danger" role="alert">
+              <strong>Cuidado!</strong> Este campo es requerido
+            </div>
+          </div>
           <div>
             <label for>Imagen</label>
             <input type="file" @change="onFileChange" class="form-control">
@@ -63,7 +67,7 @@
           <!-- Fin Datos -->
           <br>
           <div id="btn">
-            <button data-toggle="modal"  data-target="#mensajeModal"
+            <button 
             @click="registrarProducto()" type="button" class="btn btn-danger btn-lg btn-block">REGISTRAR</button>
           </div>
         </div>
@@ -130,6 +134,16 @@ export default {
   },
   methods: {
     registrarProducto(){
+
+      this.submitted = true;
+      // stop here if form is invalid
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
+      if(this.categoria != '4'){
+        this.stock = '';
+      }
       let datos = new FormData();
       datos.append('producto',this.nombre);
       datos.append('descripcion',this.descripcion);
@@ -147,6 +161,8 @@ export default {
           .then(response => {
             console.log("Producto Agregado!!");
             this.mensaje = "PRODUCTO AGREGADO!!"
+            $('#mensajeModal').modal('show');
+                  this.submitted = false;
             this.limpiar();
             /*this.limpiarRegistro();
             this.mensaje_registro = "Producto Agregado!!";*/

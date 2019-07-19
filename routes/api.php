@@ -64,6 +64,14 @@ Route::get('sub_categorias/{subcategoria_id}', [
     'as' => 'sub_categorias',
     'uses' => 'SubCategoriaController@getSubCategorias',
 ]);
+Route::get('cliente_detalle/{id}', [
+    'as' => 'cliente_detalle',
+    'uses' => 'ClienteController@clienteDetalle',
+]);
+Route::put('venta_estado/{id}', [
+    'as' => 'venta_estado',
+    'uses' => 'VentaController@cambiarEstado',
+]);
 Route::resource('sub_categoria','SubCategoriaController');
 Route::resource('categoria','CategoriaController');
 Route::resource('producto','ProductoController');
@@ -71,3 +79,8 @@ Route::resource('venta','VentaController');
 Route::resource('compra','CompraController');
 Route::resource('gastos','GastoController');
 Route::resource('cliente','ClienteController');
+Route::resource('pool','PoolController');
+Route::get('pool/{fecha_inicio}/{fecha_fin}', [
+    'as' => 'pool_cantidad',
+    'uses' => 'PoolController@obtenerFichasVendidas',
+]);

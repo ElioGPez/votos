@@ -12,7 +12,8 @@ class Cliente extends Model
 	protected $filable = [
         'nombre',
         'telefono',
-        'direccion'
+        'direccion',
+        'estado'
     ];
 
     public function venta()

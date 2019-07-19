@@ -13,9 +13,13 @@
 
           <div>
             <label for>Nombre</label>
-            <input v-model="nombre" type="text" class="form-control">
+            <input v-model="nombre" type="text" class="form-control" :class="{ error: $v.nombre.$error }">
           </div>
-
+          <div v-if="$v.nombre.$dirty">
+            <div v-if="!$v.nombre.required" class="alert alert-danger" role="alert">
+              <strong>Cuidado!</strong> Este campo es requerido
+            </div>
+          </div>
           <div>
             <label for>Descripcion</label>
             <input v-model="descripcion" type="text" class="form-control">
@@ -69,6 +73,12 @@
 <script>
 const axios = require("axios");
 
+import {
+  required,
+  minLength,
+  between,
+  integer
+} from "vuelidate/lib/validators";
 
 export default {
   data() {
@@ -83,6 +93,11 @@ export default {
       imagen : '',
       mensaje : ''
     };
+  },
+  validations: {
+    nombre: {
+      required
+    }
   },
   methods: {
     registrarProducto(){
@@ -137,5 +152,8 @@ export default {
 <style>
 label {
   text-align: center;
+}
+.error {
+  border: 1px solid red;
 }
 </style>

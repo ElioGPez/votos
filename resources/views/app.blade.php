@@ -28,7 +28,9 @@
     <div id="main"> 
     <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e60000;">
         <!-- Logo -->
-        <a id="ac" class="navbar-brand" href="#"><h2><b>Sistema Sandwicheria</b></h2></a>
+        <a id="ac" class="navbar-brand" href="#">
+        <img src="/images/logo.jpg"  width="100" height="100">
+        </a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#ca-navbar" aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <!-- Menu Area -->
             <div class="navbar-collapse collapse" id="ca-navbar" style="">

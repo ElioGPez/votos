@@ -8,7 +8,7 @@
 
     <div id="cardlist" class="card">
       <div>
-        <router-link style="color:white;" to="/producto_crear">
+        <router-link style="color:white;" to="/cliente_crear">
           <button style="margin:3px;" align="right" class="btn btn-danger">
             <i class="fas fa-plus-circle"></i>Nuevo Cliente
           </button>
@@ -26,7 +26,7 @@
                 >
                   <thead style="background-color: rgb(177, 18, 18);">
                     <tr>
-                      <th>Imagen</th>
+                      <th>Id</th>
                       <th>Nombre</th>
                       <th>Telefono</th>
                       <th>Direccion</th>
@@ -34,17 +34,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(item,index) of listado_clientes.data" :key="item.id">
-                      <td data-label="imagen">
-                        <img :src="'/images/'+item.imagen"  width="50" height="50">
-                      </td>
-                      <td data-label="Producto">{{item.nombre}}</td>
-                      <td data-label="Stock">{{item.telefono}}</td>
-                      <td data-label="Precio">{{item.direccion}}</td>
+                    <tr v-for="(item,index) of listado_clientes" :key="item.id">
+                      <td data-label="Id">{{item.id}}</td>
+
+                      <td data-label="Nombre">{{item.nombre}}</td>
+                      <td data-label="Telefono">{{item.telefono}}</td>
+                      <td data-label="Direccion">{{item.direccion}}</td>
                       <td data-label="Acciones">
                         <a href>
                       <router-link :to="{
-                        name : 'producto_modificar',
+                        name : 'cliente_detalle',
+                        params : {id : item.id}
+                      }">
+                      <button class="btn btn-warning">
+                        <i class="far fa-user"></i>
+                      </button>        
+                      </router-link>
+                        </a>
+                        <a href>
+                      <router-link :to="{
+                        name : 'cliente_modificar',
                         params : {id : item.id}
                       }">
                       <button class="btn btn-warning">
@@ -66,7 +75,7 @@
                 </table>
               </div>
             </fieldset>
-                        <pagination :data="listado_productos" @pagination-change-page="getResults"></pagination>            
+                        <pagination :data="listado_clientes" @pagination-change-page="getResults"></pagination>            
 
             <br>
           </div>
@@ -127,6 +136,8 @@ export default {
 				.then(response => {
 
           this.listado_clientes = response.data;
+          console.log(this.listado_clientes);
+          var cliente = this.listado_clientes.shift();
           console.log(this.listado_clientes);
 				});
     },

@@ -128,7 +128,7 @@ class ProductoController extends Controller
         $producto->producto = $request->producto;
         $producto->descripcion = $request->descripcion;
         $producto->precio = $request->precio;
-        $producto->stock ='0';
+        $producto->stock = $request->stock;
         $producto->subcategoria_id = $request->subcategoria_id;
 
         // $file=Input::file($request->imagen);
@@ -158,6 +158,9 @@ class ProductoController extends Controller
             }
             if($subcategoria->nombre == 'Al plato'){
                 $producto->imagen = 'al-plato.png';
+            }else
+            {
+                $producto->imagen = 'bebida.jpg';
             }
         }
 
@@ -203,13 +206,12 @@ class ProductoController extends Controller
         $producto->producto = $request->producto;
         $producto->descripcion = $request->descripcion;
         $producto->precio = $request->precio;
-        $producto->stock =$request->stock;
+        $producto->stock = $request->stock;
         if($producto->nombre == 'Gasto Fijo'){
             $producto->subcategoria_id = '6';
         }else{
             $producto->subcategoria_id = '7';
         }
-        $producto->nombre = '5';
 
         // $file=Input::file($request->imagen);
         //$file->move(public_path().'/imagenes/productos',$file->name);

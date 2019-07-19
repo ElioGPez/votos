@@ -35,4 +35,8 @@ class Producto extends Model
     {
         return $this->hasMany('App\Linea_Gasto');
     }
+    public function pool()
+    {
+        return $this->hasMany('App\Pool');
+    }
 }
